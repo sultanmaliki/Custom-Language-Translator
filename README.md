@@ -125,3 +125,4 @@ For help or questions, please contact:
 - 📩 Email: [connect@syedmohammedsultan.online](mailto:connect@syedmohammedsultan.online)  
 - 📷 Instagram: [@sm.sultan.maliki](https://instagram.com/sm.sultan.maliki)  
 - 🌐 Website: [syedmohammedsultan.online](https://syedmohammedsultan.online)  
+- 💼 LinkedIn: [syedmohammedsultan](https://www.linkedin.com/in/syedmohammedsultan)
