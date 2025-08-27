@@ -1,0 +1,22 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Model and tokenizer files
+*.h5
+*.keras
+*.pkl
+*.npy
+
+# Gradio temporary files and cache
+.gradio/
+
+# System files
+.DS_Store
+.ipynb_checkpoints/
+
+# Logs
+*.log
+
+# Environment files
+.env
