@@ -1,128 +1,116 @@
-# Custom-Language-Translator
-A customizable Neural Machine Translation (NMT) pipeline built with TensorFlow and Keras. Supports TSV datasets, preprocessing, training with Seq2Seq + attention, beam search inference, and an interactive Gradio web app. Includes tokenizer handling, checkpoints, and flexible deployment for multilingual translation.
+# Nawayathi ⇄ English Translator
 
----
+A neural machine translator for **Nawayathi**, a language spoken by a small community near Bhatkal, Karnataka. Nawayathi has no standard spelling and isn't covered by mainstream translation tools, so this project is built around **collecting a corpus and fine-tuning a pretrained model on it**, in both directions (Nawayathi → English and English → Nawayathi).
 
-## 🚀 Features
+## How it works
 
-- Flexible dataset format support (TSV)  
-- Encoder-decoder model with **attention** implemented in **Keras/TensorFlow**  
-- Preprocessing scripts for tokenization and data preparation  
-- Training script with **EarlyStopping** and checkpoint saving  
-- Inference module with **beam search decoding**  
-- Interactive translation interface via **Gradio**  
+Training a translation model from scratch needs hundreds of thousands of sentence pairs, far more than exists for Nawayathi. Instead, this project fine-tunes Meta's pretrained multilingual model [NLLB-200 (distilled, 600M)](https://huggingface.co/facebook/nllb-200-distilled-600M) using **LoRA**, which trains only a few percent of the weights. That lets a small corpus go a long way and fits on an 8 GB GPU.
 
----
+Nawayathi is written here in **Roman letters**. NLLB marks each sentence's language with a tag, and Nawayathi isn't one of its 200 languages, so the project *borrows* the Marathi tag (`mar_Deva`, see `NWY_TAG` in [config.py](config.py)) and fine-tuning re-teaches it to mean "Nawayathi in Roman letters". The base model is never modified; only a small adapter is saved.
 
-## 📂 File Structure
+## Setup
 
-- `dataset.tsv` — bilingual dataset file  
-- `data_preprocessing.py` — script to preprocess and tokenize dataset  
-- `model_definition.py` — neural network architecture definition  
-- `train_model.py` — training pipeline  
-- `inference.py` — sentence translation using trained model  
-- `app.py` — Gradio app to run translations via web UI  
-- Model weight files: `.h5`, `.keras`  
-- Tokenizer files: `.pkl`  
+Needs Python 3.10+ (developed and tested on 3.14) and, ideally, an NVIDIA GPU with 8 GB+ of memory (it runs on the CPU, but slowly). PowerShell on Windows:
 
----
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
 
-## ⚙️ Setup Instructions
+# PyTorch with CUDA first. A plain `pip install torch` is CPU-only on Windows.
+pip install torch --index-url https://download.pytorch.org/whl/cu128
+pip install -r requirements.txt
+```
 
-1. **Clone the repository**
+The first training run downloads the NLLB model (about 2.5 GB) into your Hugging Face cache.
 
-   ```bash
-   git clone https://github.com/sultanmaliki/Custom-Language-Translator.git
-   cd Custom-Language-Translator
-   ```
+## Workflow
 
-2. **Install dependencies**
+### 1. Build the corpus
 
-   ```bash
-   pip install -r requirements.txt
-   ```
+The corpus is [data/pairs.tsv](data/pairs.tsv): one sentence pair per line, columns separated by a **tab**.
 
----
+```tsv
+english	nawayathi	source
+<English sentence>	<Nawayathi sentence in Roman letters>	<optional: who/where>
+```
 
-## 📊 Dataset Preparation
+Two ways to add pairs: edit the file directly, or run the app (step 5) and use its **Contribute** tab. The app also lets you correct a wrong translation on the spot, and the correction goes straight into the corpus.
 
-1. Prepare your dataset in **TSV format** with two columns (source sentence and target sentence).  
-   Example: `translation_dataset.tsv`
+Tips that matter more than any setting:
 
-   ```tsv
-   hello   bonjour
-   how are you?   comment ça va ?
-   ```
+- Use **full, natural sentences**, not single words. The model learns from context.
+- Several spellings of one sentence are fine and useful. If you want two spellings treated as one word, list them in [data/spelling_variants.tsv](data/spelling_variants.tsv).
+- Cover everyday topics broadly (greetings, family, food, numbers, questions, negatives, past/future tense) rather than many near-copies of one pattern.
 
-2. Run preprocessing
+**How much is enough?** Rough rules of thumb, not guarantees: with a few hundred pairs the pipeline runs but the model mostly memorises; a few thousand pairs starts to generalise on common phrases; more is always better. Keep adding pairs and re-training.
 
-   ```bash
-   python data_preprocessing.py
-   ```
+### 2. Check and split the data
 
----
+```powershell
+python data_preprocessing.py
+```
 
-## 🏋️ Training
+Reports every problem with its line number (missing text, non-Roman characters, duplicates, stray tabs) and writes `data/processed/{train,val,test}.tsv`. The split is grouped by English sentence, so a test sentence is never also in training.
 
-Train the model using:
+### 3. Train
 
-```bash
+```powershell
 python train_model.py
 ```
 
----
+Saves the best adapter (by validation loss) to `models/nawayathi-lora/` and stops early when it stops improving. Useful options: `--epochs`, `--batch-size`, `--lr`, `--lora-r`. If you run out of GPU memory, lower `--batch-size` and raise `--accum`.
 
-## 🔎 Inference and Interface
+### 4. Evaluate
 
-1. **Command-line inference**
-
-   ```bash
-   python inference.py
-   ```
-
-2. **Launch Gradio Web App**
-
-   ```bash
-   python app.py
-   ```
-
----
-
-## 💡 Usage Example
-
-Translate a sentence via CLI:
-
-```bash
-python inference.py
+```powershell
+python evaluate.py
 ```
 
-Or use the **Gradio web interface** launched via:
+Scores the held-out test set in both directions with chrF++ (higher is better) and prints sample translations. With a small test set the numbers are noisy, so read the samples too. To compare language tags, change `NWY_TAG` in `config.py`, re-train, and re-evaluate.
 
-```bash
-python app.py
+### 5. Translate
+
+```powershell
+python app.py                                                 # web app (Translate + Contribute tabs)
+python inference.py "How are you?" --direction en2nwy         # command line
+python inference.py                                           # interactive; /swap changes direction
 ```
 
----
+The web app starts fine before any model exists, so you can begin collecting pairs on day one.
 
-## 🤝 Contribution
+## Project layout
 
-Contributions and feature requests are welcome!  
-Please **fork the repository** and submit a pull request.
+| File | Purpose |
+| --- | --- |
+| `config.py` | Paths, base model, language tags, defaults |
+| `text_normalization.py` | Cleaning applied to both sides of the corpus and to your input |
+| `data_preprocessing.py` | Corpus validation, splitting, and adding pairs |
+| `train_model.py` | LoRA fine-tuning of NLLB, both directions |
+| `evaluate.py` | chrF++ / BLEU on the test split |
+| `inference.py` | Translation with beam search |
+| `app.py` | Gradio web app |
+| `tests/` | Unit tests; `RUN_SLOW=1 pytest` also runs a GPU end-to-end test on a toy language |
 
----
+## Tests
 
-## 📜 License
+```powershell
+pytest                                # fast unit tests
+$env:RUN_SLOW = "1"; pytest -s        # + end-to-end test on the GPU (downloads the model once)
+```
 
-This project is licensed under the **MIT License**.  
-See the [LICENSE](LICENSE) file for details.
+The end-to-end test uses an invented toy language, never your real corpus.
 
----
+## License
 
-## 📧 Contact
+The code is licensed under the **MIT License**, see [LICENSE](LICENSE). The NLLB model weights are released by Meta under **CC-BY-NC 4.0** (non-commercial), and adapters trained from them inherit that restriction. Check that your intended use complies.
 
-For help or questions, please contact:
+## Contribution
 
-- 📩 Email: [connect@syedmohammedsultan.online](mailto:connect@syedmohammedsultan.online)  
-- 📷 Instagram: [@sm.sultan.maliki](https://instagram.com/sm.sultan.maliki)  
-- 🌐 Website: [syedmohammedsultan.online](https://syedmohammedsultan.online)  
+Contributions and feature requests are welcome. The most valuable contribution is **more Nawayathi sentence pairs**. Please fork the repository and submit a pull request.
+
+## Contact
+
+- 📩 Email: [connect@syedmohammedsultan.online](mailto:connect@syedmohammedsultan.online)
+- 📷 Instagram: [@sm.sultan.maliki](https://instagram.com/sm.sultan.maliki)
+- 🌐 Website: [syedmohammedsultan.online](https://syedmohammedsultan.online)
 - 💼 LinkedIn: [syedmohammedsultan](https://www.linkedin.com/in/syedmohammedsultan)
