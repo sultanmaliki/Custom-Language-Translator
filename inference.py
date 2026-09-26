@@ -1,110 +1,140 @@
-import numpy as np
+"""Translate with the trained adapter (beam search, both directions).
+
+    python inference.py                                        # interactive
+    python inference.py "How are you?" --direction en2nwy      # one-off
+"""
+import argparse
 import json
-import pickle
-import tensorflow as tf
-from keras.models import Model
-from keras.layers import Input
+import re
+from pathlib import Path
 
-# Model parameters - ensure these match training
-latent_dim = 1024
-embedding_dim = 512
+import torch
+from peft import PeftModel
+from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
 
-# Load trained model
-model = tf.keras.models.load_model('translation_model.keras')
+import config
+from text_normalization import load_variants, normalize_english, normalize_nawayathi, use_utf8_console
 
-# Load tokenizers and config
-with open('input_tokenizer.pkl', 'rb') as f:
-    input_tokenizer = pickle.load(f)
-with open('target_tokenizer.pkl', 'rb') as f:
-    target_tokenizer = pickle.load(f)
-with open('data_config.json', 'r', encoding='utf-8') as f:
-    config = json.load(f)
+_SENTENCE_END = re.compile(r"(?<=[.!?])\s+")
 
-max_encoder_seq_length = config['max_encoder_seq_length']
-max_decoder_seq_length = config['max_decoder_seq_length']
 
-# Rebuild encoder for inference - outputs encoder sequence + states
-encoder_inputs = model.input[0]
-encoder_layer = model.get_layer('encoder_lstm2')
-encoder_embedding_layer = model.get_layer('encoder_embedding')
-encoder_embedded = encoder_embedding_layer(encoder_inputs)
-encoder_outputs, state_h_enc, state_c_enc = encoder_layer(encoder_embedded)
-encoder_model = Model(encoder_inputs, [encoder_outputs, state_h_enc, state_c_enc])
+def require_language_tags(tokenizer, tags, model_name: str) -> None:
+    """An unknown tag silently becomes <unk> and would train/translate against garbage, so fail loudly."""
+    for tag in tags:
+        if tokenizer.convert_tokens_to_ids(tag) == tokenizer.unk_token_id:
+            raise ValueError(f"'{tag}' is not a language tag in {model_name}. Check EN_TAG / NWY_TAG in config.py.")
 
-# Rebuild decoder for inference with attention
-decoder_inputs = model.input[1]
-decoder_state_h_input = Input(shape=(latent_dim,), name='input_state_h')
-decoder_state_c_input = Input(shape=(latent_dim,), name='input_state_c')
-encoder_outputs_input = Input(shape=(max_encoder_seq_length, latent_dim), name='encoder_outputs_input')
 
-decoder_states_inputs = [decoder_state_h_input, decoder_state_c_input]
+def split_sentences(text: str) -> list[str]:
+    """The model translates one sentence at a time, so long text is split first."""
+    return [s for s in _SENTENCE_END.split(text.strip()) if s]
 
-decoder_embedding_layer = model.get_layer('decoder_embedding')
-decoder_lstm1_layer = model.get_layer('decoder_lstm1')
-decoder_lstm2_layer = model.get_layer('decoder_lstm2')
-attention_layer = model.get_layer('attention_layer')
-concat_layer = model.get_layer('concat_layer')
-dense_layer = model.get_layer('time_distributed_dense')
 
-dec_emb = decoder_embedding_layer(decoder_inputs)
-dec_lstm1_out, state_h1, state_c1 = decoder_lstm1_layer(dec_emb, initial_state=decoder_states_inputs)
-dec_lstm2_out, state_h2, state_c2 = decoder_lstm2_layer(dec_lstm1_out)
+class ModelNotTrainedError(RuntimeError):
+    """Raised when there is no trained adapter to load yet."""
 
-attended_context = attention_layer([dec_lstm2_out, encoder_outputs_input])
-decoder_concat = concat_layer([dec_lstm2_out, attended_context])
-decoder_outputs_final = dense_layer(decoder_concat)
 
-decoder_model = Model(
-    inputs=[decoder_inputs, encoder_outputs_input] + decoder_states_inputs,
-    outputs=[decoder_outputs_final, state_h1, state_c1, state_h2, state_c2]
-)
+class Translator:
+    def __init__(self, adapter_dir: Path = config.MODEL_DIR):
+        adapter_dir = Path(adapter_dir)
+        if not (adapter_dir / "adapter_config.json").exists() or not (adapter_dir / "meta.json").exists():
+            raise ModelNotTrainedError(
+                f"No trained model found in {adapter_dir}. Add sentence pairs to data/pairs.tsv, then run "
+                "`python data_preprocessing.py` and `python train_model.py`."
+            )
+        self.meta = json.loads((adapter_dir / "meta.json").read_text(encoding="utf-8"))
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        dtype = torch.bfloat16 if self.device.type == "cuda" and torch.cuda.is_bf16_supported() else torch.float32
 
-def decode_sequence(input_seq):
-    # Encode input to get encoder outputs and states
-    encoder_outs, state_h, state_c = encoder_model.predict(input_seq)
-    states_value = [state_h, state_c]
+        self.tokenizer = AutoTokenizer.from_pretrained(self.meta["base_model"])
+        require_language_tags(self.tokenizer, (self.meta["en_tag"], self.meta["nwy_tag"]), self.meta["base_model"])
+        base =AutoModelForSeq2SeqLM.from_pretrained(self.meta["base_model"], dtype=dtype)
+        # fold the adapter into the base weights: same output, faster generation
+        self.model = PeftModel.from_pretrained(base, adapter_dir).merge_and_unload().to(self.device).eval()
+        self.variants = load_variants()
+        self.tags = {
+            "en2nwy": (self.meta["en_tag"], self.meta["nwy_tag"]),
+            "nwy2en": (self.meta["nwy_tag"], self.meta["en_tag"]),
+        }
+        self.max_len = self.meta.get("max_len", config.MAX_LEN)
 
-    # Prepare empty target sequence with start token
-    target_seq = np.zeros((1, 1), dtype='int32')
-    start_token_index = target_tokenizer.word_index.get('<start>')
-    if start_token_index is None:
-        raise ValueError("'<start>' token not found in target tokenizer.")
-    target_seq[0, 0] = start_token_index
+    def _prepare(self, text: str, direction: str) -> str:
+        if direction == "en2nwy":
+            return normalize_english(text)
+        return normalize_nawayathi(text, self.variants)
 
-    stop_condition = False
-    decoded_sentence = ''
+    @torch.no_grad()
+    def _generate(self, texts: list[str], direction: str, num_beams: int, n_best: int, max_length: int) -> list[list[str]]:
+        if direction not in self.tags:
+            raise ValueError(f"direction must be one of {sorted(self.tags)}, got {direction!r}")
+        src_tag, tgt_tag = self.tags[direction]
+        self.tokenizer.src_lang = src_tag
+        enc = self.tokenizer([self._prepare(t, direction) for t in texts], return_tensors="pt",
+                             padding=True, truncation=True, max_length=self.max_len).to(self.device)
+        out = self.model.generate(
+            **enc,
+            forced_bos_token_id=self.tokenizer.convert_tokens_to_ids(tgt_tag),
+            num_beams=max(num_beams, n_best),
+            num_return_sequences=n_best,
+            max_length=max_length,
+            early_stopping=True,
+        )
+        decoded = self.tokenizer.batch_decode(out, skip_special_tokens=True)
+        return [decoded[i : i + n_best] for i in range(0, len(decoded), n_best)]
 
-    while not stop_condition:
-        output_tokens, h1, c1, h2, c2 = decoder_model.predict([target_seq, encoder_outs] + states_value)
-        sampled_token_index = np.argmax(output_tokens[0, -1, :])
-        sampled_word = target_tokenizer.index_word.get(sampled_token_index, '')
+    def translate_batch(self, texts: list[str], direction: str = "en2nwy", num_beams: int = 5,
+                        batch_size: int = 16, max_length: int = 128) -> list[str]:
+        """Translate many single sentences; returns the best candidate for each."""
+        results: list[str] = []
+        for i in range(0, len(texts), batch_size):
+            chunk = self._generate(texts[i : i + batch_size], direction, num_beams, 1, max_length)
+            results += [candidates[0] for candidates in chunk]
+        return results
 
-        if sampled_word == '<end>' or len(decoded_sentence.split()) >= max_decoder_seq_length:
-            stop_condition = True
-        elif sampled_word == '':
-            stop_condition = True
-        else:
-            decoded_sentence += ' ' + sampled_word
-            target_seq = np.zeros((1, 1), dtype='int32')
-            target_seq[0, 0] = sampled_token_index
-            states_value = [h2, c2]
+    def translate(self, text: str, direction: str = "en2nwy", num_beams: int = 5) -> str:
+        """Translate free text, keeping line breaks."""
+        lines = text.splitlines() or [text]
+        pieces = [split_sentences(line) for line in lines]
+        flat = [s for sentences in pieces for s in sentences]
+        if not flat:
+            return ""
+        translated = iter(self.translate_batch(flat, direction, num_beams))
+        return "\n".join(" ".join(next(translated) for _ in sentences) for sentences in pieces)
 
-    return decoded_sentence.strip()
+    def alternatives(self, sentence: str, direction: str = "en2nwy", n: int = 3, num_beams: int = 6) -> list[str]:
+        """The n best candidate translations of one sentence, best first."""
+        return self._generate([sentence], direction, num_beams, n, 128)[0]
 
-def translate(sentence):
-    seq = input_tokenizer.texts_to_sequences([sentence])
-    seq = tf.keras.preprocessing.sequence.pad_sequences(seq, maxlen=max_encoder_seq_length, padding='post')
-    return decode_sequence(seq)
 
-if __name__ == '__main__':
-    print("Enter English sentences to translate (empty line to quit)")
+def main():
+    use_utf8_console()
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("text", nargs="?", help="sentence to translate (omit for interactive mode)")
+    parser.add_argument("--direction", choices=sorted(config.DIRECTIONS), default="en2nwy")
+    parser.add_argument("--adapter-dir", type=Path, default=config.MODEL_DIR)
+    args = parser.parse_args()
+
+    try:
+        translator = Translator(args.adapter_dir)
+    except ModelNotTrainedError as e:
+        raise SystemExit(str(e))
+
+    if args.text:
+        print(translator.translate(args.text, args.direction))
+        return
+
+    direction = args.direction
+    print("Type a sentence to translate. '/swap' switches direction, an empty line quits.")
     while True:
-        text = input("Input: ").strip()
+        text = input(f"[{direction}] ").strip()
         if not text:
-            print("Exiting...")
             break
-        try:
-            translation = translate(text)
-            print(f"Translation: {translation}")
-        except Exception as e:
-            print(f"Error: {e}")
+        if text == "/swap":
+            direction = "nwy2en" if direction == "en2nwy" else "en2nwy"
+            print(f"Direction is now {direction}")
+            continue
+        print(translator.translate(text, direction))
+
+
+if __name__ == "__main__":
+    main()

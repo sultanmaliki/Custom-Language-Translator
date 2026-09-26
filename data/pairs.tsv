@@ -1,0 +1,4 @@
+# The Nawayathi corpus. One sentence pair per line, columns separated by a TAB.
+# Lines starting with # are ignored. "source" is optional (who said it, where it came from).
+# Write Nawayathi in Roman letters. Run `python data_preprocessing.py` to check this file.
+english	nawayathi	source
