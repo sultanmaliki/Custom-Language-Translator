@@ -1,5 +1,0 @@
-tensorflow>=2.10
-numpy
-pandas
-gradio
-scikit-learn
