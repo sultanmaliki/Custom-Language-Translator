@@ -36,7 +36,9 @@ english	nawayathi	source
 <English sentence>	<Nawayathi sentence in Roman letters>	<optional: who/where>
 ```
 
-Two ways to add pairs: edit the file directly, or run the app (step 5) and use its **Contribute** tab. The app also lets you correct a wrong translation on the spot, and the correction goes straight into the corpus.
+**The file already starts with about 1,350 English sentences** covering around 30 everyday topics (greetings, family, food, the sea and fishing, the mosque and festivals, the market, health, and a small block that covers who/when/negation systematically), with the `nawayathi` column **empty**. Fill in your translations in Roman letters, in any order. Rows you haven't translated yet are simply ignored, so you can run step 2 whenever you like (you need at least 20 translated rows). The most useful sections come first, and you can delete any section that doesn't suit your community. Edit it in VS Code, Notepad or Google Sheets (Download > .tsv) so it stays UTF-8; Excel's "Text" formats don't, and the checker will tell you if that happens.
+
+To add your own sentences, either add rows to the file, or run the app (step 5) and use its **Contribute** tab. The app also lets you correct a wrong translation on the spot, and the correction goes straight into the corpus.
 
 Tips that matter more than any setting:
 
@@ -52,7 +54,7 @@ Tips that matter more than any setting:
 python data_preprocessing.py
 ```
 
-Reports every problem with its line number (missing text, non-Roman characters, duplicates, stray tabs) and writes `data/processed/{train,val,test}.tsv`. The split is grouped by English sentence, so a test sentence is never also in training.
+Reports how many sentences are translated and how many are still waiting, lists every problem with its line number (non-Roman characters, duplicates, stray tabs, a Nawayathi sentence with no English), and writes `data/processed/{train,val,test}.tsv`. The split is grouped by English sentence, so a test sentence is never also in training.
 
 ### 3. Train
 

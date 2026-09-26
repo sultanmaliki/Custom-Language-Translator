@@ -29,11 +29,41 @@ def test_read_pairs_normalises_dedupes_and_skips_comments(tmp_path):
     assert report.rows_read == 3 and report.duplicates == 1 and not report.errors
 
 
-def test_read_pairs_reports_line_numbers_for_bad_rows(tmp_path):
-    f = write(tmp_path / "pairs.tsv", "english\tnawayathi\nfine\tok\nonly english\t\nalso bad\n")
+def test_read_pairs_reports_line_numbers_for_rows_without_english(tmp_path):
+    f = write(tmp_path / "pairs.tsv", "english\tnawayathi\nfine\tok\n\tonly nawayathi\n\t\tonly a source\n")
     _, report = dp.read_pairs(f)
     assert len(report.errors) == 2
     assert "line 3" in report.errors[0] and "line 4" in report.errors[1]
+
+
+def test_english_only_rows_are_pending_not_errors(tmp_path):
+    f = write(tmp_path / "pairs.tsv", (
+        "english\tnawayathi\tsource\n"
+        "Hello\t\tseed:greetings\n"
+        "Good night\t   \t\n"
+        "Only one column\n"
+        "How are you\ttranslated text\t\n"
+    ))
+    pairs, report = dp.read_pairs(f)
+    assert [p.english for p in pairs] == ["How are you"]
+    assert report.pending == 3 and report.rows_read == 4 and not report.errors
+    assert dp.corpus_size(f) == 1          # only translated rows count
+
+
+def test_a_pending_row_does_not_block_adding_the_same_english_sentence(tmp_path):
+    f = write(tmp_path / "pairs.tsv", "english\tnawayathi\tsource\nHello there\t\tseed:greetings\n")
+    assert dp.append_pair("Hello there", "translated text", path=f) == "added"
+    pairs, report = dp.read_pairs(f)
+    assert len(pairs) == 1 and report.pending == 1
+
+
+@pytest.mark.parametrize("encoding", ["cp1252", "utf-16"])
+def test_file_not_saved_as_utf8_gives_a_clear_error(tmp_path, encoding):
+    f = tmp_path / "pairs.tsv"
+    f.write_bytes("english\tnawayathi\ncafé\tx\n".encode(encoding))
+    with pytest.raises(ValueError, match="UTF-8"):
+        dp.read_pairs(f)
+    assert dp.corpus_size(f) == 0
 
 
 def test_read_pairs_requires_the_header_columns(tmp_path):

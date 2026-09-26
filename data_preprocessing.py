@@ -6,6 +6,10 @@ Reads data/pairs.tsv, a tab-separated file with a header row:
 
     english <TAB> nawayathi <TAB> source        (source is optional free text)
 
+A row with an English sentence but an empty Nawayathi column is a sentence that
+is still waiting for its translation: it is counted and skipped, not an error, so
+you can fill the file in gradually and run this at any point.
+
 Every problem is reported with its line number. Errors stop the run so that
 nothing is silently dropped from a corpus you built by hand; warnings don't.
 The split is grouped by English sentence, so the same English sentence (with
@@ -41,6 +45,7 @@ class Pair:
 @dataclass
 class Report:
     rows_read: int = 0
+    pending: int = 0        # English sentences still waiting for a Nawayathi translation
     duplicates: int = 0
     errors: list[str] = field(default_factory=list)
     warnings: list[str] = field(default_factory=list)
@@ -48,24 +53,31 @@ class Report:
 
 def _iter_rows(path: Path):
     """Yield (line_number, {column: value}) for every data row after the header."""
-    with Path(path).open("r", encoding="utf-8-sig", newline="") as f:
-        reader = csv.reader(f, delimiter="\t", quoting=csv.QUOTE_NONE)
-        header = None
-        for row in reader:
-            if not row or not "".join(row).strip() or row[0].lstrip().startswith("#"):
-                continue
-            if header is None:
-                header = [h.strip().lower() for h in row]
-                missing = {"english", "nawayathi"} - set(header)
-                if missing:
-                    raise ValueError(
-                        f"{Path(path).name}: header row must contain 'english' and 'nawayathi' "
-                        f"columns, found {header}"
-                    )
-                continue
-            rec = dict(zip(header, row))
-            rec["_extra"] = len(row) > len(header)
-            yield reader.line_num, rec
+    try:
+        with Path(path).open("r", encoding="utf-8-sig", newline="") as f:
+            reader = csv.reader(f, delimiter="\t", quoting=csv.QUOTE_NONE)
+            header = None
+            for row in reader:
+                if not row or not "".join(row).strip() or row[0].lstrip().startswith("#"):
+                    continue
+                if header is None:
+                    header = [h.strip().lower() for h in row]
+                    missing = {"english", "nawayathi"} - set(header)
+                    if missing:
+                        raise ValueError(
+                            f"{Path(path).name}: header row must contain 'english' and 'nawayathi' "
+                            f"columns, found {header}"
+                        )
+                    continue
+                rec = dict(zip(header, row))
+                rec["_extra"] = len(row) > len(header)
+                yield reader.line_num, rec
+    except UnicodeDecodeError as e:
+        raise ValueError(
+            f"{Path(path).name} is not saved as UTF-8, so some characters can't be read. Save it as UTF-8: "
+            "VS Code, Notepad and Google Sheets (Download > .tsv) do this; Excel's 'Text (Tab delimited)' "
+            "and 'Unicode Text' do not."
+        ) from e
 
 
 def read_pairs(path: Path = config.PAIRS_FILE) -> tuple[list[Pair], Report]:
@@ -80,8 +92,11 @@ def read_pairs(path: Path = config.PAIRS_FILE) -> tuple[list[Pair], Report]:
         report.rows_read += 1
         english = normalize_english(rec.get("english", ""))
         nawayathi = normalize_nawayathi(rec.get("nawayathi", ""), variants)
-        if not english or not nawayathi:
-            report.errors.append(f"line {line_no}: needs both an English and a Nawayathi sentence")
+        if english and not nawayathi:
+            report.pending += 1
+            continue
+        if not english:
+            report.errors.append(f"line {line_no}: has no English sentence")
             continue
         if rec["_extra"]:
             report.warnings.append(f"line {line_no}: more columns than the header (is there a stray tab in a sentence?)")
@@ -147,9 +162,9 @@ def read_split(path: Path) -> list[Pair]:
 
 
 def corpus_size(path: Path = config.PAIRS_FILE) -> int:
-    """Number of data rows in the corpus (tolerant: 0 if the file is absent or unreadable)."""
+    """Number of translated pairs in the corpus (tolerant: 0 if the file is absent or unreadable)."""
     try:
-        return sum(1 for _ in _iter_rows(path))
+        return sum(1 for _, rec in _iter_rows(path) if rec.get("nawayathi", "").strip())
     except (OSError, ValueError):
         return 0
 
@@ -194,7 +209,10 @@ def main() -> None:
     parser.add_argument("--seed", type=int, default=config.SEED)
     args = parser.parse_args()
 
-    pairs, report = read_pairs(args.pairs)
+    try:
+        pairs, report = read_pairs(args.pairs)
+    except (FileNotFoundError, ValueError) as e:
+        sys.exit(str(e))
     for w in report.warnings:
         print(f"warning: {w}")
     if report.errors:
@@ -202,7 +220,11 @@ def main() -> None:
             print(f"error: {e}")
         sys.exit(f"\n{len(report.errors)} error(s) in {args.pairs.name}. Fix them and run again.")
 
-    print(f"Read {report.rows_read} rows -> {len(pairs)} unique pairs ({report.duplicates} duplicates skipped).")
+    translated = report.rows_read - report.pending
+    print(f"Read {report.rows_read} rows: {translated} translated, {report.pending} still waiting for a "
+          f"Nawayathi translation. {len(pairs)} unique pairs ({report.duplicates} duplicates skipped).")
+    if not pairs:
+        sys.exit(f"Nothing to train on yet. Fill in the 'nawayathi' column of {args.pairs.name} and run this again.")
     try:
         train, val, test = split_pairs(pairs, seed=args.seed)
     except ValueError as e:

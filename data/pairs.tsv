@@ -1,4 +1,1387 @@
-# The Nawayathi corpus. One sentence pair per line, columns separated by a TAB.
-# Lines starting with # are ignored. "source" is optional (who said it, where it came from).
-# Write Nawayathi in Roman letters. Run `python data_preprocessing.py` to check this file.
+# The Nawayathi corpus. One sentence pair per line; columns are separated by a TAB. Lines starting with # are ignored.
+#
+# HOW TO FILL THIS IN: write the Nawayathi translation in the middle ('nawayathi') column, in Roman letters, the
+# way you would text it. Leave it empty to skip a sentence for now (empty rows are simply not used for training).
+# If the English is ambiguous (I / you, he / she, polite / casual), pick the most natural version. If a sentence has
+# more than one common way to say it, add another row with the same English and the other Nawayathi version.
+# The 'source' column says which topic an English sentence came from; you can ignore it.
+# Save the file as UTF-8 (VS Code, Notepad and Google Sheets > Download > .tsv do; Excel's 'Text' formats do not).
+# Run `python data_preprocessing.py` at any time to check your work and see how many are done.
 english	nawayathi	source
+# ===== Greetings and politeness =====
+Hello.		seed:greetings
+Good morning.		seed:greetings
+Good afternoon.		seed:greetings
+Good evening.		seed:greetings
+Good night.		seed:greetings
+How are you?		seed:greetings
+I am fine, thank you.		seed:greetings
+And how are you?		seed:greetings
+I am not well today.		seed:greetings
+What is your name?		seed:greetings
+My name is Ahmed.		seed:greetings
+Nice to meet you.		seed:greetings
+Welcome to our house.		seed:greetings
+Please come in.		seed:greetings
+Please sit down.		seed:greetings
+Thank you very much.		seed:greetings
+You are welcome.		seed:greetings
+Sorry, I made a mistake.		seed:greetings
+Excuse me, can I ask something?		seed:greetings
+Please forgive me.		seed:greetings
+Congratulations!		seed:greetings
+Good luck.		seed:greetings
+Take care.		seed:greetings
+See you tomorrow.		seed:greetings
+See you later.		seed:greetings
+Goodbye.		seed:greetings
+Peace be upon you.		seed:greetings
+And peace be upon you too.		seed:greetings
+God willing, we will meet again.		seed:greetings
+How is your family?		seed:greetings
+Everyone at home is well.		seed:greetings
+Thank you for your help.		seed:greetings
+Please say it again.		seed:greetings
+I did not understand.		seed:greetings
+Please speak slowly.		seed:greetings
+Do you speak English?		seed:greetings
+# ===== About yourself =====
+I am from Bhatkal.		seed:about-me
+Where are you from?		seed:about-me
+I live near the sea.		seed:about-me
+How old are you?		seed:about-me
+I am twenty years old.		seed:about-me
+My father is fifty years old.		seed:about-me
+What do you do?		seed:about-me
+I am a student.		seed:about-me
+I work in a shop.		seed:about-me
+He is a teacher.		seed:about-me
+She is a doctor.		seed:about-me
+My brother works in Dubai.		seed:about-me
+My sister studies at college.		seed:about-me
+I have two brothers and one sister.		seed:about-me
+Do you have any children?		seed:about-me
+We have three children.		seed:about-me
+This is my friend.		seed:about-me
+He is my neighbour.		seed:about-me
+She is my cousin.		seed:about-me
+Where do you live?		seed:about-me
+I live in a small house.		seed:about-me
+Our house is near the mosque.		seed:about-me
+What is your phone number?		seed:about-me
+I was born in this town.		seed:about-me
+I have lived here for ten years.		seed:about-me
+I speak our language at home.		seed:about-me
+I can also speak Kannada.		seed:about-me
+I am learning English.		seed:about-me
+He is a good man.		seed:about-me
+She is very kind.		seed:about-me
+Are you married?		seed:about-me
+He is not married yet.		seed:about-me
+My name is Fatima and I am a nurse.		seed:about-me
+I am the youngest in my family.		seed:about-me
+He is the eldest son.		seed:about-me
+# ===== Family =====
+This is my mother.		seed:family
+This is my father.		seed:family
+My grandfather is very old.		seed:family
+My grandmother tells us stories.		seed:family
+My uncle lives in the city.		seed:family
+My aunt is cooking in the kitchen.		seed:family
+My wife is at home.		seed:family
+My husband is at work.		seed:family
+Our son is in school.		seed:family
+Our daughter is sleeping.		seed:family
+The baby is crying.		seed:family
+My elder brother is tall.		seed:family
+My younger sister is very clever.		seed:family
+Where is your father?		seed:family
+Your mother is calling you.		seed:family
+His parents live in the village.		seed:family
+She loves her children.		seed:family
+The children are playing outside.		seed:family
+We all eat together.		seed:family
+My family is big.		seed:family
+Ali is my brother's son.		seed:family
+Zainab is my sister's daughter.		seed:family
+My father-in-law is a kind man.		seed:family
+The whole family came for the wedding.		seed:family
+My grandmother is sick.		seed:family
+He takes care of his parents.		seed:family
+I miss my mother.		seed:family
+Our neighbours are like family.		seed:family
+My brother and I go to the market together.		seed:family
+Their daughter got married last year.		seed:family
+Whose child is this?		seed:family
+She is my mother's sister.		seed:family
+He is my father's brother.		seed:family
+The twins look the same.		seed:family
+The boy is holding his mother's hand.		seed:family
+My father gave me some money.		seed:family
+Our grandmother lives with us.		seed:family
+Ask your father.		seed:family
+Call your brother.		seed:family
+Come and see the baby.		seed:family
+# ===== Questions =====
+What is this?		seed:questions
+What is that?		seed:questions
+Who is he?		seed:questions
+Who are you?		seed:questions
+Who came?		seed:questions
+Whose bag is this?		seed:questions
+Where is he?		seed:questions
+Where did you go?		seed:questions
+When did you come?		seed:questions
+When will he come?		seed:questions
+Why are you late?		seed:questions
+Why did you not come?		seed:questions
+Why is he crying?		seed:questions
+How did it happen?		seed:questions
+How far is it?		seed:questions
+How long will it take?		seed:questions
+How many people are there?		seed:questions
+How much does it cost?		seed:questions
+Which one do you want?		seed:questions
+Which is your house?		seed:questions
+Is he at home?		seed:questions
+Is she coming?		seed:questions
+Are they here?		seed:questions
+Do you know him?		seed:questions
+Do you like it?		seed:questions
+Did you eat?		seed:questions
+Did he call?		seed:questions
+Have you seen my bag?		seed:questions
+Have you finished?		seed:questions
+Can you swim?		seed:questions
+Can you come tomorrow?		seed:questions
+Will you come with me?		seed:questions
+Will it rain today?		seed:questions
+Should I wait?		seed:questions
+Is there any water?		seed:questions
+Is this yours?		seed:questions
+Are you sure?		seed:questions
+Is it true?		seed:questions
+What happened?		seed:questions
+What are you doing?		seed:questions
+What do you want?		seed:questions
+What did he say?		seed:questions
+What are you looking for?		seed:questions
+What should we do now?		seed:questions
+# ===== Requests, commands and permission =====
+Come here.		seed:requests
+Go there.		seed:requests
+Sit here.		seed:requests
+Wait a minute.		seed:requests
+Please help me.		seed:requests
+Can you help me?		seed:requests
+Can I come in?		seed:requests
+May I ask you something?		seed:requests
+Can I go now?		seed:requests
+You can go.		seed:requests
+Bring me some water.		seed:requests
+Give me that book.		seed:requests
+Take this.		seed:requests
+Show me your hand.		seed:requests
+Do it now.		seed:requests
+Do it slowly.		seed:requests
+Do not do that.		seed:requests
+Do not touch it.		seed:requests
+Do not go there.		seed:requests
+Do not be late.		seed:requests
+Do not make noise.		seed:requests
+Do not tell anyone.		seed:requests
+Let me see.		seed:requests
+Let me think.		seed:requests
+Let us go.		seed:requests
+Let him come.		seed:requests
+Let me help you.		seed:requests
+Tell me the truth.		seed:requests
+Tell him to come.		seed:requests
+Ask her to wait.		seed:requests
+Send him here.		seed:requests
+Call the doctor.		seed:requests
+Stop it.		seed:requests
+Listen to me.		seed:requests
+Look at this.		seed:requests
+Hold this for me.		seed:requests
+Keep quiet.		seed:requests
+Leave me alone.		seed:requests
+Try again.		seed:requests
+# ===== Numbers and money =====
+One, two, three, four, five.		seed:numbers
+Six, seven, eight, nine, ten.		seed:numbers
+I have one book.		seed:numbers
+He has two cars.		seed:numbers
+She bought three mangoes.		seed:numbers
+We need four chairs.		seed:numbers
+There are five people in the room.		seed:numbers
+Ten students are absent today.		seed:numbers
+She is twelve years old.		seed:numbers
+He is twenty five years old.		seed:numbers
+There are thirty days in this month.		seed:numbers
+One hundred people came to the meeting.		seed:numbers
+The village has about one thousand houses.		seed:numbers
+Give me half a kilo of rice.		seed:numbers
+I want a quarter of a litre of milk.		seed:numbers
+How many are there?		seed:numbers
+How much is this?		seed:numbers
+It costs ten rupees.		seed:numbers
+That shirt is two hundred rupees.		seed:numbers
+The price is too high.		seed:numbers
+Please reduce the price.		seed:numbers
+I have only five rupees.		seed:numbers
+Do you have change?		seed:numbers
+He paid one thousand rupees.		seed:numbers
+Take your money.		seed:numbers
+I gave him the money yesterday.		seed:numbers
+He owes me a hundred rupees.		seed:numbers
+The fish costs three hundred rupees a kilo.		seed:numbers
+First, second and third.		seed:numbers
+This is my first time.		seed:numbers
+Add two and three.		seed:numbers
+Take away one from five.		seed:numbers
+Two times three is six.		seed:numbers
+Half of ten is five.		seed:numbers
+Count the money again.		seed:numbers
+We are six in the group.		seed:numbers
+Both of them are my friends.		seed:numbers
+Every child got one book.		seed:numbers
+All of them came.		seed:numbers
+I have 3 brothers.		seed:numbers
+She is 12 years old.		seed:numbers
+The bus comes at 8:30.		seed:numbers
+It costs 500 rupees.		seed:numbers
+I bought 5 kilos of rice.		seed:numbers
+There are 30 students in the class.		seed:numbers
+We need 2 chairs.		seed:numbers
+He paid 1000 rupees.		seed:numbers
+The shop opens at 9 in the morning.		seed:numbers
+My house number is 24.		seed:numbers
+# ===== Time, days and months =====
+What time is it?		seed:time
+It is six o'clock.		seed:time
+It is half past seven.		seed:time
+It is quarter to nine.		seed:time
+The bus comes at eight in the morning.		seed:time
+I wake up at five every morning.		seed:time
+Today is Monday.		seed:time
+Tomorrow is Tuesday.		seed:time
+Yesterday was Sunday.		seed:time
+The days of the week are Monday, Tuesday, Wednesday, Thursday, Friday, Saturday and Sunday.		seed:time
+Friday is a holy day.		seed:time
+We do not have school on Sunday.		seed:time
+What is the date today?		seed:time
+My birthday is in June.		seed:time
+It rains a lot in July.		seed:time
+January is the first month of the year.		seed:time
+The month of Ramadan is coming.		seed:time
+I will come next week.		seed:time
+He came last month.		seed:time
+We met two years ago.		seed:time
+I will finish this in one hour.		seed:time
+Wait for five minutes.		seed:time
+Come back after some time.		seed:time
+He is always late.		seed:time
+She never lies.		seed:time
+I go there every day.		seed:time
+Sometimes we eat outside.		seed:time
+Now I am busy.		seed:time
+Not now, later.		seed:time
+It is too early.		seed:time
+It is already late.		seed:time
+Morning, afternoon, evening and night.		seed:time
+The sun rises in the east.		seed:time
+The sun sets in the west.		seed:time
+The shop opens at nine.		seed:time
+The shop closes at ten at night.		seed:time
+What did you do yesterday?		seed:time
+What will you do tomorrow?		seed:time
+I was waiting for you since morning.		seed:time
+The train leaves in ten minutes.		seed:time
+# ===== Grammar: who does it, and when =====
+I go to the market every day.		seed:grammar-verbs
+I am going to the market now.		seed:grammar-verbs
+I went to the market yesterday.		seed:grammar-verbs
+I will go to the market tomorrow.		seed:grammar-verbs
+I did not go to the market yesterday.		seed:grammar-verbs
+You go to the market every day.		seed:grammar-verbs
+You are going to the market now.		seed:grammar-verbs
+You went to the market yesterday.		seed:grammar-verbs
+You will go to the market tomorrow.		seed:grammar-verbs
+You did not go to the market yesterday.		seed:grammar-verbs
+He goes to the market every day.		seed:grammar-verbs
+He is going to the market now.		seed:grammar-verbs
+He went to the market yesterday.		seed:grammar-verbs
+He will go to the market tomorrow.		seed:grammar-verbs
+He did not go to the market yesterday.		seed:grammar-verbs
+She goes to the market every day.		seed:grammar-verbs
+She is going to the market now.		seed:grammar-verbs
+She went to the market yesterday.		seed:grammar-verbs
+She will go to the market tomorrow.		seed:grammar-verbs
+She did not go to the market yesterday.		seed:grammar-verbs
+We go to the market every day.		seed:grammar-verbs
+We are going to the market now.		seed:grammar-verbs
+We went to the market yesterday.		seed:grammar-verbs
+We will go to the market tomorrow.		seed:grammar-verbs
+We did not go to the market yesterday.		seed:grammar-verbs
+You all go to the market every day.		seed:grammar-verbs
+You all are going to the market now.		seed:grammar-verbs
+You all went to the market yesterday.		seed:grammar-verbs
+You all will go to the market tomorrow.		seed:grammar-verbs
+You all did not go to the market yesterday.		seed:grammar-verbs
+They go to the market every day.		seed:grammar-verbs
+They are going to the market now.		seed:grammar-verbs
+They went to the market yesterday.		seed:grammar-verbs
+They will go to the market tomorrow.		seed:grammar-verbs
+They did not go to the market yesterday.		seed:grammar-verbs
+I eat rice every day.		seed:grammar-verbs
+I am eating rice now.		seed:grammar-verbs
+I ate rice yesterday.		seed:grammar-verbs
+I will eat rice tomorrow.		seed:grammar-verbs
+I did not eat rice yesterday.		seed:grammar-verbs
+You eat rice every day.		seed:grammar-verbs
+You are eating rice now.		seed:grammar-verbs
+You ate rice yesterday.		seed:grammar-verbs
+You will eat rice tomorrow.		seed:grammar-verbs
+You did not eat rice yesterday.		seed:grammar-verbs
+He eats rice every day.		seed:grammar-verbs
+He is eating rice now.		seed:grammar-verbs
+He ate rice yesterday.		seed:grammar-verbs
+He will eat rice tomorrow.		seed:grammar-verbs
+He did not eat rice yesterday.		seed:grammar-verbs
+She eats rice every day.		seed:grammar-verbs
+She is eating rice now.		seed:grammar-verbs
+She ate rice yesterday.		seed:grammar-verbs
+She will eat rice tomorrow.		seed:grammar-verbs
+She did not eat rice yesterday.		seed:grammar-verbs
+We eat rice every day.		seed:grammar-verbs
+We are eating rice now.		seed:grammar-verbs
+We ate rice yesterday.		seed:grammar-verbs
+We will eat rice tomorrow.		seed:grammar-verbs
+We did not eat rice yesterday.		seed:grammar-verbs
+You all eat rice every day.		seed:grammar-verbs
+You all are eating rice now.		seed:grammar-verbs
+You all ate rice yesterday.		seed:grammar-verbs
+You all will eat rice tomorrow.		seed:grammar-verbs
+You all did not eat rice yesterday.		seed:grammar-verbs
+They eat rice every day.		seed:grammar-verbs
+They are eating rice now.		seed:grammar-verbs
+They ate rice yesterday.		seed:grammar-verbs
+They will eat rice tomorrow.		seed:grammar-verbs
+They did not eat rice yesterday.		seed:grammar-verbs
+I come home every day.		seed:grammar-verbs
+I am coming home now.		seed:grammar-verbs
+I came home yesterday.		seed:grammar-verbs
+I will come home tomorrow.		seed:grammar-verbs
+I did not come home yesterday.		seed:grammar-verbs
+You come home every day.		seed:grammar-verbs
+You are coming home now.		seed:grammar-verbs
+You came home yesterday.		seed:grammar-verbs
+You will come home tomorrow.		seed:grammar-verbs
+You did not come home yesterday.		seed:grammar-verbs
+He comes home every day.		seed:grammar-verbs
+He is coming home now.		seed:grammar-verbs
+He came home yesterday.		seed:grammar-verbs
+He will come home tomorrow.		seed:grammar-verbs
+He did not come home yesterday.		seed:grammar-verbs
+She comes home every day.		seed:grammar-verbs
+She is coming home now.		seed:grammar-verbs
+She came home yesterday.		seed:grammar-verbs
+She will come home tomorrow.		seed:grammar-verbs
+She did not come home yesterday.		seed:grammar-verbs
+We come home every day.		seed:grammar-verbs
+We are coming home now.		seed:grammar-verbs
+We came home yesterday.		seed:grammar-verbs
+We will come home tomorrow.		seed:grammar-verbs
+We did not come home yesterday.		seed:grammar-verbs
+You all come home every day.		seed:grammar-verbs
+You all are coming home now.		seed:grammar-verbs
+You all came home yesterday.		seed:grammar-verbs
+You all will come home tomorrow.		seed:grammar-verbs
+You all did not come home yesterday.		seed:grammar-verbs
+They come home every day.		seed:grammar-verbs
+They are coming home now.		seed:grammar-verbs
+They came home yesterday.		seed:grammar-verbs
+They will come home tomorrow.		seed:grammar-verbs
+They did not come home yesterday.		seed:grammar-verbs
+I buy fish every day.		seed:grammar-verbs
+I am buying fish now.		seed:grammar-verbs
+I bought fish yesterday.		seed:grammar-verbs
+I will buy fish tomorrow.		seed:grammar-verbs
+I did not buy fish yesterday.		seed:grammar-verbs
+You buy fish every day.		seed:grammar-verbs
+You are buying fish now.		seed:grammar-verbs
+You bought fish yesterday.		seed:grammar-verbs
+You will buy fish tomorrow.		seed:grammar-verbs
+You did not buy fish yesterday.		seed:grammar-verbs
+He buys fish every day.		seed:grammar-verbs
+He is buying fish now.		seed:grammar-verbs
+He bought fish yesterday.		seed:grammar-verbs
+He will buy fish tomorrow.		seed:grammar-verbs
+He did not buy fish yesterday.		seed:grammar-verbs
+She buys fish every day.		seed:grammar-verbs
+She is buying fish now.		seed:grammar-verbs
+She bought fish yesterday.		seed:grammar-verbs
+She will buy fish tomorrow.		seed:grammar-verbs
+She did not buy fish yesterday.		seed:grammar-verbs
+We buy fish every day.		seed:grammar-verbs
+We are buying fish now.		seed:grammar-verbs
+We bought fish yesterday.		seed:grammar-verbs
+We will buy fish tomorrow.		seed:grammar-verbs
+We did not buy fish yesterday.		seed:grammar-verbs
+You all buy fish every day.		seed:grammar-verbs
+You all are buying fish now.		seed:grammar-verbs
+You all bought fish yesterday.		seed:grammar-verbs
+You all will buy fish tomorrow.		seed:grammar-verbs
+You all did not buy fish yesterday.		seed:grammar-verbs
+They buy fish every day.		seed:grammar-verbs
+They are buying fish now.		seed:grammar-verbs
+They bought fish yesterday.		seed:grammar-verbs
+They will buy fish tomorrow.		seed:grammar-verbs
+They did not buy fish yesterday.		seed:grammar-verbs
+# ===== Grammar: my/your/his, this/that, and where things are =====
+This is my book.		seed:grammar-words
+This is your book.		seed:grammar-words
+This is his book.		seed:grammar-words
+This is her book.		seed:grammar-words
+This is our book.		seed:grammar-words
+This is their book.		seed:grammar-words
+This is my house.		seed:grammar-words
+This is your house.		seed:grammar-words
+This is his house.		seed:grammar-words
+This is her house.		seed:grammar-words
+This is our house.		seed:grammar-words
+This is their house.		seed:grammar-words
+This is your father.		seed:grammar-words
+This is his father.		seed:grammar-words
+This is her father.		seed:grammar-words
+This is our father.		seed:grammar-words
+This is their father.		seed:grammar-words
+This is your friend.		seed:grammar-words
+This is his friend.		seed:grammar-words
+This is her friend.		seed:grammar-words
+This is our friend.		seed:grammar-words
+This is their friend.		seed:grammar-words
+This is my boat.		seed:grammar-words
+This is your boat.		seed:grammar-words
+This is his boat.		seed:grammar-words
+This is her boat.		seed:grammar-words
+This is our boat.		seed:grammar-words
+This is their boat.		seed:grammar-words
+This is my shop.		seed:grammar-words
+This is your shop.		seed:grammar-words
+This is his shop.		seed:grammar-words
+This is her shop.		seed:grammar-words
+This is our shop.		seed:grammar-words
+This is their shop.		seed:grammar-words
+Where is my book?		seed:grammar-words
+Where is your book?		seed:grammar-words
+Where is his book?		seed:grammar-words
+Where is her book?		seed:grammar-words
+Where is our book?		seed:grammar-words
+Where is their book?		seed:grammar-words
+Where is my father?		seed:grammar-words
+Where is his father?		seed:grammar-words
+Where is her father?		seed:grammar-words
+Where is our father?		seed:grammar-words
+Where is their father?		seed:grammar-words
+Where is my boat?		seed:grammar-words
+Where is your boat?		seed:grammar-words
+Where is his boat?		seed:grammar-words
+Where is her boat?		seed:grammar-words
+Where is our boat?		seed:grammar-words
+Where is their boat?		seed:grammar-words
+This is a house.		seed:grammar-words
+That is a house.		seed:grammar-words
+These are houses.		seed:grammar-words
+Those are houses.		seed:grammar-words
+This is a boat.		seed:grammar-words
+That is a boat.		seed:grammar-words
+These are boats.		seed:grammar-words
+Those are boats.		seed:grammar-words
+This is a book.		seed:grammar-words
+That is a book.		seed:grammar-words
+These are books.		seed:grammar-words
+Those are books.		seed:grammar-words
+This is a tree.		seed:grammar-words
+That is a tree.		seed:grammar-words
+These are trees.		seed:grammar-words
+Those are trees.		seed:grammar-words
+This is a fish.		seed:grammar-words
+That is a fish.		seed:grammar-words
+These are fish.		seed:grammar-words
+Those are fish.		seed:grammar-words
+The book is on the table.		seed:grammar-words
+The book is under the table.		seed:grammar-words
+The cat is in the box.		seed:grammar-words
+The cat is behind the door.		seed:grammar-words
+The key is in my bag.		seed:grammar-words
+The key is on the chair.		seed:grammar-words
+The bag is near the door.		seed:grammar-words
+The bag is under the bed.		seed:grammar-words
+The boat is near the shore.		seed:grammar-words
+The boat is in the sea.		seed:grammar-words
+The bird is on the tree.		seed:grammar-words
+The bird is in the tree.		seed:grammar-words
+The children are in front of the school.		seed:grammar-words
+The shop is next to the mosque.		seed:grammar-words
+The mosque is behind the market.		seed:grammar-words
+The school is near our house.		seed:grammar-words
+The dog is under the tree.		seed:grammar-words
+The dog is in front of the house.		seed:grammar-words
+The fish is in the basket.		seed:grammar-words
+The water is in the bucket.		seed:grammar-words
+The phone is on the bed.		seed:grammar-words
+The phone is in my pocket.		seed:grammar-words
+The tree is behind the house.		seed:grammar-words
+The road is in front of the shop.		seed:grammar-words
+The ball is under the chair.		seed:grammar-words
+The money is in the box.		seed:grammar-words
+The coconut fell from the tree.		seed:grammar-words
+He came from the village.		seed:grammar-words
+She went to the sea.		seed:grammar-words
+The man is between the two boys.		seed:grammar-words
+# ===== Grammar: have, can, must, want, should =====
+I have a boat.		seed:grammar-have-can
+I do not have a boat.		seed:grammar-have-can
+Do you have a boat?		seed:grammar-have-can
+He has a shop.		seed:grammar-have-can
+He does not have a shop.		seed:grammar-have-can
+Does he have a shop?		seed:grammar-have-can
+We have time.		seed:grammar-have-can
+We do not have time.		seed:grammar-have-can
+Do you have time?		seed:grammar-have-can
+They have three children.		seed:grammar-have-can
+They do not have any children.		seed:grammar-have-can
+Do they have children?		seed:grammar-have-can
+I can swim.		seed:grammar-have-can
+I cannot swim.		seed:grammar-have-can
+He can drive a car.		seed:grammar-have-can
+He cannot drive a car.		seed:grammar-have-can
+Can she cook?		seed:grammar-have-can
+I must go now.		seed:grammar-have-can
+You must not go there.		seed:grammar-have-can
+Must we wait?		seed:grammar-have-can
+I want to eat.		seed:grammar-have-can
+I do not want to eat.		seed:grammar-have-can
+Do you want to eat?		seed:grammar-have-can
+I want to go home.		seed:grammar-have-can
+He wants to sleep.		seed:grammar-have-can
+They want to play.		seed:grammar-have-can
+You should rest.		seed:grammar-have-can
+You should not eat so much.		seed:grammar-have-can
+Should I call him?		seed:grammar-have-can
+We should help them.		seed:grammar-have-can
+May I come in?		seed:grammar-have-can
+You may go now.		seed:grammar-have-can
+I know him.		seed:grammar-have-can
+I do not know him.		seed:grammar-have-can
+# ===== Everyday short forms (how people really type) =====
+I'm fine.		seed:contractions
+I'm hungry.		seed:contractions
+I don't know.		seed:contractions
+I don't understand.		seed:contractions
+I can't come today.		seed:contractions
+I won't go there.		seed:contractions
+He isn't here.		seed:contractions
+She isn't at home.		seed:contractions
+We aren't ready.		seed:contractions
+They aren't coming.		seed:contractions
+It's raining.		seed:contractions
+It's very hot today.		seed:contractions
+What's your name?		seed:contractions
+Where's the bus stand?		seed:contractions
+Who's there?		seed:contractions
+That's my house.		seed:contractions
+Let's go.		seed:contractions
+Let's eat.		seed:contractions
+Don't worry.		seed:contractions
+Don't be late.		seed:contractions
+# ===== Food and drink =====
+I am hungry.		seed:food
+Are you hungry?		seed:food
+I am thirsty.		seed:food
+Please give me some water.		seed:food
+The water is cold.		seed:food
+The tea is very hot.		seed:food
+Do you want tea or coffee?		seed:food
+I like tea with milk.		seed:food
+I do not take sugar.		seed:food
+Lunch is ready.		seed:food
+Come and eat.		seed:food
+What did you cook today?		seed:food
+We are eating rice and fish curry.		seed:food
+My mother makes very good food.		seed:food
+I like spicy food.		seed:food
+This food is too spicy.		seed:food
+The soup needs more salt.		seed:food
+There is too much salt.		seed:food
+The bread is fresh.		seed:food
+I want another plate of rice.		seed:food
+Please pass the salt.		seed:food
+He eats three times a day.		seed:food
+The children want sweets.		seed:food
+We drink milk every morning.		seed:food
+Do not waste food.		seed:food
+Wash your hands before eating.		seed:food
+The rice is not cooked yet.		seed:food
+Add some more water.		seed:food
+The fish is fresh from the sea.		seed:food
+We fried the fish in oil.		seed:food
+She is making dosa for breakfast.		seed:food
+I had eggs for breakfast.		seed:food
+What is for dinner?		seed:food
+We will have chicken today.		seed:food
+The mango is very sweet.		seed:food
+I like bananas.		seed:food
+Coconut is used in many dishes.		seed:food
+The onions are on the table.		seed:food
+Cut the vegetables.		seed:food
+Peel the potatoes.		seed:food
+Boil the eggs.		seed:food
+Put the pot on the fire.		seed:food
+The milk boiled over.		seed:food
+I cannot eat any more.		seed:food
+That was a delicious meal.		seed:food
+The guests are hungry.		seed:food
+Would you like some more?		seed:food
+No thank you, I am full.		seed:food
+Fill the glass with water.		seed:food
+The bottle is empty.		seed:food
+Do not drink water from the tap.		seed:food
+He drinks a glass of juice every day.		seed:food
+She is grinding spices for the curry.		seed:food
+We break our fast at sunset.		seed:food
+Dates are eaten to break the fast.		seed:food
+Our cook makes biryani on special days.		seed:food
+# ===== Home and household =====
+Our house has three rooms.		seed:home
+Open the door.		seed:home
+Close the window.		seed:home
+Please lock the door.		seed:home
+The key is on the table.		seed:home
+Turn on the light.		seed:home
+Turn off the fan.		seed:home
+The room is very dark.		seed:home
+It is hot inside the house.		seed:home
+Where is the kitchen?		seed:home
+The bathroom is at the back.		seed:home
+The bed is in the small room.		seed:home
+Put the clothes on the bed.		seed:home
+Sweep the floor.		seed:home
+Wash the dishes.		seed:home
+I am washing my clothes.		seed:home
+Hang the clothes outside to dry.		seed:home
+The roof leaks in the rain.		seed:home
+The wall needs new paint.		seed:home
+There is a well behind the house.		seed:home
+We have a small garden.		seed:home
+The cat is sleeping on the chair.		seed:home
+Bring a chair for the guest.		seed:home
+Put the bag under the table.		seed:home
+The mat is on the floor.		seed:home
+The clock is on the wall.		seed:home
+The mirror is broken.		seed:home
+Where is the broom?		seed:home
+The electricity is gone.		seed:home
+The power is back.		seed:home
+We need to fix the tap.		seed:home
+There is no water in the pipe.		seed:home
+Take the rubbish outside.		seed:home
+Keep the house clean.		seed:home
+The neighbours are very noisy.		seed:home
+Our house is old but strong.		seed:home
+He is building a new house.		seed:home
+The bucket is full of water.		seed:home
+Bring me a glass of water.		seed:home
+The cupboard is full of clothes.		seed:home
+Where did you put my phone?		seed:home
+Do not leave the gate open.		seed:home
+The dog is barking at the door.		seed:home
+Come inside, it is raining.		seed:home
+# ===== Body and health =====
+My head hurts.		seed:health
+I have a headache.		seed:health
+I have a stomach ache.		seed:health
+My tooth is paining.		seed:health
+My leg hurts when I walk.		seed:health
+I have a fever.		seed:health
+I have a cold and a cough.		seed:health
+My throat is sore.		seed:health
+I feel dizzy.		seed:health
+I feel very weak.		seed:health
+I cannot sleep at night.		seed:health
+I hurt my hand.		seed:health
+He fell and hurt his knee.		seed:health
+There is blood on your shirt.		seed:health
+Wash the wound with clean water.		seed:health
+Are you feeling better now?		seed:health
+I am feeling much better today.		seed:health
+You should see a doctor.		seed:health
+Let us go to the hospital.		seed:health
+The doctor is not here today.		seed:health
+The doctor gave me some medicine.		seed:health
+Take this medicine twice a day.		seed:health
+Take one tablet after eating.		seed:health
+Drink plenty of water.		seed:health
+You need to rest.		seed:health
+Do not go to work today.		seed:health
+The child has a high fever.		seed:health
+She is pregnant.		seed:health
+My grandfather cannot hear well.		seed:health
+He cannot see without glasses.		seed:health
+Close your eyes.		seed:health
+Open your mouth.		seed:health
+Show me your tongue.		seed:health
+Raise your hand.		seed:health
+Breathe in slowly.		seed:health
+My heart is beating fast.		seed:health
+My back is aching.		seed:health
+My eyes are red.		seed:health
+Wash your face.		seed:health
+Brush your teeth twice a day.		seed:health
+Cut your nails.		seed:health
+Comb your hair.		seed:health
+The baby has a rash on the skin.		seed:health
+I am allergic to some foods.		seed:health
+He has diabetes.		seed:health
+Where does it hurt?		seed:health
+It hurts here.		seed:health
+It does not hurt any more.		seed:health
+She is recovering slowly.		seed:health
+I need to buy medicine from the shop.		seed:health
+Health is more important than money.		seed:health
+# ===== Feelings =====
+I am happy.		seed:feelings
+I am very sad today.		seed:feelings
+She is angry with me.		seed:feelings
+Do not be angry.		seed:feelings
+He is afraid of the dark.		seed:feelings
+I am not afraid.		seed:feelings
+I am tired.		seed:feelings
+I am worried about my mother.		seed:feelings
+Do not worry.		seed:feelings
+We are very proud of you.		seed:feelings
+I am surprised to see you here.		seed:feelings
+He was very shy.		seed:feelings
+She is lonely in the new city.		seed:feelings
+I feel sleepy.		seed:feelings
+I feel like crying.		seed:feelings
+The children are excited.		seed:feelings
+I am sorry for your loss.		seed:feelings
+He is jealous of his friend.		seed:feelings
+I love my country.		seed:feelings
+I like this place very much.		seed:feelings
+I do not like this.		seed:feelings
+I hate waiting.		seed:feelings
+She laughs a lot.		seed:feelings
+He cried when he heard the news.		seed:feelings
+Why are you smiling?		seed:feelings
+I am bored.		seed:feelings
+It made me very happy.		seed:feelings
+I feel ashamed.		seed:feelings
+He is very brave.		seed:feelings
+She is always calm.		seed:feelings
+I am sure about it.		seed:feelings
+I am not sure.		seed:feelings
+I forgot my keys.		seed:feelings
+I remember that day well.		seed:feelings
+# ===== Market and shopping =====
+Where is the market?		seed:market
+The market is far from here.		seed:market
+I am going to the shop.		seed:market
+What do you want to buy?		seed:market
+I want to buy some vegetables.		seed:market
+How much is one kilo of tomatoes?		seed:market
+That is too expensive.		seed:market
+Give me a discount.		seed:market
+I will take two kilos.		seed:market
+Please weigh it again.		seed:market
+Give me a bag.		seed:market
+Do you have smaller ones?		seed:market
+Show me another one.		seed:market
+Do you have this in a bigger size?		seed:market
+This shirt is too small.		seed:market
+The shoes are too tight.		seed:market
+I like this colour.		seed:market
+I do not like this cloth.		seed:market
+Can I try it on?		seed:market
+I will buy it.		seed:market
+I will not buy it.		seed:market
+What is the last price?		seed:market
+Here is your money.		seed:market
+Keep the change.		seed:market
+Please give me the bill.		seed:market
+The shop is closed today.		seed:market
+The vegetables are not fresh.		seed:market
+The fruit is rotten.		seed:market
+These apples are very good.		seed:market
+I want oil, sugar and salt.		seed:market
+Buy some rice and lentils.		seed:market
+Bring milk from the shop.		seed:market
+Go and buy bread.		seed:market
+The shopkeeper is my friend.		seed:market
+There is a lot of crowd in the market.		seed:market
+He sells clothes at the market.		seed:market
+She sells flowers near the mosque.		seed:market
+Everything is expensive these days.		seed:market
+Prices are going up.		seed:market
+I do not have enough money.		seed:market
+Can you lend me some money?		seed:market
+I will pay you tomorrow.		seed:market
+This is a good bargain.		seed:market
+He cheated me.		seed:market
+The scale is wrong.		seed:market
+The fresh vegetables come in the morning.		seed:market
+Please pack it well.		seed:market
+Send it to my house.		seed:market
+I will pay by phone.		seed:market
+Is there a bank nearby?		seed:market
+# ===== Travel and directions =====
+Where are you going?		seed:travel
+I am going to Mangalore.		seed:travel
+I want to go to the bus stand.		seed:travel
+How do I get to the station?		seed:travel
+Which way is the hospital?		seed:travel
+Go straight.		seed:travel
+Turn left at the corner.		seed:travel
+Turn right after the bridge.		seed:travel
+It is near the mosque.		seed:travel
+It is not far from here.		seed:travel
+It is about two kilometres.		seed:travel
+It takes ten minutes to walk.		seed:travel
+Stop here.		seed:travel
+Please stop the bus.		seed:travel
+When does the next bus leave?		seed:travel
+The bus is late.		seed:travel
+The bus is full.		seed:travel
+Where can I buy a ticket?		seed:travel
+One ticket to Udupi, please.		seed:travel
+How much is the fare?		seed:travel
+Take an auto-rickshaw.		seed:travel
+The road is very bad.		seed:travel
+There is a lot of traffic.		seed:travel
+Drive slowly.		seed:travel
+He drives very fast.		seed:travel
+I lost my way.		seed:travel
+Can you show me the way?		seed:travel
+Follow me.		seed:travel
+Wait here for me.		seed:travel
+The train arrives at noon.		seed:travel
+The train has already left.		seed:travel
+We are going by train.		seed:travel
+He came by bike.		seed:travel
+I walked to school.		seed:travel
+The bridge is broken.		seed:travel
+Cross the road carefully.		seed:travel
+Look both ways before crossing.		seed:travel
+The petrol pump is ahead.		seed:travel
+The car broke down on the road.		seed:travel
+We reached at night.		seed:travel
+It was a long journey.		seed:travel
+I am tired after the trip.		seed:travel
+Where is your luggage?		seed:travel
+Take your bag.		seed:travel
+He is travelling abroad next week.		seed:travel
+My flight is at ten.		seed:travel
+Give me a lift to town.		seed:travel
+Which bus goes to Kumta?		seed:travel
+Get down at the next stop.		seed:travel
+Please wake me up at the last stop.		seed:travel
+# ===== Weather and seasons =====
+The weather is nice today.		seed:weather
+It is very hot today.		seed:weather
+It is cold in the morning.		seed:weather
+It is raining.		seed:weather
+It rained all night.		seed:weather
+The rain has stopped.		seed:weather
+It rains heavily in the monsoon.		seed:weather
+The sky is full of dark clouds.		seed:weather
+The wind is strong.		seed:weather
+There is a storm coming.		seed:weather
+The sea is rough today.		seed:weather
+The sun is very strong.		seed:weather
+It is humid.		seed:weather
+Take an umbrella with you.		seed:weather
+The road is full of water.		seed:weather
+The river is flooding.		seed:weather
+The rainy season starts in June.		seed:weather
+Summer is very hot here.		seed:weather
+Winter is not cold on the coast.		seed:weather
+The weather changes quickly.		seed:weather
+Lightning struck the tree.		seed:weather
+I heard thunder.		seed:weather
+The fog is thick this morning.		seed:weather
+It will rain tomorrow.		seed:weather
+It did not rain this year.		seed:weather
+The clothes are still wet.		seed:weather
+The clothes dried quickly in the sun.		seed:weather
+The moon is bright tonight.		seed:weather
+The stars are visible tonight.		seed:weather
+The evening breeze is pleasant.		seed:weather
+# ===== The sea and fishing =====
+The sea is very big.		seed:sea
+The waves are high today.		seed:sea
+The fishermen go out at night.		seed:sea
+He goes fishing every morning.		seed:sea
+Our boat is old but strong.		seed:sea
+The boat has a small engine.		seed:sea
+They caught a lot of fish today.		seed:sea
+The fish are sold at the harbour.		seed:sea
+We sell fresh fish in the market.		seed:sea
+The price of fish is high.		seed:sea
+The fishing net is torn.		seed:sea
+He is mending the net.		seed:sea
+It is dangerous to go out in the storm.		seed:sea
+The boat returned safely.		seed:sea
+Wait for the boat at the beach.		seed:sea
+The children are playing on the sand.		seed:sea
+Do not swim in the deep water.		seed:sea
+The water is salty.		seed:sea
+He can swim very well.		seed:sea
+She is afraid of the sea.		seed:sea
+The tide is coming in.		seed:sea
+The tide is going out.		seed:sea
+The sun is setting over the sea.		seed:sea
+There are many boats in the harbour.		seed:sea
+The ship carries goods to other countries.		seed:sea
+My uncle was a sailor.		seed:sea
+He learned fishing from his father.		seed:sea
+We do not go to sea during the monsoon.		seed:sea
+The fishermen are back.		seed:sea
+Buy the biggest fish.		seed:sea
+We caught sardines and mackerel.		seed:sea
+I want half a kilo of prawns.		seed:sea
+The crab is still alive.		seed:sea
+Clean the fish well.		seed:sea
+Dry the fish in the sun.		seed:sea
+The port is very busy in the morning.		seed:sea
+Many people from our town work on ships.		seed:sea
+The lighthouse is on the hill.		seed:sea
+The coast is beautiful.		seed:sea
+There is a strong current here.		seed:sea
+Life jackets are kept in the boat.		seed:sea
+The engine has stopped.		seed:sea
+We need more fuel.		seed:sea
+The waves washed the boat ashore.		seed:sea
+# ===== Work and business =====
+What work do you do?		seed:work
+I work at a factory.		seed:work
+He has a small business.		seed:work
+My father owns a shop.		seed:work
+I work in the Gulf.		seed:work
+He goes to work by bus.		seed:work
+When do you finish work?		seed:work
+I finish work at six.		seed:work
+I am very busy today.		seed:work
+I have a lot of work.		seed:work
+Do not disturb me now.		seed:work
+We work six days a week.		seed:work
+He got a new job.		seed:work
+She lost her job.		seed:work
+I am looking for work.		seed:work
+The salary is low.		seed:work
+The boss is not in the office today.		seed:work
+We have a meeting at ten.		seed:work
+Please send me the letter.		seed:work
+Sign here.		seed:work
+I need a day off.		seed:work
+He is on leave.		seed:work
+The work is finished.		seed:work
+The work is not finished yet.		seed:work
+We will complete it tomorrow.		seed:work
+Help me with this work.		seed:work
+He is a hard worker.		seed:work
+She is a driver.		seed:work
+He is a carpenter.		seed:work
+My uncle is a tailor.		seed:work
+He repairs mobile phones.		seed:work
+I sell vegetables.		seed:work
+The company is hiring people.		seed:work
+Business is slow these days.		seed:work
+Business is very good this month.		seed:work
+He earns a good income.		seed:work
+We need to save some money.		seed:work
+He sent money home from abroad.		seed:work
+The contract is for two years.		seed:work
+Everyone must work together.		seed:work
+# ===== School and learning =====
+The children go to school.		seed:school
+I go to school every day.		seed:school
+School starts at nine.		seed:school
+The teacher is teaching in the class.		seed:school
+Open your books.		seed:school
+Close your books.		seed:school
+Read this page.		seed:school
+Write your name here.		seed:school
+Listen carefully.		seed:school
+Do you understand?		seed:school
+I do not understand this word.		seed:school
+What does this word mean?		seed:school
+Please repeat the question.		seed:school
+Who knows the answer?		seed:school
+Raise your hand if you know.		seed:school
+The answer is correct.		seed:school
+The answer is wrong.		seed:school
+You have done very well.		seed:school
+He is the best student in the class.		seed:school
+She always comes first.		seed:school
+I failed the exam.		seed:school
+I passed the exam.		seed:school
+The exam is next week.		seed:school
+I must study tonight.		seed:school
+Do your homework.		seed:school
+He forgot his book at home.		seed:school
+The school is closed for holidays.		seed:school
+The teacher is angry.		seed:school
+Please be quiet in the class.		seed:school
+Sit down.		seed:school
+Stand up.		seed:school
+Come to the board.		seed:school
+Write on the board.		seed:school
+We learn Urdu and Arabic at the madrasa.		seed:school
+He studies engineering.		seed:school
+She wants to become a doctor.		seed:school
+I want to study abroad.		seed:school
+The college fees are high.		seed:school
+Education is very important.		seed:school
+Read a book every day.		seed:school
+# ===== Mosque, prayer and festivals =====
+It is time for prayer.		seed:faith
+Let us go to the mosque.		seed:faith
+The call to prayer is heard from the mosque.		seed:faith
+I pray five times a day.		seed:faith
+We pray together on Friday.		seed:faith
+Wash before you pray.		seed:faith
+The mosque is clean and quiet.		seed:faith
+He reads the Quran every morning.		seed:faith
+God is great.		seed:faith
+Thank God.		seed:faith
+If God wills, I will come.		seed:faith
+May God bless you.		seed:faith
+May God forgive us.		seed:faith
+Pray for me.		seed:faith
+Ramadan is the month of fasting.		seed:faith
+We fast from dawn to sunset.		seed:faith
+I am fasting today.		seed:faith
+We break the fast with dates and water.		seed:faith
+The whole family eats together at sunset.		seed:faith
+Eid is a day of joy.		seed:faith
+We wear new clothes on Eid.		seed:faith
+Children get gifts on Eid.		seed:faith
+We give charity to the poor.		seed:faith
+Visit the sick.		seed:faith
+Help the needy.		seed:faith
+Respect your elders.		seed:faith
+Speak the truth.		seed:faith
+Do not lie.		seed:faith
+Do not steal.		seed:faith
+Be kind to everyone.		seed:faith
+Feed the hungry.		seed:faith
+He went on pilgrimage this year.		seed:faith
+He is coming back from Mecca.		seed:faith
+The scholar gave a talk after prayer.		seed:faith
+The children are learning the Quran.		seed:faith
+Everyone gathered for the funeral prayer.		seed:faith
+The festival is next week.		seed:faith
+We decorated the house for the festival.		seed:faith
+Sweets were shared with the neighbours.		seed:faith
+Let us pray for peace.		seed:faith
+# ===== Weddings and celebrations =====
+There is a wedding in our family.		seed:celebrations
+The wedding is next Sunday.		seed:celebrations
+The bride is wearing a red dress.		seed:celebrations
+The groom is coming with his friends.		seed:celebrations
+Many guests have come.		seed:celebrations
+The food was very good at the wedding.		seed:celebrations
+They are cooking for five hundred people.		seed:celebrations
+We are invited to the wedding.		seed:celebrations
+Congratulations to the new couple.		seed:celebrations
+May you be happy together.		seed:celebrations
+The whole street is decorated with lights.		seed:celebrations
+Women are singing songs.		seed:celebrations
+The children are dancing.		seed:celebrations
+She applied henna on her hands.		seed:celebrations
+He gave a gift to the bride.		seed:celebrations
+The wedding hall is very big.		seed:celebrations
+The couple is going on a trip.		seed:celebrations
+His marriage is fixed for next month.		seed:celebrations
+Her marriage was arranged by the family.		seed:celebrations
+We celebrated his birthday at home.		seed:celebrations
+Happy birthday to you!		seed:celebrations
+The cake was very sweet.		seed:celebrations
+We took many photos.		seed:celebrations
+It was a very happy day.		seed:celebrations
+The party will start at seven.		seed:celebrations
+# ===== Village, nature and animals =====
+Our town is by the sea.		seed:nature
+The village is quiet.		seed:nature
+There are many coconut trees.		seed:nature
+The tree has many mangoes.		seed:nature
+The garden is full of flowers.		seed:nature
+The flower smells sweet.		seed:nature
+The river is very clean.		seed:nature
+The hill is covered with green trees.		seed:nature
+The forest is thick.		seed:nature
+The fields are green in the rainy season.		seed:nature
+The farmer is ploughing the field.		seed:nature
+He grows rice and vegetables.		seed:nature
+The cow gives milk.		seed:nature
+The goat is eating grass.		seed:nature
+The hen has laid an egg.		seed:nature
+The dog is running behind the boy.		seed:nature
+The cat caught a mouse.		seed:nature
+A bird is sitting on the tree.		seed:nature
+The crow is making noise.		seed:nature
+The snake went into the bush.		seed:nature
+The elephant is very big.		seed:nature
+The monkey took the banana.		seed:nature
+Do not disturb the animals.		seed:nature
+There are many insects at night.		seed:nature
+Mosquitoes are biting me.		seed:nature
+The buffalo is in the water.		seed:nature
+The horse runs very fast.		seed:nature
+Look at the sky.		seed:nature
+There is a full moon tonight.		seed:nature
+The road goes through the forest.		seed:nature
+The rain made everything green.		seed:nature
+We planted a tree.		seed:nature
+Water the plants every day.		seed:nature
+The leaves are falling.		seed:nature
+The grass is wet.		seed:nature
+# ===== Phone and technology =====
+Where is my phone?		seed:phone
+My phone is not working.		seed:phone
+The battery is dead.		seed:phone
+Charge your phone.		seed:phone
+Call me tomorrow.		seed:phone
+I will call you later.		seed:phone
+Send me a message.		seed:phone
+I got your message.		seed:phone
+Please answer the phone.		seed:phone
+The phone is ringing.		seed:phone
+He is talking on the phone.		seed:phone
+There is no network here.		seed:phone
+The internet is very slow.		seed:phone
+Do you have WiFi?		seed:phone
+I saw it on the internet.		seed:phone
+He watches videos all day.		seed:phone
+Send me the photo.		seed:phone
+Take a picture of us.		seed:phone
+Turn up the volume.		seed:phone
+Turn down the sound.		seed:phone
+I am sending you the location.		seed:phone
+Video call me tonight.		seed:phone
+He calls his mother every day from abroad.		seed:phone
+My phone fell in the water.		seed:phone
+The screen is broken.		seed:phone
+I forgot my password.		seed:phone
+Do not share your number with everyone.		seed:phone
+He plays games on his phone.		seed:phone
+Turn on the television.		seed:phone
+What is on the news today?		seed:phone
+# ===== Describing things and giving opinions =====
+This is good.		seed:describing
+That is bad.		seed:describing
+It is very big.		seed:describing
+It is very small.		seed:describing
+This house is bigger than that one.		seed:describing
+He is taller than me.		seed:describing
+She is younger than her brother.		seed:describing
+This is the best shop in town.		seed:describing
+This road is longer.		seed:describing
+The river is deep.		seed:describing
+The water is shallow.		seed:describing
+The stone is heavy.		seed:describing
+The bag is light.		seed:describing
+The tea is sweet.		seed:describing
+The lemon is sour.		seed:describing
+The medicine is bitter.		seed:describing
+The bread is soft.		seed:describing
+The rock is hard.		seed:describing
+The knife is sharp.		seed:describing
+The road is wide.		seed:describing
+The lane is narrow.		seed:describing
+The colour is red.		seed:describing
+The sky is blue.		seed:describing
+The leaves are green.		seed:describing
+The flower is yellow.		seed:describing
+The dress is white.		seed:describing
+The night is black.		seed:describing
+The car is new.		seed:describing
+The house is old.		seed:describing
+The boy is fat.		seed:describing
+The girl is thin.		seed:describing
+The old man is weak.		seed:describing
+The young man is strong.		seed:describing
+This is easy.		seed:describing
+That is difficult.		seed:describing
+It is true.		seed:describing
+It is false.		seed:describing
+It is very far.		seed:describing
+It is very near.		seed:describing
+I think he is right.		seed:describing
+I do not agree with you.		seed:describing
+In my opinion, this is better.		seed:describing
+Both are the same.		seed:describing
+They are different.		seed:describing
+# ===== A day in the life =====
+I wake up early in the morning.		seed:routine
+I wash my face and brush my teeth.		seed:routine
+I pray and have breakfast.		seed:routine
+Then I go to work.		seed:routine
+I come back home in the evening.		seed:routine
+We eat dinner at eight.		seed:routine
+After dinner we watch television.		seed:routine
+The children go to bed early.		seed:routine
+I sleep at ten.		seed:routine
+She gets up before everyone.		seed:routine
+He takes a bath every morning.		seed:routine
+I drink tea in the evening.		seed:routine
+We walk on the beach after sunset.		seed:routine
+On Fridays we go to the mosque.		seed:routine
+On Sundays I rest at home.		seed:routine
+Every morning I read the newspaper.		seed:routine
+He shaves every day.		seed:routine
+She combs her hair.		seed:routine
+The children get ready for school.		seed:routine
+My mother wakes me up.		seed:routine
+I put on my shoes.		seed:routine
+I take my bag and leave.		seed:routine
+I lock the door.		seed:routine
+I reach the shop at nine.		seed:routine
+I open the shop.		seed:routine
+We close at night.		seed:routine
+I count the money at the end of the day.		seed:routine
+I come home tired.		seed:routine
+I take a short nap after lunch.		seed:routine
+We talk together in the evening.		seed:routine
+He tells stories to the children at night.		seed:routine
+The lights go out at eleven.		seed:routine
+I turn off the light and sleep.		seed:routine
+It is a busy day.		seed:routine
+Tomorrow is another day.		seed:routine
+# ===== Things that happened =====
+Yesterday I went to the market.		seed:stories
+I bought fish and vegetables.		seed:stories
+On the way I met my old friend.		seed:stories
+We talked for a long time.		seed:stories
+Then I came home.		seed:stories
+My mother had already cooked.		seed:stories
+We ate together.		seed:stories
+Last week my uncle came from Dubai.		seed:stories
+He brought gifts for everyone.		seed:stories
+The children were very happy.		seed:stories
+When I was small, I lived in the village.		seed:stories
+We used to play near the sea.		seed:stories
+My grandfather told us many stories.		seed:stories
+One day it rained very heavily.		seed:stories
+The water came into our house.		seed:stories
+We moved everything to the upper floor.		seed:stories
+The next morning the water went down.		seed:stories
+Nobody was hurt.		seed:stories
+A long time ago, there was a king.		seed:stories
+He had a beautiful garden.		seed:stories
+One day a bird came to the garden.		seed:stories
+The bird sang a beautiful song.		seed:stories
+The king was very happy.		seed:stories
+He gave the bird some grain.		seed:stories
+The bird flew away and never came back.		seed:stories
+He waited for it every day.		seed:stories
+I saw him at the mosque yesterday.		seed:stories
+She did not come to the party.		seed:stories
+They left early in the morning.		seed:stories
+We finished the work at night.		seed:stories
+# ===== Longer sentences =====
+I could not come yesterday because my mother was sick.		seed:longer
+When the rain stopped, the children ran outside to play.		seed:longer
+He wanted to buy a new boat, but he did not have enough money.		seed:longer
+My brother works in Dubai and sends money home every month.		seed:longer
+If you are hungry, there is some rice and fish in the kitchen.		seed:longer
+She went to the market to buy vegetables, and then she came home to cook.		seed:longer
+The teacher told the students to read the lesson and write the answers in their books.		seed:longer
+I will wait for you here until you finish your work.		seed:longer
+Although it was raining heavily, the fishermen went out to sea.		seed:longer
+My grandfather says that the sea was much cleaner when he was young.		seed:longer
+We were sitting on the beach when the sun started to set.		seed:longer
+He did not know that his friend was waiting for him at the station.		seed:longer
+Please tell your mother that I will come to see her tomorrow morning.		seed:longer
+The shop near the mosque sells everything you need for the house.		seed:longer
+I have not seen him since he went to work abroad.		seed:longer
+The children who study hard will do well in the exam.		seed:longer
+She asked me where I was going and why I was in a hurry.		seed:longer
+It is better to leave early because the road is very bad after the rain.		seed:longer
+He said that he would call us as soon as he reached home.		seed:longer
+We bought a small house near the sea so that the children can play on the beach.		seed:longer
+Wash your hands with soap before you eat and after you eat.		seed:longer
+The old man sat under the tree and told stories to the children until it was dark.		seed:longer
+My father worked very hard all his life so that we could go to school.		seed:longer
+Everyone in the village came to help when the boat was in trouble.		seed:longer
+I like to walk on the beach in the evening because the air is cool and fresh.		seed:longer
+The bus was so full that we could not find a place to sit.		seed:longer
+He is not only my neighbour but also my best friend.		seed:longer
+You can take my phone if yours is not working.		seed:longer
+Nobody knows how the fire started in the market last night.		seed:longer
+Every morning my mother wakes up early, prays and makes tea for the whole family.		seed:longer
+She was so happy that she could not say anything.		seed:longer
+The doctor said that I must rest for one week and take the medicine every day.		seed:longer
+I don't think he will come today because he is not feeling well.		seed:longer
+Would you like to come with us to the wedding on Sunday?		seed:longer
+Please wait here while I go and ask the shopkeeper about the price.		seed:longer
+They have lived in this town for many years, but they still miss their village.		seed:longer
+He told me a story about a fisherman who found a big fish in his net.		seed:longer
+If the weather is good tomorrow, we will go to the beach with our friends.		seed:longer
+There was no electricity for two days, so we could not charge our phones.		seed:longer
+I forgot to bring my money, so I could not buy anything at the market.		seed:longer
+# ===== Plans, hopes and conditions =====
+I will go tomorrow.		seed:future
+He will come next week.		seed:future
+We will meet at five.		seed:future
+I will call you tonight.		seed:future
+It will be ready by evening.		seed:future
+I am going to buy a new phone.		seed:future
+She is going to study medicine.		seed:future
+We are planning a trip.		seed:future
+If it rains, we will stay at home.		seed:future
+If you come, I will be happy.		seed:future
+If I have time, I will help you.		seed:future
+If you do not study, you will fail.		seed:future
+When he comes, tell him to wait.		seed:future
+I will go if you come with me.		seed:future
+I will not go without you.		seed:future
+Maybe he will come.		seed:future
+Maybe not.		seed:future
+I hope it does not rain.		seed:future
+I hope you get well soon.		seed:future
+I want to build a house here.		seed:future
+One day I will visit Mecca.		seed:future
+I will save money for the wedding.		seed:future
+Next year we will buy a boat.		seed:future
+I want to open my own shop.		seed:future
+Whatever happens, I will not leave.		seed:future
+Wait until I come back.		seed:future
+Do not go before I come.		seed:future
+As soon as I reach, I will call.		seed:future
+Before you go, eat something.		seed:future
+After you finish, come to me.		seed:future
+# ===== Emergencies and safety =====
+Help!		seed:emergency
+Call the police.		seed:emergency
+Call an ambulance.		seed:emergency
+There is a fire!		seed:emergency
+Run!		seed:emergency
+Be careful!		seed:emergency
+It is dangerous.		seed:emergency
+Do not go near the water.		seed:emergency
+Someone is drowning.		seed:emergency
+He is hurt.		seed:emergency
+He is not breathing.		seed:emergency
+Stay here, I will get help.		seed:emergency
+I am lost.		seed:emergency
+My child is missing.		seed:emergency
+The road is blocked.		seed:emergency
+Someone stole my bag.		seed:emergency
+Where is the nearest hospital?		seed:emergency
+I need a doctor now.		seed:emergency
+Keep away from the fire.		seed:emergency
+It is safe now.		seed:emergency
