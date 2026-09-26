@@ -23,6 +23,8 @@ pip install -r requirements.txt
 
 The first training run downloads the NLLB model (about 2.5 GB) into your Hugging Face cache.
 
+**Will it fit my GPU?** [docs/SYSTEM_SPECS_AND_LIMITS.md](docs/SYSTEM_SPECS_AND_LIMITS.md) records what an 8 GB laptop GPU (RTX 4060) can do: training speed, memory limits and which settings to avoid. `python benchmark.py specs` and `python benchmark.py train` measure your own machine.
+
 ## Workflow
 
 ### 1. Build the corpus
@@ -58,7 +60,9 @@ Reports every problem with its line number (missing text, non-Roman characters, 
 python train_model.py
 ```
 
-Saves the best adapter (by validation loss) to `models/nawayathi-lora/` and stops early when it stops improving. Useful options: `--epochs`, `--batch-size`, `--lr`, `--lora-r`. If you run out of GPU memory, lower `--batch-size` and raise `--accum`.
+Saves the best adapter (by validation loss) to `models/nawayathi-lora/` and stops early when it stops improving. Useful options: `--epochs`, `--batch-size`, `--lr`, `--lora-r`.
+
+Before training it checks your batch size and longest sentence against the GPU's free memory and prints a warning, with a suggested `--batch-size` and `--accum`, if they are too big. If you run out of GPU memory, lower `--batch-size` and raise `--accum`.
 
 ### 4. Evaluate
 
@@ -89,6 +93,8 @@ The web app starts fine before any model exists, so you can begin collecting pai
 | `evaluate.py` | chrF++ / BLEU on the test split |
 | `inference.py` | Translation with beam search |
 | `app.py` | Gradio web app |
+| `benchmark.py` | Measures your GPU's training/translation speed and memory limits |
+| `docs/SYSTEM_SPECS_AND_LIMITS.md` | What the author's machine (8 GB RTX 4060 laptop) can and can't do |
 | `tests/` | Unit tests; `RUN_SLOW=1 pytest` also runs a GPU end-to-end test on a toy language |
 
 ## Tests

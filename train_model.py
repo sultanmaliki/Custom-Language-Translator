@@ -26,6 +26,62 @@ from inference import require_language_tags
 
 LORA_TARGETS = ["q_proj", "k_proj", "v_proj", "out_proj", "fc1", "fc2"]
 
+# GPU memory guard. Training memory is dominated by the output layer over NLLB's 256k-word vocabulary,
+# so it scales with (batch size x longest target). Measured on an 8 GiB RTX 4060 Laptop (see
+# docs/SYSTEM_SPECS_AND_LIMITS.md); it ignores the transformer layers, which are small next to it.
+BYTES_PER_VOCAB_TOKEN = 18.3   # bf16 logits + their fp32 copy + gradients + loss, per vocab entry per target token
+FIXED_OVERHEAD_GIB = 0.1
+# Once activations pass ~70% of the free VRAM, Windows silently spills into system RAM (5-20x slower, no error).
+SAFE_FRACTION = 0.7
+
+# Batches have a different padded length every step. PyTorch's allocator caches memory blocks by size, and on
+# Windows the driver overflows into system RAM instead of raising out-of-memory, so the allocator never learns to
+# free that cache: it grows to 2-3x the VRAM and training runs 3-5x slower (measured, see the docs). Two fixes,
+# together worth 3x on the default settings: pad to a multiple of PAD_MULTIPLE so batches share a few shapes,
+# and cap the allocator just under the VRAM that is really free, so it frees its cache when it needs to.
+PAD_MULTIPLE = 8
+ALLOCATOR_SHARE_OF_FREE = 0.92
+
+
+def allocator_fraction(free_gib: float, total_gib: float) -> float:
+    """Share of total VRAM to let PyTorch's allocator use."""
+    return ALLOCATOR_SHARE_OF_FREE * free_gib / total_gib
+
+
+def estimate_activation_gib(vocab_size: int, batch_size: int, longest_target: int) -> float:
+    """Approximate GPU memory (GiB) a training step needs on top of the model weights."""
+    return FIXED_OVERHEAD_GIB + BYTES_PER_VOCAB_TOKEN * vocab_size * batch_size * longest_target / 2**30
+
+
+def safe_batch_size(vocab_size: int, longest_target: int, free_gib: float) -> int:
+    """Largest batch size whose estimated activations stay within the safe share of free memory."""
+    per_example = BYTES_PER_VOCAB_TOKEN * vocab_size * longest_target / 2**30
+    return max(1, int((SAFE_FRACTION * free_gib - FIXED_OVERHEAD_GIB) / per_example))
+
+
+def check_gpu_memory(vocab_size: int, batch_size: int, accum: int, longest_target: int) -> None:
+    """Print the memory estimate, and warn (not fail) if it is likely to spill into system RAM."""
+    free_gib = torch.cuda.mem_get_info()[0] / 2**30   # free after the model is loaded
+    needed = estimate_activation_gib(vocab_size, batch_size, longest_target)
+    summary = (f"batch size {batch_size} x longest target {longest_target} tokens needs ~{needed:.1f} GiB "
+               f"of GPU memory for activations; {free_gib:.1f} GiB is free")
+    if needed <= SAFE_FRACTION * free_gib:
+        print(f"GPU memory check: {summary} (OK)")
+        return
+    safe = safe_batch_size(vocab_size, longest_target, free_gib)
+    print(f"WARNING: {summary}.\n"
+          "  Training would likely stop with an out-of-memory error, or crawl as memory spills into system RAM.\n"
+          f"  Try: --batch-size {safe} --accum {math.ceil(batch_size * accum / safe)} "
+          "(same effective batch), or lower --max-len. See docs/SYSTEM_SPECS_AND_LIMITS.md.")
+
+
+def load_lora_model(base_model: str, device: torch.device, use_amp: bool, lora_r: int = 16):
+    """The frozen pretrained model (bf16 on GPU) with trainable LoRA adapters on top."""
+    model = AutoModelForSeq2SeqLM.from_pretrained(base_model, dtype=torch.bfloat16 if use_amp else torch.float32)
+    lora = LoraConfig(task_type=TaskType.SEQ_2_SEQ_LM, r=lora_r, lora_alpha=2 * lora_r,
+                      lora_dropout=0.1, target_modules=LORA_TARGETS)
+    return get_peft_model(model, lora).to(device)
+
 
 def make_examples(pairs, tokenizer, max_len):
     """Turn each pair into two examples (en->nwy and nwy->en). Over-long ones are dropped, not cut."""
@@ -42,9 +98,10 @@ def make_examples(pairs, tokenizer, max_len):
     return examples, dropped
 
 
-def make_collate(pad_id: int, decoder_start_id: int):
+def make_collate(pad_id: int, decoder_start_id: int, pad_multiple: int = 1):
     def collate(batch):
         n, src_len, tgt_len = len(batch), max(len(b["input_ids"]) for b in batch), max(len(b["labels"]) for b in batch)
+        src_len, tgt_len = (-(-length // pad_multiple) * pad_multiple for length in (src_len, tgt_len))
         input_ids = torch.full((n, src_len), pad_id, dtype=torch.long)
         attention_mask = torch.zeros((n, src_len), dtype=torch.long)
         labels = torch.full((n, tgt_len), -100, dtype=torch.long)
@@ -113,14 +170,14 @@ def main():
     if device.type == "cpu":
         print("WARNING: no CUDA GPU found, training on the CPU will be very slow.")
     print(f"Device: {torch.cuda.get_device_name(0) if device.type == 'cuda' else 'cpu'}  (bf16: {use_amp})")
+    if device.type == "cuda":
+        free, total = torch.cuda.mem_get_info()
+        torch.cuda.set_per_process_memory_fraction(allocator_fraction(free / 2**30, total / 2**30))
 
     print(f"Loading {args.base_model} ...")
     tokenizer = AutoTokenizer.from_pretrained(args.base_model)
     require_language_tags(tokenizer, (config.EN_TAG, config.NWY_TAG), args.base_model)
-    model =AutoModelForSeq2SeqLM.from_pretrained(args.base_model, dtype=torch.bfloat16 if use_amp else torch.float32)
-    lora = LoraConfig(task_type=TaskType.SEQ_2_SEQ_LM, r=args.lora_r, lora_alpha=2 * args.lora_r,
-                      lora_dropout=0.1, target_modules=LORA_TARGETS)
-    model = get_peft_model(model, lora).to(device)
+    model = load_lora_model(args.base_model, device, use_amp, args.lora_r)
     model.print_trainable_parameters()
 
     train_ex, dropped_t = make_examples(train_pairs, tokenizer, args.max_len)
@@ -128,8 +185,13 @@ def main():
     if dropped_t or dropped_v:
         print(f"Dropped {dropped_t + dropped_v} examples longer than {args.max_len} tokens.")
     print(f"Training examples: {len(train_ex)} ({len(train_pairs)} pairs x 2 directions), validation: {len(val_ex)}")
+    if not train_ex:
+        raise SystemExit(f"No training examples left: every sentence is longer than --max-len {args.max_len}.")
+    if device.type == "cuda":
+        check_gpu_memory(model.config.vocab_size, args.batch_size, args.accum,
+                         max(len(e["labels"]) for e in train_ex))
 
-    collate = make_collate(tokenizer.pad_token_id, model.config.decoder_start_token_id)
+    collate = make_collate(tokenizer.pad_token_id, model.config.decoder_start_token_id, PAD_MULTIPLE)
     train_loader = DataLoader(train_ex, batch_size=args.batch_size, shuffle=True, collate_fn=collate)
     val_loader = DataLoader(val_ex, batch_size=args.batch_size, shuffle=False, collate_fn=collate)
 
@@ -174,7 +236,8 @@ def main():
                 break
 
     if device.type == "cuda":
-        print(f"Peak GPU memory: {torch.cuda.max_memory_allocated() / 2**30:.1f} GiB")
+        print(f"Peak GPU memory: {torch.cuda.max_memory_allocated() / 2**30:.1f} GiB in use, "
+              f"{torch.cuda.max_memory_reserved() / 2**30:.1f} GiB reserved by PyTorch")
     print(f"Done. Best epoch {best_epoch} (val loss {best_val:.3f}), adapter saved to {args.output_dir}")
     print("Next: python evaluate.py   then   python app.py")
 
