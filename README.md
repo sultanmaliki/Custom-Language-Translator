@@ -23,6 +23,8 @@ pip install -r requirements.txt
 
 The first training run downloads the NLLB model (about 2.5 GB) into your Hugging Face cache.
 
+**Will it fit my GPU?** [docs/SYSTEM_SPECS_AND_LIMITS.md](docs/SYSTEM_SPECS_AND_LIMITS.md) records what an 8 GB laptop GPU (RTX 4060) can do: training speed, memory limits and which settings to avoid. `python benchmark.py specs` and `python benchmark.py train` measure your own machine.
+
 ## Workflow
 
 ### 1. Build the corpus
@@ -34,7 +36,9 @@ english	nawayathi	source
 <English sentence>	<Nawayathi sentence in Roman letters>	<optional: who/where>
 ```
 
-Two ways to add pairs: edit the file directly, or run the app (step 5) and use its **Contribute** tab. The app also lets you correct a wrong translation on the spot, and the correction goes straight into the corpus.
+**The file already starts with about 1,350 English sentences** covering around 30 everyday topics (greetings, family, food, the sea and fishing, the mosque and festivals, the market, health, and a small block that covers who/when/negation systematically), with the `nawayathi` column **empty**. Fill in your translations in Roman letters, in any order. Rows you haven't translated yet are simply ignored, so you can run step 2 whenever you like (you need at least 20 translated rows). The most useful sections come first, and you can delete any section that doesn't suit your community. Edit it in VS Code, Notepad or Google Sheets (Download > .tsv) so it stays UTF-8; Excel's "Text" formats don't, and the checker will tell you if that happens.
+
+To add your own sentences, either add rows to the file, or run the app (step 5) and use its **Contribute** tab. The app also lets you correct a wrong translation on the spot, and the correction goes straight into the corpus.
 
 Tips that matter more than any setting:
 
@@ -50,7 +54,7 @@ Tips that matter more than any setting:
 python data_preprocessing.py
 ```
 
-Reports every problem with its line number (missing text, non-Roman characters, duplicates, stray tabs) and writes `data/processed/{train,val,test}.tsv`. The split is grouped by English sentence, so a test sentence is never also in training.
+Reports how many sentences are translated and how many are still waiting, lists every problem with its line number (non-Roman characters, duplicates, stray tabs, a Nawayathi sentence with no English), and writes `data/processed/{train,val,test}.tsv`. The split is grouped by English sentence, so a test sentence is never also in training.
 
 ### 3. Train
 
@@ -58,7 +62,9 @@ Reports every problem with its line number (missing text, non-Roman characters, 
 python train_model.py
 ```
 
-Saves the best adapter (by validation loss) to `models/nawayathi-lora/` and stops early when it stops improving. Useful options: `--epochs`, `--batch-size`, `--lr`, `--lora-r`. If you run out of GPU memory, lower `--batch-size` and raise `--accum`.
+Saves the best adapter (by validation loss) to `models/nawayathi-lora/` and stops early when it stops improving. Useful options: `--epochs`, `--batch-size`, `--lr`, `--lora-r`.
+
+Before training it checks your batch size and longest sentence against the GPU's free memory and prints a warning, with a suggested `--batch-size` and `--accum`, if they are too big. If you run out of GPU memory, lower `--batch-size` and raise `--accum`.
 
 ### 4. Evaluate
 
@@ -89,6 +95,8 @@ The web app starts fine before any model exists, so you can begin collecting pai
 | `evaluate.py` | chrF++ / BLEU on the test split |
 | `inference.py` | Translation with beam search |
 | `app.py` | Gradio web app |
+| `benchmark.py` | Measures your GPU's training/translation speed and memory limits |
+| `docs/SYSTEM_SPECS_AND_LIMITS.md` | What the author's machine (8 GB RTX 4060 laptop) can and can't do |
 | `tests/` | Unit tests; `RUN_SLOW=1 pytest` also runs a GPU end-to-end test on a toy language |
 
 ## Tests

@@ -1,0 +1,4 @@
+# Optional. Map alternative spellings of a Nawayathi word to the one spelling you want to use.
+# Format: variant<TAB>preferred   (case-insensitive, whole words only). Applied to training data and to your input.
+# Placeholder example (replace with real words, delete the leading #):
+# some_variant_spelling	preferred_spelling
