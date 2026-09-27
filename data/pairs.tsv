@@ -7,6 +7,15 @@
 # The 'source' column says which topic an English sentence came from; you can ignore it.
 # Save the file as UTF-8 (VS Code, Notepad and Google Sheets > Download > .tsv do; Excel's 'Text' formats do not).
 # Run `python data_preprocessing.py` at any time to check your work and see how many are done.
+#
+# DRAFT ROWS: every row whose 'source' ends in |draft-hi, |draft-mid or |draft-gloss was filled in by
+# Claude, not a speaker -- treat all of them as wrong until you've checked them, not as a reference.
+#   |draft-hi    a full sentence reusing your own attested words/patterns almost exactly.
+#   |draft-mid   a full sentence built from your grammar + a mix of attested and guessed words.
+#   |draft-gloss word-by-word only, IN ENGLISH WORD ORDER (not real Nawayathi word order), with any
+#                word it had no guess for left as [english-word]. The roughest tier by far.
+# Fix a row by replacing its whole 'nawayathi' cell and deleting the |draft-... suffix (or the whole
+# 'source' cell). Search for "|draft" to jump between them, and for "[" to find the biggest gaps first.
 english	nawayathi	source
 # ===== Greetings and politeness =====
 Hello.	Awa	seed:greetings
@@ -55,7 +64,7 @@ My father is fifty years old.	Moje bapa pannas warshe.	seed:about-me
 What do you do?	Tu ka karta?	seed:about-me
 I am a student.	Me ek shagird.	seed:about-me
 I work in a shop.	Me ek angdi kaam karta.	seed:about-me
-He is a teacher.		Ho ek ustad.	seed:about-me
+He is a teacher.	Ho ek ustad.	seed:about-me
 She is a doctor.	Ti ek daktarni.	seed:about-me
 My brother works in Dubai.	Mojo bhaus Dubai bittar kaam karta.	seed:about-me
 My sister studies at college.	Moji Bhain College bittar padta.	seed:about-me
@@ -208,1131 +217,1131 @@ Keep quiet.	Chup ra.	seed:requests
 Leave me alone.	Maka eklo sod.	seed:requests
 Try again.	Biji ek time koshish kar	seed:requests
 # ===== Numbers and money =====
-One, two, three, four, five.		seed:numbers
-Six, seven, eight, nine, ten.		seed:numbers
-I have one book.		seed:numbers
-He has two cars.		seed:numbers
-She bought three mangoes.		seed:numbers
-We need four chairs.		seed:numbers
-There are five people in the room.		seed:numbers
-Ten students are absent today.		seed:numbers
-She is twelve years old.		seed:numbers
-He is twenty five years old.		seed:numbers
-There are thirty days in this month.		seed:numbers
-One hundred people came to the meeting.		seed:numbers
-The village has about one thousand houses.		seed:numbers
-Give me half a kilo of rice.		seed:numbers
-I want a quarter of a litre of milk.		seed:numbers
-How many are there?		seed:numbers
-How much is this?		seed:numbers
-It costs ten rupees.		seed:numbers
-That shirt is two hundred rupees.		seed:numbers
-The price is too high.		seed:numbers
-Please reduce the price.		seed:numbers
-I have only five rupees.		seed:numbers
-Do you have change?		seed:numbers
-He paid one thousand rupees.		seed:numbers
-Take your money.		seed:numbers
-I gave him the money yesterday.		seed:numbers
-He owes me a hundred rupees.		seed:numbers
-The fish costs three hundred rupees a kilo.		seed:numbers
-First, second and third.		seed:numbers
-This is my first time.		seed:numbers
-Add two and three.		seed:numbers
-Take away one from five.		seed:numbers
-Two times three is six.		seed:numbers
-Half of ten is five.		seed:numbers
-Count the money again.		seed:numbers
-We are six in the group.		seed:numbers
-Both of them are my friends.		seed:numbers
-Every child got one book.		seed:numbers
-All of them came.		seed:numbers
-I have 3 brothers.		seed:numbers
-She is 12 years old.		seed:numbers
-The bus comes at 8:30.		seed:numbers
-It costs 500 rupees.		seed:numbers
-I bought 5 kilos of rice.		seed:numbers
-There are 30 students in the class.		seed:numbers
-We need 2 chairs.		seed:numbers
-He paid 1000 rupees.		seed:numbers
-The shop opens at 9 in the morning.		seed:numbers
-My house number is 24.		seed:numbers
+One, two, three, four, five.	ek, don, teen, char, paas.	seed:numbers|draft-gloss
+Six, seven, eight, nine, ten.	cha, saat, aath, nau, dha.	seed:numbers|draft-gloss
+I have one book.	Me ek kitab.	seed:numbers|draft-gloss
+He has two cars.	Teka gaadi wate.	seed:numbers|draft-mid
+She bought three mangoes.	Ti hadlo teen [mangoes].	seed:numbers|draft-gloss
+We need four chairs.	Ami kaas char khurchi.	seed:numbers|draft-gloss
+There are five people in the room.	tari paas manshe bittar kamra.	seed:numbers|draft-gloss
+Ten students are absent today.	dha shagird [absent] aas.	seed:numbers|draft-gloss
+She is twelve years old.	Ti baara warshe purano.	seed:numbers|draft-gloss
+He is twenty five years old.	To wis paas warshe purano.	seed:numbers|draft-gloss
+There are thirty days in this month.	tari tis dis bittar He mahina.	seed:numbers|draft-gloss
+One hundred people came to the meeting.	ek sou manshe ailo [meeting].	seed:numbers|draft-gloss
+The village has about one thousand houses.	gaaw ek hazar ghar.	seed:numbers|draft-gloss
+Give me half a kilo of rice.	deta Maka aadho kilo chawal.	seed:numbers|draft-gloss
+I want a quarter of a litre of milk.	Me kaas pau [litre] dudh.	seed:numbers|draft-gloss
+How many are there?	kishi bhouat tari?	seed:numbers|draft-gloss
+How much is this?	kishi balli He?	seed:numbers|draft-gloss
+It costs ten rupees.	He [costs] dha rupaye.	seed:numbers|draft-gloss
+That shirt is two hundred rupees.	Te shirt don sou rupaye.	seed:numbers|draft-gloss
+The price is too high.	keemat balli uncho.	seed:numbers|draft-gloss
+Please reduce the price.	zarra [reduce] keemat.	seed:numbers|draft-gloss
+I have only five rupees.	Me [only] paas rupaye.	seed:numbers|draft-gloss
+Do you have change?	Tu [change]?	seed:numbers|draft-gloss
+He paid one thousand rupees.	To [paid] ek hazar rupaye.	seed:numbers|draft-gloss
+Take your money.	ghenta tuje dud.	seed:numbers|draft-gloss
+I gave him the money yesterday.	Me dele Teka dud kaal.	seed:numbers|draft-gloss
+He owes me a hundred rupees.	To [owes] Maka sou rupaye.	seed:numbers|draft-gloss
+The fish costs three hundred rupees a kilo.	meen [costs] teen sou rupaye kilo.	seed:numbers|draft-gloss
+First, second and third.	pailo, dusro ani tisro.	seed:numbers|draft-gloss
+This is my first time.	He moje pailo wakhat.	seed:numbers|draft-gloss
+Add two and three.	[add] don ani teen.	seed:numbers|draft-gloss
+Take away one from five.	ghenta [away] ek cho paas.	seed:numbers|draft-gloss
+Two times three is six.	don wakhat teen cha.	seed:numbers|draft-gloss
+Half of ten is five.	aadho dha paas.	seed:numbers|draft-gloss
+Count the money again.	[count] dud [again].	seed:numbers|draft-gloss
+We are six in the group.	Ami cha bittar [group].	seed:numbers|draft-gloss
+Both of them are my friends.	[both] Tenka moje dost.	seed:numbers|draft-gloss
+Every child got one book.	har chadu ghetlo ek kitab.	seed:numbers|draft-gloss
+All of them came.	sammu Tenka ailo.	seed:numbers|draft-gloss
+I have 3 brothers.	Me 3 bhaus.	seed:numbers|draft-gloss
+She is 12 years old.	Ti 12 warshe purano.	seed:numbers|draft-gloss
+The bus comes at 8:30.	bus yeta 8: 30.	seed:numbers|draft-gloss
+It costs 500 rupees.	He [costs] 500 rupaye.	seed:numbers|draft-gloss
+I bought 5 kilos of rice.	Me hadlo 5 kilo chawal.	seed:numbers|draft-gloss
+There are 30 students in the class.	tari 30 shagird bittar class.	seed:numbers|draft-gloss
+We need 2 chairs.	Ami kaas 2 khurchi.	seed:numbers|draft-gloss
+He paid 1000 rupees.	To [paid] 1000 rupaye.	seed:numbers|draft-gloss
+The shop opens at 9 in the morning.	angdi usauta 9 bittar sakan.	seed:numbers|draft-gloss
+My house number is 24.	moje ghar [number] 24.	seed:numbers|draft-gloss
 # ===== Time, days and months =====
-What time is it?		seed:time
-It is six o'clock.		seed:time
-It is half past seven.		seed:time
-It is quarter to nine.		seed:time
-The bus comes at eight in the morning.		seed:time
-I wake up at five every morning.		seed:time
-Today is Monday.		seed:time
-Tomorrow is Tuesday.		seed:time
-Yesterday was Sunday.		seed:time
-The days of the week are Monday, Tuesday, Wednesday, Thursday, Friday, Saturday and Sunday.		seed:time
-Friday is a holy day.		seed:time
-We do not have school on Sunday.		seed:time
-What is the date today?		seed:time
-My birthday is in June.		seed:time
-It rains a lot in July.		seed:time
-January is the first month of the year.		seed:time
-The month of Ramadan is coming.		seed:time
-I will come next week.		seed:time
-He came last month.		seed:time
-We met two years ago.		seed:time
-I will finish this in one hour.		seed:time
-Wait for five minutes.		seed:time
-Come back after some time.		seed:time
-He is always late.		seed:time
-She never lies.		seed:time
-I go there every day.		seed:time
-Sometimes we eat outside.		seed:time
-Now I am busy.		seed:time
-Not now, later.		seed:time
-It is too early.		seed:time
-It is already late.		seed:time
-Morning, afternoon, evening and night.		seed:time
-The sun rises in the east.		seed:time
-The sun sets in the west.		seed:time
-The shop opens at nine.		seed:time
-The shop closes at ten at night.		seed:time
-What did you do yesterday?		seed:time
-What will you do tomorrow?		seed:time
-I was waiting for you since morning.		seed:time
-The train leaves in ten minutes.		seed:time
+What time is it?	kaa wakhat He?	seed:time|draft-gloss
+It is six o'clock.	He cha wazun.	seed:time|draft-gloss
+It is half past seven.	He aadho [past] saat.	seed:time|draft-gloss
+It is quarter to nine.	He pau nau.	seed:time|draft-gloss
+The bus comes at eight in the morning.	bus yeta aath bittar sakan.	seed:time|draft-gloss
+I wake up at five every morning.	Me [wake] paas har sakan.	seed:time|draft-gloss
+Today is Monday.	aas Somwar.	seed:time|draft-gloss
+Tomorrow is Tuesday.	fausai Mangalwar.	seed:time|draft-gloss
+Yesterday was Sunday.	kaal Itwaar.	seed:time|draft-gloss
+The days of the week are Monday, Tuesday, Wednesday, Thursday, Friday, Saturday and Sunday.	dis hafta Somwar, Mangalwar, Budhwar, Guruwar, Jumma, Sanicharwar ani Itwaar.	seed:time|draft-gloss
+Friday is a holy day.	Jumma [holy] dis.	seed:time|draft-gloss
+We do not have school on Sunday.	Ami shaala Itwaar nai.	seed:time|draft-gloss
+What is the date today?	kaa [date] aas?	seed:time|draft-gloss
+My birthday is in June.	moje birthday bittar June.	seed:time|draft-gloss
+It rains a lot in July.	He paus padta bhouat bittar July.	seed:time|draft-gloss
+January is the first month of the year.	January pailo mahina warsa.	seed:time|draft-gloss
+The month of Ramadan is coming.	mahina Ramzan yete wate.	seed:time|draft-gloss
+I will come next week.	Me yeta yauche hafta.	seed:time|draft-gloss
+He came last month.	To ailo gelle mahina.	seed:time|draft-gloss
+We met two years ago.	Ami [met] don warshe [ago].	seed:time|draft-gloss
+I will finish this in one hour.	Me khatam karta He bittar ek ghanta.	seed:time|draft-gloss
+Wait for five minutes.	ube rata paas minute.	seed:time|draft-gloss
+Come back after some time.	yeta peeth mag zarra wakhat.	seed:time|draft-gloss
+He is always late.	To hameshaa modi.	seed:time|draft-gloss
+She never lies.	Ti kadi nai [lies].	seed:time|draft-gloss
+I go there every day.	Me wata tari har dis.	seed:time|draft-gloss
+Sometimes we eat outside.	kadi kadi Ami khata bhair.	seed:time|draft-gloss
+Now I am busy.	etta Me masroof.	seed:time|draft-gloss
+Not now, later.	nai etta, maggir.	seed:time|draft-gloss
+It is too early.	He balli wehla.	seed:time|draft-gloss
+It is already late.	He [already] modi.	seed:time|draft-gloss
+Morning, afternoon, evening and night.	sakan, dompar, timpar ani raat.	seed:time|draft-gloss
+The sun rises in the east.	suraj [rises] bittar [east].	seed:time|draft-gloss
+The sun sets in the west.	suraj [sets] bittar [west].	seed:time|draft-gloss
+The shop opens at nine.	angdi usauta nau.	seed:time|draft-gloss
+The shop closes at ten at night.	angdi band karta dha raat.	seed:time|draft-gloss
+What did you do yesterday?	kaa Tu kaal?	seed:time|draft-gloss
+What will you do tomorrow?	kaa Tu fausai?	seed:time|draft-gloss
+I was waiting for you since morning.	Me ube rate wate Tu [since] sakan.	seed:time|draft-gloss
+The train leaves in ten minutes.	train sodta bittar dha minute.	seed:time|draft-gloss
 # ===== Grammar: who does it, and when =====
-I go to the market every day.		seed:grammar-verbs
-I am going to the market now.		seed:grammar-verbs
-I went to the market yesterday.		seed:grammar-verbs
-I will go to the market tomorrow.		seed:grammar-verbs
-I did not go to the market yesterday.		seed:grammar-verbs
-You go to the market every day.		seed:grammar-verbs
-You are going to the market now.		seed:grammar-verbs
-You went to the market yesterday.		seed:grammar-verbs
-You will go to the market tomorrow.		seed:grammar-verbs
-You did not go to the market yesterday.		seed:grammar-verbs
-He goes to the market every day.		seed:grammar-verbs
-He is going to the market now.		seed:grammar-verbs
-He went to the market yesterday.		seed:grammar-verbs
-He will go to the market tomorrow.		seed:grammar-verbs
-He did not go to the market yesterday.		seed:grammar-verbs
-She goes to the market every day.		seed:grammar-verbs
-She is going to the market now.		seed:grammar-verbs
-She went to the market yesterday.		seed:grammar-verbs
-She will go to the market tomorrow.		seed:grammar-verbs
-She did not go to the market yesterday.		seed:grammar-verbs
-We go to the market every day.		seed:grammar-verbs
-We are going to the market now.		seed:grammar-verbs
-We went to the market yesterday.		seed:grammar-verbs
-We will go to the market tomorrow.		seed:grammar-verbs
-We did not go to the market yesterday.		seed:grammar-verbs
-You all go to the market every day.		seed:grammar-verbs
-You all are going to the market now.		seed:grammar-verbs
-You all went to the market yesterday.		seed:grammar-verbs
-You all will go to the market tomorrow.		seed:grammar-verbs
-You all did not go to the market yesterday.		seed:grammar-verbs
-They go to the market every day.		seed:grammar-verbs
-They are going to the market now.		seed:grammar-verbs
-They went to the market yesterday.		seed:grammar-verbs
-They will go to the market tomorrow.		seed:grammar-verbs
-They did not go to the market yesterday.		seed:grammar-verbs
-I eat rice every day.		seed:grammar-verbs
-I am eating rice now.		seed:grammar-verbs
-I ate rice yesterday.		seed:grammar-verbs
-I will eat rice tomorrow.		seed:grammar-verbs
-I did not eat rice yesterday.		seed:grammar-verbs
-You eat rice every day.		seed:grammar-verbs
-You are eating rice now.		seed:grammar-verbs
-You ate rice yesterday.		seed:grammar-verbs
-You will eat rice tomorrow.		seed:grammar-verbs
-You did not eat rice yesterday.		seed:grammar-verbs
-He eats rice every day.		seed:grammar-verbs
-He is eating rice now.		seed:grammar-verbs
-He ate rice yesterday.		seed:grammar-verbs
-He will eat rice tomorrow.		seed:grammar-verbs
-He did not eat rice yesterday.		seed:grammar-verbs
-She eats rice every day.		seed:grammar-verbs
-She is eating rice now.		seed:grammar-verbs
-She ate rice yesterday.		seed:grammar-verbs
-She will eat rice tomorrow.		seed:grammar-verbs
-She did not eat rice yesterday.		seed:grammar-verbs
-We eat rice every day.		seed:grammar-verbs
-We are eating rice now.		seed:grammar-verbs
-We ate rice yesterday.		seed:grammar-verbs
-We will eat rice tomorrow.		seed:grammar-verbs
-We did not eat rice yesterday.		seed:grammar-verbs
-You all eat rice every day.		seed:grammar-verbs
-You all are eating rice now.		seed:grammar-verbs
-You all ate rice yesterday.		seed:grammar-verbs
-You all will eat rice tomorrow.		seed:grammar-verbs
-You all did not eat rice yesterday.		seed:grammar-verbs
-They eat rice every day.		seed:grammar-verbs
-They are eating rice now.		seed:grammar-verbs
-They ate rice yesterday.		seed:grammar-verbs
-They will eat rice tomorrow.		seed:grammar-verbs
-They did not eat rice yesterday.		seed:grammar-verbs
-I come home every day.		seed:grammar-verbs
-I am coming home now.		seed:grammar-verbs
-I came home yesterday.		seed:grammar-verbs
-I will come home tomorrow.		seed:grammar-verbs
-I did not come home yesterday.		seed:grammar-verbs
-You come home every day.		seed:grammar-verbs
-You are coming home now.		seed:grammar-verbs
-You came home yesterday.		seed:grammar-verbs
-You will come home tomorrow.		seed:grammar-verbs
-You did not come home yesterday.		seed:grammar-verbs
-He comes home every day.		seed:grammar-verbs
-He is coming home now.		seed:grammar-verbs
-He came home yesterday.		seed:grammar-verbs
-He will come home tomorrow.		seed:grammar-verbs
-He did not come home yesterday.		seed:grammar-verbs
-She comes home every day.		seed:grammar-verbs
-She is coming home now.		seed:grammar-verbs
-She came home yesterday.		seed:grammar-verbs
-She will come home tomorrow.		seed:grammar-verbs
-She did not come home yesterday.		seed:grammar-verbs
-We come home every day.		seed:grammar-verbs
-We are coming home now.		seed:grammar-verbs
-We came home yesterday.		seed:grammar-verbs
-We will come home tomorrow.		seed:grammar-verbs
-We did not come home yesterday.		seed:grammar-verbs
-You all come home every day.		seed:grammar-verbs
-You all are coming home now.		seed:grammar-verbs
-You all came home yesterday.		seed:grammar-verbs
-You all will come home tomorrow.		seed:grammar-verbs
-You all did not come home yesterday.		seed:grammar-verbs
-They come home every day.		seed:grammar-verbs
-They are coming home now.		seed:grammar-verbs
-They came home yesterday.		seed:grammar-verbs
-They will come home tomorrow.		seed:grammar-verbs
-They did not come home yesterday.		seed:grammar-verbs
-I buy fish every day.		seed:grammar-verbs
-I am buying fish now.		seed:grammar-verbs
-I bought fish yesterday.		seed:grammar-verbs
-I will buy fish tomorrow.		seed:grammar-verbs
-I did not buy fish yesterday.		seed:grammar-verbs
-You buy fish every day.		seed:grammar-verbs
-You are buying fish now.		seed:grammar-verbs
-You bought fish yesterday.		seed:grammar-verbs
-You will buy fish tomorrow.		seed:grammar-verbs
-You did not buy fish yesterday.		seed:grammar-verbs
-He buys fish every day.		seed:grammar-verbs
-He is buying fish now.		seed:grammar-verbs
-He bought fish yesterday.		seed:grammar-verbs
-He will buy fish tomorrow.		seed:grammar-verbs
-He did not buy fish yesterday.		seed:grammar-verbs
-She buys fish every day.		seed:grammar-verbs
-She is buying fish now.		seed:grammar-verbs
-She bought fish yesterday.		seed:grammar-verbs
-She will buy fish tomorrow.		seed:grammar-verbs
-She did not buy fish yesterday.		seed:grammar-verbs
-We buy fish every day.		seed:grammar-verbs
-We are buying fish now.		seed:grammar-verbs
-We bought fish yesterday.		seed:grammar-verbs
-We will buy fish tomorrow.		seed:grammar-verbs
-We did not buy fish yesterday.		seed:grammar-verbs
-You all buy fish every day.		seed:grammar-verbs
-You all are buying fish now.		seed:grammar-verbs
-You all bought fish yesterday.		seed:grammar-verbs
-You all will buy fish tomorrow.		seed:grammar-verbs
-You all did not buy fish yesterday.		seed:grammar-verbs
-They buy fish every day.		seed:grammar-verbs
-They are buying fish now.		seed:grammar-verbs
-They bought fish yesterday.		seed:grammar-verbs
-They will buy fish tomorrow.		seed:grammar-verbs
-They did not buy fish yesterday.		seed:grammar-verbs
+I go to the market every day.	Me angdi wata.	seed:grammar-verbs|draft-hi
+I am going to the market now.	Me angdi waste wate.	seed:grammar-verbs|draft-hi
+I went to the market yesterday.	Me angdi gelo.	seed:grammar-verbs|draft-hi
+I will go to the market tomorrow.	Me angdi watalo.	seed:grammar-verbs|draft-hi
+I did not go to the market yesterday.	Me angdi gel nai.	seed:grammar-verbs|draft-hi
+You go to the market every day.	Tu angdi wata.	seed:grammar-verbs|draft-hi
+You are going to the market now.	Tu angdi waste wate.	seed:grammar-verbs|draft-hi
+You went to the market yesterday.	Tu angdi gelo.	seed:grammar-verbs|draft-hi
+You will go to the market tomorrow.	Tu angdi watalo.	seed:grammar-verbs|draft-hi
+You did not go to the market yesterday.	Tu angdi gel nai.	seed:grammar-verbs|draft-hi
+He goes to the market every day.	To angdi wata.	seed:grammar-verbs|draft-hi
+He is going to the market now.	To angdi waste wate.	seed:grammar-verbs|draft-hi
+He went to the market yesterday.	To angdi gelo.	seed:grammar-verbs|draft-hi
+He will go to the market tomorrow.	To angdi watalo.	seed:grammar-verbs|draft-hi
+He did not go to the market yesterday.	To angdi gel nai.	seed:grammar-verbs|draft-hi
+She goes to the market every day.	Ti angdi wata.	seed:grammar-verbs|draft-hi
+She is going to the market now.	Ti angdi waste wate.	seed:grammar-verbs|draft-hi
+She went to the market yesterday.	Ti angdi gelo.	seed:grammar-verbs|draft-hi
+She will go to the market tomorrow.	Ti angdi watalo.	seed:grammar-verbs|draft-hi
+She did not go to the market yesterday.	Ti angdi gel nai.	seed:grammar-verbs|draft-hi
+We go to the market every day.	Ami angdi wata.	seed:grammar-verbs|draft-hi
+We are going to the market now.	Ami angdi waste wate.	seed:grammar-verbs|draft-hi
+We went to the market yesterday.	Ami angdi gelo.	seed:grammar-verbs|draft-hi
+We will go to the market tomorrow.	Ami angdi watalo.	seed:grammar-verbs|draft-hi
+We did not go to the market yesterday.	Ami angdi gel nai.	seed:grammar-verbs|draft-hi
+You all go to the market every day.	Tumi angdi wata.	seed:grammar-verbs|draft-hi
+You all are going to the market now.	Tumi angdi waste wate.	seed:grammar-verbs|draft-hi
+You all went to the market yesterday.	Tumi angdi gelo.	seed:grammar-verbs|draft-hi
+You all will go to the market tomorrow.	Tumi angdi watalo.	seed:grammar-verbs|draft-hi
+You all did not go to the market yesterday.	Tumi angdi gel nai.	seed:grammar-verbs|draft-hi
+They go to the market every day.	Ten angdi wata.	seed:grammar-verbs|draft-hi
+They are going to the market now.	Ten angdi waste wate.	seed:grammar-verbs|draft-hi
+They went to the market yesterday.	Ten angdi gelo.	seed:grammar-verbs|draft-hi
+They will go to the market tomorrow.	Ten angdi watalo.	seed:grammar-verbs|draft-hi
+They did not go to the market yesterday.	Ten angdi gel nai.	seed:grammar-verbs|draft-hi
+I eat rice every day.	Me chawal khata.	seed:grammar-verbs|draft-hi
+I am eating rice now.	Me chawal khate wate.	seed:grammar-verbs|draft-hi
+I ate rice yesterday.	Me chawal khalo.	seed:grammar-verbs|draft-hi
+I will eat rice tomorrow.	Me chawal khatalo.	seed:grammar-verbs|draft-hi
+I did not eat rice yesterday.	Me chawal khal nai.	seed:grammar-verbs|draft-hi
+You eat rice every day.	Tu chawal khata.	seed:grammar-verbs|draft-hi
+You are eating rice now.	Tu chawal khate wate.	seed:grammar-verbs|draft-hi
+You ate rice yesterday.	Tu chawal khalo.	seed:grammar-verbs|draft-hi
+You will eat rice tomorrow.	Tu chawal khatalo.	seed:grammar-verbs|draft-hi
+You did not eat rice yesterday.	Tu chawal khal nai.	seed:grammar-verbs|draft-hi
+He eats rice every day.	To chawal khata.	seed:grammar-verbs|draft-hi
+He is eating rice now.	To chawal khate wate.	seed:grammar-verbs|draft-hi
+He ate rice yesterday.	To chawal khalo.	seed:grammar-verbs|draft-hi
+He will eat rice tomorrow.	To chawal khatalo.	seed:grammar-verbs|draft-hi
+He did not eat rice yesterday.	To chawal khal nai.	seed:grammar-verbs|draft-hi
+She eats rice every day.	Ti chawal khata.	seed:grammar-verbs|draft-hi
+She is eating rice now.	Ti chawal khate wate.	seed:grammar-verbs|draft-hi
+She ate rice yesterday.	Ti chawal khalo.	seed:grammar-verbs|draft-hi
+She will eat rice tomorrow.	Ti chawal khatalo.	seed:grammar-verbs|draft-hi
+She did not eat rice yesterday.	Ti chawal khal nai.	seed:grammar-verbs|draft-hi
+We eat rice every day.	Ami chawal khata.	seed:grammar-verbs|draft-hi
+We are eating rice now.	Ami chawal khate wate.	seed:grammar-verbs|draft-hi
+We ate rice yesterday.	Ami chawal khalo.	seed:grammar-verbs|draft-hi
+We will eat rice tomorrow.	Ami chawal khatalo.	seed:grammar-verbs|draft-hi
+We did not eat rice yesterday.	Ami chawal khal nai.	seed:grammar-verbs|draft-hi
+You all eat rice every day.	Tumi chawal khata.	seed:grammar-verbs|draft-hi
+You all are eating rice now.	Tumi chawal khate wate.	seed:grammar-verbs|draft-hi
+You all ate rice yesterday.	Tumi chawal khalo.	seed:grammar-verbs|draft-hi
+You all will eat rice tomorrow.	Tumi chawal khatalo.	seed:grammar-verbs|draft-hi
+You all did not eat rice yesterday.	Tumi chawal khal nai.	seed:grammar-verbs|draft-hi
+They eat rice every day.	Ten chawal khata.	seed:grammar-verbs|draft-hi
+They are eating rice now.	Ten chawal khate wate.	seed:grammar-verbs|draft-hi
+They ate rice yesterday.	Ten chawal khalo.	seed:grammar-verbs|draft-hi
+They will eat rice tomorrow.	Ten chawal khatalo.	seed:grammar-verbs|draft-hi
+They did not eat rice yesterday.	Ten chawal khal nai.	seed:grammar-verbs|draft-hi
+I come home every day.	Me ghar yeta.	seed:grammar-verbs|draft-hi
+I am coming home now.	Me ghar yete wate.	seed:grammar-verbs|draft-hi
+I came home yesterday.	Me ghar ailo.	seed:grammar-verbs|draft-hi
+I will come home tomorrow.	Me ghar yetalo.	seed:grammar-verbs|draft-hi
+I did not come home yesterday.	Me ghar ayal nai.	seed:grammar-verbs|draft-hi
+You come home every day.	Tu ghar yeta.	seed:grammar-verbs|draft-hi
+You are coming home now.	Tu ghar yete wate.	seed:grammar-verbs|draft-hi
+You came home yesterday.	Tu ghar ailo.	seed:grammar-verbs|draft-hi
+You will come home tomorrow.	Tu ghar yetalo.	seed:grammar-verbs|draft-hi
+You did not come home yesterday.	Tu ghar ayal nai.	seed:grammar-verbs|draft-hi
+He comes home every day.	To ghar yeta.	seed:grammar-verbs|draft-hi
+He is coming home now.	To ghar yete wate.	seed:grammar-verbs|draft-hi
+He came home yesterday.	To ghar ailo.	seed:grammar-verbs|draft-hi
+He will come home tomorrow.	To ghar yetalo.	seed:grammar-verbs|draft-hi
+He did not come home yesterday.	To ghar ayal nai.	seed:grammar-verbs|draft-hi
+She comes home every day.	Ti ghar yeta.	seed:grammar-verbs|draft-hi
+She is coming home now.	Ti ghar yete wate.	seed:grammar-verbs|draft-hi
+She came home yesterday.	Ti ghar ailo.	seed:grammar-verbs|draft-hi
+She will come home tomorrow.	Ti ghar yetalo.	seed:grammar-verbs|draft-hi
+She did not come home yesterday.	Ti ghar ayal nai.	seed:grammar-verbs|draft-hi
+We come home every day.	Ami ghar yeta.	seed:grammar-verbs|draft-hi
+We are coming home now.	Ami ghar yete wate.	seed:grammar-verbs|draft-hi
+We came home yesterday.	Ami ghar ailo.	seed:grammar-verbs|draft-hi
+We will come home tomorrow.	Ami ghar yetalo.	seed:grammar-verbs|draft-hi
+We did not come home yesterday.	Ami ghar ayal nai.	seed:grammar-verbs|draft-hi
+You all come home every day.	Tumi ghar yeta.	seed:grammar-verbs|draft-hi
+You all are coming home now.	Tumi ghar yete wate.	seed:grammar-verbs|draft-hi
+You all came home yesterday.	Tumi ghar ailo.	seed:grammar-verbs|draft-hi
+You all will come home tomorrow.	Tumi ghar yetalo.	seed:grammar-verbs|draft-hi
+You all did not come home yesterday.	Tumi ghar ayal nai.	seed:grammar-verbs|draft-hi
+They come home every day.	Ten ghar yeta.	seed:grammar-verbs|draft-hi
+They are coming home now.	Ten ghar yete wate.	seed:grammar-verbs|draft-hi
+They came home yesterday.	Ten ghar ailo.	seed:grammar-verbs|draft-hi
+They will come home tomorrow.	Ten ghar yetalo.	seed:grammar-verbs|draft-hi
+They did not come home yesterday.	Ten ghar ayal nai.	seed:grammar-verbs|draft-hi
+I buy fish every day.	Me meen hadta.	seed:grammar-verbs|draft-hi
+I am buying fish now.	Me meen hadte wate.	seed:grammar-verbs|draft-hi
+I bought fish yesterday.	Me meen hadlo.	seed:grammar-verbs|draft-hi
+I will buy fish tomorrow.	Me meen hadtale.	seed:grammar-verbs|draft-hi
+I did not buy fish yesterday.	Me meen hadal nai.	seed:grammar-verbs|draft-hi
+You buy fish every day.	Tu meen hadta.	seed:grammar-verbs|draft-hi
+You are buying fish now.	Tu meen hadte wate.	seed:grammar-verbs|draft-hi
+You bought fish yesterday.	Tu meen hadlo.	seed:grammar-verbs|draft-hi
+You will buy fish tomorrow.	Tu meen hadtale.	seed:grammar-verbs|draft-hi
+You did not buy fish yesterday.	Tu meen hadal nai.	seed:grammar-verbs|draft-hi
+He buys fish every day.	To meen hadta.	seed:grammar-verbs|draft-hi
+He is buying fish now.	To meen hadte wate.	seed:grammar-verbs|draft-hi
+He bought fish yesterday.	To meen hadlo.	seed:grammar-verbs|draft-hi
+He will buy fish tomorrow.	To meen hadtale.	seed:grammar-verbs|draft-hi
+He did not buy fish yesterday.	To meen hadal nai.	seed:grammar-verbs|draft-hi
+She buys fish every day.	Ti meen hadta.	seed:grammar-verbs|draft-hi
+She is buying fish now.	Ti meen hadte wate.	seed:grammar-verbs|draft-hi
+She bought fish yesterday.	Ti meen hadlo.	seed:grammar-verbs|draft-hi
+She will buy fish tomorrow.	Ti meen hadtale.	seed:grammar-verbs|draft-hi
+She did not buy fish yesterday.	Ti meen hadal nai.	seed:grammar-verbs|draft-hi
+We buy fish every day.	Ami meen hadta.	seed:grammar-verbs|draft-hi
+We are buying fish now.	Ami meen hadte wate.	seed:grammar-verbs|draft-hi
+We bought fish yesterday.	Ami meen hadlo.	seed:grammar-verbs|draft-hi
+We will buy fish tomorrow.	Ami meen hadtale.	seed:grammar-verbs|draft-hi
+We did not buy fish yesterday.	Ami meen hadal nai.	seed:grammar-verbs|draft-hi
+You all buy fish every day.	Tumi meen hadta.	seed:grammar-verbs|draft-hi
+You all are buying fish now.	Tumi meen hadte wate.	seed:grammar-verbs|draft-hi
+You all bought fish yesterday.	Tumi meen hadlo.	seed:grammar-verbs|draft-hi
+You all will buy fish tomorrow.	Tumi meen hadtale.	seed:grammar-verbs|draft-hi
+You all did not buy fish yesterday.	Tumi meen hadal nai.	seed:grammar-verbs|draft-hi
+They buy fish every day.	Ten meen hadta.	seed:grammar-verbs|draft-hi
+They are buying fish now.	Ten meen hadte wate.	seed:grammar-verbs|draft-hi
+They bought fish yesterday.	Ten meen hadlo.	seed:grammar-verbs|draft-hi
+They will buy fish tomorrow.	Ten meen hadtale.	seed:grammar-verbs|draft-hi
+They did not buy fish yesterday.	Ten meen hadal nai.	seed:grammar-verbs|draft-hi
 # ===== Grammar: my/your/his, this/that, and where things are =====
-This is my book.		seed:grammar-words
-This is your book.		seed:grammar-words
-This is his book.		seed:grammar-words
-This is her book.		seed:grammar-words
-This is our book.		seed:grammar-words
-This is their book.		seed:grammar-words
-This is my house.		seed:grammar-words
-This is your house.		seed:grammar-words
-This is his house.		seed:grammar-words
-This is her house.		seed:grammar-words
-This is our house.		seed:grammar-words
-This is their house.		seed:grammar-words
-This is your father.		seed:grammar-words
-This is his father.		seed:grammar-words
-This is her father.		seed:grammar-words
-This is our father.		seed:grammar-words
-This is their father.		seed:grammar-words
-This is your friend.		seed:grammar-words
-This is his friend.		seed:grammar-words
-This is her friend.		seed:grammar-words
-This is our friend.		seed:grammar-words
-This is their friend.		seed:grammar-words
-This is my boat.		seed:grammar-words
-This is your boat.		seed:grammar-words
-This is his boat.		seed:grammar-words
-This is her boat.		seed:grammar-words
-This is our boat.		seed:grammar-words
-This is their boat.		seed:grammar-words
-This is my shop.		seed:grammar-words
-This is your shop.		seed:grammar-words
-This is his shop.		seed:grammar-words
-This is her shop.		seed:grammar-words
-This is our shop.		seed:grammar-words
-This is their shop.		seed:grammar-words
-Where is my book?		seed:grammar-words
-Where is your book?		seed:grammar-words
-Where is his book?		seed:grammar-words
-Where is her book?		seed:grammar-words
-Where is our book?		seed:grammar-words
-Where is their book?		seed:grammar-words
-Where is my father?		seed:grammar-words
-Where is his father?		seed:grammar-words
-Where is her father?		seed:grammar-words
-Where is our father?		seed:grammar-words
-Where is their father?		seed:grammar-words
-Where is my boat?		seed:grammar-words
-Where is your boat?		seed:grammar-words
-Where is his boat?		seed:grammar-words
-Where is her boat?		seed:grammar-words
-Where is our boat?		seed:grammar-words
-Where is their boat?		seed:grammar-words
-This is a house.		seed:grammar-words
-That is a house.		seed:grammar-words
-These are houses.		seed:grammar-words
-Those are houses.		seed:grammar-words
-This is a boat.		seed:grammar-words
-That is a boat.		seed:grammar-words
-These are boats.		seed:grammar-words
-Those are boats.		seed:grammar-words
-This is a book.		seed:grammar-words
-That is a book.		seed:grammar-words
-These are books.		seed:grammar-words
-Those are books.		seed:grammar-words
-This is a tree.		seed:grammar-words
-That is a tree.		seed:grammar-words
-These are trees.		seed:grammar-words
-Those are trees.		seed:grammar-words
-This is a fish.		seed:grammar-words
-That is a fish.		seed:grammar-words
-These are fish.		seed:grammar-words
-Those are fish.		seed:grammar-words
-The book is on the table.		seed:grammar-words
-The book is under the table.		seed:grammar-words
-The cat is in the box.		seed:grammar-words
-The cat is behind the door.		seed:grammar-words
-The key is in my bag.		seed:grammar-words
-The key is on the chair.		seed:grammar-words
-The bag is near the door.		seed:grammar-words
-The bag is under the bed.		seed:grammar-words
-The boat is near the shore.		seed:grammar-words
-The boat is in the sea.		seed:grammar-words
-The bird is on the tree.		seed:grammar-words
-The bird is in the tree.		seed:grammar-words
-The children are in front of the school.		seed:grammar-words
-The shop is next to the mosque.		seed:grammar-words
-The mosque is behind the market.		seed:grammar-words
-The school is near our house.		seed:grammar-words
-The dog is under the tree.		seed:grammar-words
-The dog is in front of the house.		seed:grammar-words
-The fish is in the basket.		seed:grammar-words
-The water is in the bucket.		seed:grammar-words
-The phone is on the bed.		seed:grammar-words
-The phone is in my pocket.		seed:grammar-words
-The tree is behind the house.		seed:grammar-words
-The road is in front of the shop.		seed:grammar-words
-The ball is under the chair.		seed:grammar-words
-The money is in the box.		seed:grammar-words
-The coconut fell from the tree.		seed:grammar-words
-He came from the village.		seed:grammar-words
-She went to the sea.		seed:grammar-words
-The man is between the two boys.		seed:grammar-words
+This is my book.	He moje kitab.	seed:grammar-words|draft-hi
+This is your book.	He tuje kitab.	seed:grammar-words|draft-hi
+This is his book.	He teje kitab.	seed:grammar-words|draft-hi
+This is her book.	He teje kitab.	seed:grammar-words|draft-hi
+This is our book.	He amche kitab.	seed:grammar-words|draft-hi
+This is their book.	He tenche kitab.	seed:grammar-words|draft-hi
+This is my house.	He moje ghar.	seed:grammar-words|draft-hi
+This is your house.	He tuje ghar.	seed:grammar-words|draft-hi
+This is his house.	He teje ghar.	seed:grammar-words|draft-hi
+This is her house.	He teje ghar.	seed:grammar-words|draft-hi
+This is our house.	He amche ghar.	seed:grammar-words|draft-hi
+This is their house.	He tenche ghar.	seed:grammar-words|draft-hi
+This is your father.	He tuje bapa.	seed:grammar-words|draft-hi
+This is his father.	He teje bapa.	seed:grammar-words|draft-hi
+This is her father.	He teje bapa.	seed:grammar-words|draft-hi
+This is our father.	He amche bapa.	seed:grammar-words|draft-hi
+This is their father.	He tenche bapa.	seed:grammar-words|draft-hi
+This is your friend.	Ho tujo dost.	seed:grammar-words|draft-hi
+This is his friend.	Ho tejo dost.	seed:grammar-words|draft-hi
+This is her friend.	Ho tejo dost.	seed:grammar-words|draft-hi
+This is our friend.	Ho amcho dost.	seed:grammar-words|draft-hi
+This is their friend.	Ho tencho dost.	seed:grammar-words|draft-hi
+This is my boat.	He moje samku.	seed:grammar-words|draft-hi
+This is your boat.	He tuje samku.	seed:grammar-words|draft-hi
+This is his boat.	He teje samku.	seed:grammar-words|draft-hi
+This is her boat.	He teje samku.	seed:grammar-words|draft-hi
+This is our boat.	He amche samku.	seed:grammar-words|draft-hi
+This is their boat.	He tenche samku.	seed:grammar-words|draft-hi
+This is my shop.	He moje angdi.	seed:grammar-words|draft-hi
+This is your shop.	He tuje angdi.	seed:grammar-words|draft-hi
+This is his shop.	He teje angdi.	seed:grammar-words|draft-hi
+This is her shop.	He teje angdi.	seed:grammar-words|draft-hi
+This is our shop.	He amche angdi.	seed:grammar-words|draft-hi
+This is their shop.	He tenche angdi.	seed:grammar-words|draft-hi
+Where is my book?	moje kitab khe wate?	seed:grammar-words|draft-hi
+Where is your book?	tuje kitab khe wate?	seed:grammar-words|draft-hi
+Where is his book?	teje kitab khe wate?	seed:grammar-words|draft-hi
+Where is her book?	khe teji kitab?	seed:grammar-words|draft-gloss
+Where is our book?	khe amche kitab?	seed:grammar-words|draft-gloss
+Where is their book?	khe tenche kitab?	seed:grammar-words|draft-gloss
+Where is my father?	moje bapa khe wate?	seed:grammar-words|draft-hi
+Where is his father?	teje bapa khe wate?	seed:grammar-words|draft-hi
+Where is her father?	khe teji bapa?	seed:grammar-words|draft-gloss
+Where is our father?	khe amche bapa?	seed:grammar-words|draft-gloss
+Where is their father?	khe tenche bapa?	seed:grammar-words|draft-gloss
+Where is my boat?	moje samku khe wate?	seed:grammar-words|draft-hi
+Where is your boat?	tuje samku khe wate?	seed:grammar-words|draft-hi
+Where is his boat?	teje samku khe wate?	seed:grammar-words|draft-hi
+Where is her boat?	khe teji samku?	seed:grammar-words|draft-gloss
+Where is our boat?	khe amche samku?	seed:grammar-words|draft-gloss
+Where is their boat?	khe tenche samku?	seed:grammar-words|draft-gloss
+This is a house.	He ek ghar.	seed:grammar-words|draft-hi
+That is a house.	Te ek ghar.	seed:grammar-words|draft-hi
+These are houses.	Hen ghar.	seed:grammar-words|draft-hi
+Those are houses.	Ten ghar.	seed:grammar-words|draft-hi
+This is a boat.	He ek samku.	seed:grammar-words|draft-hi
+That is a boat.	Te ek samku.	seed:grammar-words|draft-hi
+These are boats.	Hen samku.	seed:grammar-words|draft-hi
+Those are boats.	Ten samku.	seed:grammar-words|draft-hi
+This is a book.	He ek kitab.	seed:grammar-words|draft-hi
+That is a book.	Te ek kitab.	seed:grammar-words|draft-hi
+These are books.	Hen kitab.	seed:grammar-words|draft-hi
+Those are books.	Ten kitab.	seed:grammar-words|draft-hi
+This is a tree.	He ek zhaad.	seed:grammar-words|draft-mid
+That is a tree.	Te ek zhaad.	seed:grammar-words|draft-mid
+These are trees.	Hen zhaad.	seed:grammar-words|draft-mid
+Those are trees.	Ten zhaad.	seed:grammar-words|draft-mid
+This is a fish.	He ek meen.	seed:grammar-words|draft-mid
+That is a fish.	Te ek meen.	seed:grammar-words|draft-mid
+These are fish.	Hen meen.	seed:grammar-words|draft-mid
+Those are fish.	Ten meen.	seed:grammar-words|draft-mid
+The book is on the table.	kitab mez.	seed:grammar-words|draft-gloss
+The book is under the table.	kitab khali mez.	seed:grammar-words|draft-gloss
+The cat is in the box.	manjar bittar dabba.	seed:grammar-words|draft-gloss
+The cat is behind the door.	manjar [behind] dar.	seed:grammar-words|draft-gloss
+The key is in my bag.	chaabi bittar moje postan.	seed:grammar-words|draft-gloss
+The key is on the chair.	chaabi khurchi.	seed:grammar-words|draft-gloss
+The bag is near the door.	postan bagla dar.	seed:grammar-words|draft-gloss
+The bag is under the bed.	postan khali khaat.	seed:grammar-words|draft-gloss
+The boat is near the shore.	samku bagla kaath.	seed:grammar-words|draft-gloss
+The boat is in the sea.	samku bittar darya.	seed:grammar-words|draft-gloss
+The bird is on the tree.	chidiya zhaad war wate.	seed:grammar-words|draft-hi
+The bird is in the tree.	chidiya zhaad bittar wate.	seed:grammar-words|draft-hi
+The children are in front of the school.	chadwe bittar [front] shaala.	seed:grammar-words|draft-gloss
+The shop is next to the mosque.	angdi mizgat sarin wate.	seed:grammar-words|draft-hi
+The mosque is behind the market.	mizgat angdi paatal wate.	seed:grammar-words|draft-hi
+The school is near our house.	shaala bagla amche ghar.	seed:grammar-words|draft-gloss
+The dog is under the tree.	kutro zhaad khali wate.	seed:grammar-words|draft-hi
+The dog is in front of the house.	kutro bittar [front] ghar.	seed:grammar-words|draft-gloss
+The fish is in the basket.	meen bittar tokri.	seed:grammar-words|draft-gloss
+The water is in the bucket.	paani bittar [bucket].	seed:grammar-words|draft-gloss
+The phone is on the bed.	phone khaat.	seed:grammar-words|draft-gloss
+The phone is in my pocket.	phone bittar moje [pocket].	seed:grammar-words|draft-gloss
+The tree is behind the house.	zhaad [behind] ghar.	seed:grammar-words|draft-gloss
+The road is in front of the shop.	waat angdi fude wate.	seed:grammar-words|draft-hi
+The ball is under the chair.	[ball] khali khurchi.	seed:grammar-words|draft-gloss
+The money is in the box.	dud bittar dabba.	seed:grammar-words|draft-gloss
+The coconut fell from the tree.	[coconut] [fell] cho zhaad.	seed:grammar-words|draft-gloss
+He came from the village.	To ailo cho gaaw.	seed:grammar-words|draft-gloss
+She went to the sea.	Ti gelo darya.	seed:grammar-words|draft-gloss
+The man is between the two boys.	bando [between] don [boys].	seed:grammar-words|draft-gloss
 # ===== Grammar: have, can, must, want, should =====
-I have a boat.		seed:grammar-have-can
-I do not have a boat.		seed:grammar-have-can
-Do you have a boat?		seed:grammar-have-can
-He has a shop.		seed:grammar-have-can
-He does not have a shop.		seed:grammar-have-can
-Does he have a shop?		seed:grammar-have-can
-We have time.		seed:grammar-have-can
-We do not have time.		seed:grammar-have-can
-Do you have time?		seed:grammar-have-can
-They have three children.		seed:grammar-have-can
-They do not have any children.		seed:grammar-have-can
-Do they have children?		seed:grammar-have-can
-I can swim.		seed:grammar-have-can
-I cannot swim.		seed:grammar-have-can
-He can drive a car.		seed:grammar-have-can
-He cannot drive a car.		seed:grammar-have-can
-Can she cook?		seed:grammar-have-can
-I must go now.		seed:grammar-have-can
-You must not go there.		seed:grammar-have-can
-Must we wait?		seed:grammar-have-can
-I want to eat.		seed:grammar-have-can
-I do not want to eat.		seed:grammar-have-can
-Do you want to eat?		seed:grammar-have-can
-I want to go home.		seed:grammar-have-can
-He wants to sleep.		seed:grammar-have-can
-They want to play.		seed:grammar-have-can
-You should rest.		seed:grammar-have-can
-You should not eat so much.		seed:grammar-have-can
-Should I call him?		seed:grammar-have-can
-We should help them.		seed:grammar-have-can
-May I come in?		seed:grammar-have-can
-You may go now.		seed:grammar-have-can
-I know him.		seed:grammar-have-can
-I do not know him.		seed:grammar-have-can
+I have a boat.	Maka samku wate.	seed:grammar-have-can|draft-hi
+I do not have a boat.	Maka samku nai wate.	seed:grammar-have-can|draft-hi
+Do you have a boat?	Tuka samku wate?	seed:grammar-have-can|draft-hi
+He has a shop.	Teka angdi wate.	seed:grammar-have-can|draft-hi
+He does not have a shop.	Teka angdi nai wate.	seed:grammar-have-can|draft-hi
+Does he have a shop?	Teka angdi wate?	seed:grammar-have-can|draft-hi
+We have time.	Ami wakhat.	seed:grammar-have-can|draft-gloss
+We do not have time.	Ami wakhat nai.	seed:grammar-have-can|draft-gloss
+Do you have time?	Tu wakhat?	seed:grammar-have-can|draft-gloss
+They have three children.	Tenka chadwe wate.	seed:grammar-have-can|draft-hi
+They do not have any children.	Ten [any] chadwe nai.	seed:grammar-have-can|draft-gloss
+Do they have children?	Ten chadwe?	seed:grammar-have-can|draft-gloss
+I can swim.	Me pau sakta.	seed:grammar-have-can|draft-hi
+I cannot swim.	Me pau sakta nai.	seed:grammar-have-can|draft-hi
+He can drive a car.	To sakta chalauta gaadi.	seed:grammar-have-can|draft-gloss
+He cannot drive a car.	To sakta chalauta gaadi nai.	seed:grammar-have-can|draft-gloss
+Can she cook?	sakta Ti khau karta?	seed:grammar-have-can|draft-gloss
+I must go now.	Me karyaw wata etta.	seed:grammar-have-can|draft-gloss
+You must not go there.	Tu karyaw wata tari nai.	seed:grammar-have-can|draft-gloss
+Must we wait?	karyaw Ami ube rata?	seed:grammar-have-can|draft-gloss
+I want to eat.	Me kaas khata.	seed:grammar-have-can|draft-gloss
+I do not want to eat.	Me kaas khata nai.	seed:grammar-have-can|draft-gloss
+Do you want to eat?	Tu kaas khata?	seed:grammar-have-can|draft-gloss
+I want to go home.	Me kaas wata ghar.	seed:grammar-have-can|draft-gloss
+He wants to sleep.	To kaas wadgalta.	seed:grammar-have-can|draft-gloss
+They want to play.	Ten kaas khelta.	seed:grammar-have-can|draft-gloss
+You should rest.	Tu karyaw aaram karta.	seed:grammar-have-can|draft-gloss
+You should not eat so much.	Tu karyaw khata balli nai.	seed:grammar-have-can|draft-gloss
+Should I call him?	karyaw Me apauta Teka?	seed:grammar-have-can|draft-gloss
+We should help them.	Ami karyaw madad karta Tenka.	seed:grammar-have-can|draft-gloss
+May I come in?	Me yeta bittar?	seed:grammar-have-can|draft-gloss
+You may go now.	Tu wata etta.	seed:grammar-have-can|draft-gloss
+I know him.	Me walkhata Teka.	seed:grammar-have-can|draft-gloss
+I do not know him.	Me walkhata Teka nai.	seed:grammar-have-can|draft-gloss
 # ===== Everyday short forms (how people really type) =====
-I'm fine.		seed:contractions
-I'm hungry.		seed:contractions
-I don't know.		seed:contractions
-I don't understand.		seed:contractions
-I can't come today.		seed:contractions
-I won't go there.		seed:contractions
-He isn't here.		seed:contractions
-She isn't at home.		seed:contractions
-We aren't ready.		seed:contractions
-They aren't coming.		seed:contractions
-It's raining.		seed:contractions
-It's very hot today.		seed:contractions
-What's your name?		seed:contractions
-Where's the bus stand?		seed:contractions
-Who's there?		seed:contractions
-That's my house.		seed:contractions
-Let's go.		seed:contractions
-Let's eat.		seed:contractions
-Don't worry.		seed:contractions
-Don't be late.		seed:contractions
+I'm fine.	[i'm] [fine].	seed:contractions|draft-gloss
+I'm hungry.	[i'm] bhukelo.	seed:contractions|draft-gloss
+I don't know.	Me walkhata nai.	seed:contractions|draft-gloss
+I don't understand.	Me walkhata nai.	seed:contractions|draft-gloss
+I can't come today.	Me sakta yeta aas nai.	seed:contractions|draft-gloss
+I won't go there.	Me [won't] wata tari nai.	seed:contractions|draft-gloss
+He isn't here.	To yari nai.	seed:contractions|draft-gloss
+She isn't at home.	Ti ghar nai.	seed:contractions|draft-gloss
+We aren't ready.	Ami tayyar nai.	seed:contractions|draft-gloss
+They aren't coming.	Ten yete wate nai.	seed:contractions|draft-gloss
+It's raining.	[it's] paus padte wate.	seed:contractions|draft-gloss
+It's very hot today.	[it's] balli garam aas.	seed:contractions|draft-gloss
+What's your name?	[what's] tuje naw?	seed:contractions|draft-gloss
+Where's the bus stand?	[where's] bus [stand]?	seed:contractions|draft-gloss
+Who's there?	[who's] tari?	seed:contractions|draft-gloss
+That's my house.	[that's] moje ghar.	seed:contractions|draft-gloss
+Let's go.	[let's] wata.	seed:contractions|draft-gloss
+Let's eat.	[let's] khata.	seed:contractions|draft-gloss
+Don't worry.	[worry] nai.	seed:contractions|draft-gloss
+Don't be late.	modi nai.	seed:contractions|draft-gloss
 # ===== Food and drink =====
-I am hungry.		seed:food
-Are you hungry?		seed:food
-I am thirsty.		seed:food
-Please give me some water.		seed:food
-The water is cold.		seed:food
-The tea is very hot.		seed:food
-Do you want tea or coffee?		seed:food
-I like tea with milk.		seed:food
-I do not take sugar.		seed:food
-Lunch is ready.		seed:food
-Come and eat.		seed:food
-What did you cook today?		seed:food
-We are eating rice and fish curry.		seed:food
-My mother makes very good food.		seed:food
-I like spicy food.		seed:food
-This food is too spicy.		seed:food
-The soup needs more salt.		seed:food
-There is too much salt.		seed:food
-The bread is fresh.		seed:food
-I want another plate of rice.		seed:food
-Please pass the salt.		seed:food
-He eats three times a day.		seed:food
-The children want sweets.		seed:food
-We drink milk every morning.		seed:food
-Do not waste food.		seed:food
-Wash your hands before eating.		seed:food
-The rice is not cooked yet.		seed:food
-Add some more water.		seed:food
-The fish is fresh from the sea.		seed:food
-We fried the fish in oil.		seed:food
-She is making dosa for breakfast.		seed:food
-I had eggs for breakfast.		seed:food
-What is for dinner?		seed:food
-We will have chicken today.		seed:food
-The mango is very sweet.		seed:food
-I like bananas.		seed:food
-Coconut is used in many dishes.		seed:food
-The onions are on the table.		seed:food
-Cut the vegetables.		seed:food
-Peel the potatoes.		seed:food
-Boil the eggs.		seed:food
-Put the pot on the fire.		seed:food
-The milk boiled over.		seed:food
-I cannot eat any more.		seed:food
-That was a delicious meal.		seed:food
-The guests are hungry.		seed:food
-Would you like some more?		seed:food
-No thank you, I am full.		seed:food
-Fill the glass with water.		seed:food
-The bottle is empty.		seed:food
-Do not drink water from the tap.		seed:food
-He drinks a glass of juice every day.		seed:food
-She is grinding spices for the curry.		seed:food
-We break our fast at sunset.		seed:food
-Dates are eaten to break the fast.		seed:food
-Our cook makes biryani on special days.		seed:food
+I am hungry.	Me bhukelo.	seed:food|draft-gloss
+Are you hungry?	Tu bhukelo?	seed:food|draft-gloss
+I am thirsty.	Me tarsalo.	seed:food|draft-gloss
+Please give me some water.	zarra deta Maka zarra paani.	seed:food|draft-gloss
+The water is cold.	paani thand.	seed:food|draft-gloss
+The tea is very hot.	chaha balli garam.	seed:food|draft-gloss
+Do you want tea or coffee?	Tu kaas chaha ya [coffee]?	seed:food|draft-gloss
+I like tea with milk.	Me chaha sarin dudh.	seed:food|draft-gloss
+I do not take sugar.	Me ghenta sakhar nai.	seed:food|draft-gloss
+Lunch is ready.	[lunch] tayyar.	seed:food|draft-gloss
+Come and eat.	yeta ani khata.	seed:food|draft-gloss
+What did you cook today?	kaa Tu khau karta aas?	seed:food|draft-gloss
+We are eating rice and fish curry.	Ami khate wate chawal ani meen [curry].	seed:food|draft-gloss
+My mother makes very good food.	moje mama [makes] balli nikko khau.	seed:food|draft-gloss
+I like spicy food.	Me teekha khau.	seed:food|draft-gloss
+This food is too spicy.	He khau balli teekha.	seed:food|draft-gloss
+The soup needs more salt.	[soup] kaas zyada mith.	seed:food|draft-gloss
+There is too much salt.	tari balli balli mith.	seed:food|draft-gloss
+The bread is fresh.	roti taza.	seed:food|draft-gloss
+I want another plate of rice.	Me kaas [another] taat chawal.	seed:food|draft-gloss
+Please pass the salt.	zarra [pass] mith.	seed:food|draft-gloss
+He eats three times a day.	To khata teen wakhat dis.	seed:food|draft-gloss
+The children want sweets.	chadwe kaas gaddo.	seed:food|draft-gloss
+We drink milk every morning.	Ami peta dudh har sakan.	seed:food|draft-gloss
+Do not waste food.	[waste] khau nai.	seed:food|draft-gloss
+Wash your hands before eating.	dhuta tuje hath fude khate wate.	seed:food|draft-gloss
+The rice is not cooked yet.	chawal khau kailo [yet] nai.	seed:food|draft-gloss
+Add some more water.	[add] zarra zyada paani.	seed:food|draft-gloss
+The fish is fresh from the sea.	meen taza cho darya.	seed:food|draft-gloss
+We fried the fish in oil.	Ami [fried] meen bittar [oil].	seed:food|draft-gloss
+She is making dosa for breakfast.	Ti [making] [dosa] [breakfast].	seed:food|draft-gloss
+I had eggs for breakfast.	Me [eggs] [breakfast].	seed:food|draft-gloss
+What is for dinner?	kaa khau?	seed:food|draft-gloss
+We will have chicken today.	Ami [chicken] aas.	seed:food|draft-gloss
+The mango is very sweet.	[mango] balli gaddo.	seed:food|draft-gloss
+I like bananas.	Me [bananas].	seed:food|draft-gloss
+Coconut is used in many dishes.	[coconut] [used] bittar bhouat [dishes].	seed:food|draft-gloss
+The onions are on the table.	[onions] mez.	seed:food|draft-gloss
+Cut the vegetables.	[cut] bhaji.	seed:food|draft-gloss
+Peel the potatoes.	[peel] [potatoes].	seed:food|draft-gloss
+Boil the eggs.	[boil] [eggs].	seed:food|draft-gloss
+Put the pot on the fire.	[put] [pot] uzo.	seed:food|draft-gloss
+The milk boiled over.	dudh [boiled] [over].	seed:food|draft-gloss
+I cannot eat any more.	Me sakta khata [any] zyada nai.	seed:food|draft-gloss
+That was a delicious meal.	Te [delicious] [meal].	seed:food|draft-gloss
+The guests are hungry.	mehman bhukelo.	seed:food|draft-gloss
+Would you like some more?	Tu zarra zyada?	seed:food|draft-gloss
+No thank you, I am full.	nai [thank] Tu, Me bhardo.	seed:food|draft-gloss
+Fill the glass with water.	[fill] gilas sarin paani.	seed:food|draft-gloss
+The bottle is empty.	botal khali.	seed:food|draft-gloss
+Do not drink water from the tap.	peta paani cho [tap] nai.	seed:food|draft-gloss
+He drinks a glass of juice every day.	To peta gilas [juice] har dis.	seed:food|draft-gloss
+She is grinding spices for the curry.	Ti [grinding] [spices] [curry].	seed:food|draft-gloss
+We break our fast at sunset.	Ami [break] amche tez maghrib.	seed:food|draft-gloss
+Dates are eaten to break the fast.	khajur [eaten] [break] tez.	seed:food|draft-gloss
+Our cook makes biryani on special days.	amche khau karta [makes] [biryani] [special] dis.	seed:food|draft-gloss
 # ===== Home and household =====
-Our house has three rooms.		seed:home
-Open the door.		seed:home
-Close the window.		seed:home
-Please lock the door.		seed:home
-The key is on the table.		seed:home
-Turn on the light.		seed:home
-Turn off the fan.		seed:home
-The room is very dark.		seed:home
-It is hot inside the house.		seed:home
-Where is the kitchen?		seed:home
-The bathroom is at the back.		seed:home
-The bed is in the small room.		seed:home
-Put the clothes on the bed.		seed:home
-Sweep the floor.		seed:home
-Wash the dishes.		seed:home
-I am washing my clothes.		seed:home
-Hang the clothes outside to dry.		seed:home
-The roof leaks in the rain.		seed:home
-The wall needs new paint.		seed:home
-There is a well behind the house.		seed:home
-We have a small garden.		seed:home
-The cat is sleeping on the chair.		seed:home
-Bring a chair for the guest.		seed:home
-Put the bag under the table.		seed:home
-The mat is on the floor.		seed:home
-The clock is on the wall.		seed:home
-The mirror is broken.		seed:home
-Where is the broom?		seed:home
-The electricity is gone.		seed:home
-The power is back.		seed:home
-We need to fix the tap.		seed:home
-There is no water in the pipe.		seed:home
-Take the rubbish outside.		seed:home
-Keep the house clean.		seed:home
-The neighbours are very noisy.		seed:home
-Our house is old but strong.		seed:home
-He is building a new house.		seed:home
-The bucket is full of water.		seed:home
-Bring me a glass of water.		seed:home
-The cupboard is full of clothes.		seed:home
-Where did you put my phone?		seed:home
-Do not leave the gate open.		seed:home
-The dog is barking at the door.		seed:home
-Come inside, it is raining.		seed:home
+Our house has three rooms.	amche ghar teen kamra.	seed:home|draft-gloss
+Open the door.	usauta dar.	seed:home|draft-gloss
+Close the window.	band karta khidki.	seed:home|draft-gloss
+Please lock the door.	zarra [lock] dar.	seed:home|draft-gloss
+The key is on the table.	chaabi mez.	seed:home|draft-gloss
+Turn on the light.	[turn] light.	seed:home|draft-gloss
+Turn off the fan.	[turn] [off] fan.	seed:home|draft-gloss
+The room is very dark.	kamra balli andhar.	seed:home|draft-gloss
+It is hot inside the house.	He garam [inside] ghar.	seed:home|draft-gloss
+Where is the kitchen?	khe bawarchikhana?	seed:home|draft-gloss
+The bathroom is at the back.	[bathroom] peeth.	seed:home|draft-gloss
+The bed is in the small room.	khaat bittar dhaklo kamra.	seed:home|draft-gloss
+Put the clothes on the bed.	[put] kapde khaat.	seed:home|draft-gloss
+Sweep the floor.	[sweep] farsh.	seed:home|draft-gloss
+Wash the dishes.	dhuta [dishes].	seed:home|draft-gloss
+I am washing my clothes.	Me dhute wate moje kapde.	seed:home|draft-gloss
+Hang the clothes outside to dry.	[hang] kapde bhair sukko.	seed:home|draft-gloss
+The roof leaks in the rain.	chhat [leaks] bittar paus padta.	seed:home|draft-gloss
+The wall needs new paint.	bhint kaas nawo [paint].	seed:home|draft-gloss
+There is a well behind the house.	tari nikko [behind] ghar.	seed:home|draft-gloss
+We have a small garden.	Ami dhaklo baag.	seed:home|draft-gloss
+The cat is sleeping on the chair.	manjar wadgali wate khurchi.	seed:home|draft-gloss
+Bring a chair for the guest.	hadta khurchi mehman.	seed:home|draft-gloss
+Put the bag under the table.	[put] postan khali mez.	seed:home|draft-gloss
+The mat is on the floor.	[mat] farsh.	seed:home|draft-gloss
+The clock is on the wall.	[clock] bhint.	seed:home|draft-gloss
+The mirror is broken.	[mirror] [broken].	seed:home|draft-gloss
+Where is the broom?	khe [broom]?	seed:home|draft-gloss
+The electricity is gone.	[electricity] [gone].	seed:home|draft-gloss
+The power is back.	[power] peeth.	seed:home|draft-gloss
+We need to fix the tap.	Ami kaas [fix] [tap].	seed:home|draft-gloss
+There is no water in the pipe.	tari nai paani bittar pipe.	seed:home|draft-gloss
+Take the rubbish outside.	ghenta [rubbish] bhair.	seed:home|draft-gloss
+Keep the house clean.	[keep] ghar saaf.	seed:home|draft-gloss
+The neighbours are very noisy.	shejer balli [noisy].	seed:home|draft-gloss
+Our house is old but strong.	amche ghar purano pan mazbut.	seed:home|draft-gloss
+He is building a new house.	To [building] nawo ghar.	seed:home|draft-gloss
+The bucket is full of water.	[bucket] bhardo paani.	seed:home|draft-gloss
+Bring me a glass of water.	hadta Maka gilas paani.	seed:home|draft-gloss
+The cupboard is full of clothes.	[cupboard] bhardo kapde.	seed:home|draft-gloss
+Where did you put my phone?	khe Tu [put] moje phone?	seed:home|draft-gloss
+Do not leave the gate open.	sodta [gate] usauta nai.	seed:home|draft-gloss
+The dog is barking at the door.	kutro [barking] dar.	seed:home|draft-gloss
+Come inside, it is raining.	yeta [inside], He paus padte wate.	seed:home|draft-gloss
 # ===== Body and health =====
-My head hurts.		seed:health
-I have a headache.		seed:health
-I have a stomach ache.		seed:health
-My tooth is paining.		seed:health
-My leg hurts when I walk.		seed:health
-I have a fever.		seed:health
-I have a cold and a cough.		seed:health
-My throat is sore.		seed:health
-I feel dizzy.		seed:health
-I feel very weak.		seed:health
-I cannot sleep at night.		seed:health
-I hurt my hand.		seed:health
-He fell and hurt his knee.		seed:health
-There is blood on your shirt.		seed:health
-Wash the wound with clean water.		seed:health
-Are you feeling better now?		seed:health
-I am feeling much better today.		seed:health
-You should see a doctor.		seed:health
-Let us go to the hospital.		seed:health
-The doctor is not here today.		seed:health
-The doctor gave me some medicine.		seed:health
-Take this medicine twice a day.		seed:health
-Take one tablet after eating.		seed:health
-Drink plenty of water.		seed:health
-You need to rest.		seed:health
-Do not go to work today.		seed:health
-The child has a high fever.		seed:health
-She is pregnant.		seed:health
-My grandfather cannot hear well.		seed:health
-He cannot see without glasses.		seed:health
-Close your eyes.		seed:health
-Open your mouth.		seed:health
-Show me your tongue.		seed:health
-Raise your hand.		seed:health
-Breathe in slowly.		seed:health
-My heart is beating fast.		seed:health
-My back is aching.		seed:health
-My eyes are red.		seed:health
-Wash your face.		seed:health
-Brush your teeth twice a day.		seed:health
-Cut your nails.		seed:health
-Comb your hair.		seed:health
-The baby has a rash on the skin.		seed:health
-I am allergic to some foods.		seed:health
-He has diabetes.		seed:health
-Where does it hurt?		seed:health
-It hurts here.		seed:health
-It does not hurt any more.		seed:health
-She is recovering slowly.		seed:health
-I need to buy medicine from the shop.		seed:health
-Health is more important than money.		seed:health
+My head hurts.	moje matho dukhta.	seed:health|draft-gloss
+I have a headache.	Maka dukhi mathi wate.	seed:health|draft-mid
+I have a stomach ache.	Me pot [ache].	seed:health|draft-gloss
+My tooth is paining.	moje daant [paining].	seed:health|draft-gloss
+My leg hurts when I walk.	moje paay dukhta ketta Me chalta.	seed:health|draft-gloss
+I have a fever.	Maka taap wate.	seed:health|draft-mid
+I have a cold and a cough.	Me thand ani [cough].	seed:health|draft-gloss
+My throat is sore.	moje gala [sore].	seed:health|draft-gloss
+I feel dizzy.	Me [feel] [dizzy].	seed:health|draft-gloss
+I feel very weak.	Me [feel] balli kamzor.	seed:health|draft-gloss
+I cannot sleep at night.	Me sakta wadgalta raat nai.	seed:health|draft-gloss
+I hurt my hand.	Me dukhta moje hath.	seed:health|draft-gloss
+He fell and hurt his knee.	To [fell] ani dukhta teje guddo.	seed:health|draft-gloss
+There is blood on your shirt.	tari khoon tuje shirt.	seed:health|draft-gloss
+Wash the wound with clean water.	dhuta zakham sarin saaf paani.	seed:health|draft-gloss
+Are you feeling better now?	Tu [feeling] [better] etta?	seed:health|draft-gloss
+I am feeling much better today.	Me [feeling] balli [better] aas.	seed:health|draft-gloss
+You should see a doctor.	Tu karyaw palta daktar.	seed:health|draft-gloss
+Let us go to the hospital.	[let] Amka wata hospital.	seed:health|draft-gloss
+The doctor is not here today.	daktar yari aas nai.	seed:health|draft-gloss
+The doctor gave me some medicine.	daktar dele Maka zarra guliyo.	seed:health|draft-gloss
+Take this medicine twice a day.	ghenta He guliyo [twice] dis.	seed:health|draft-gloss
+Take one tablet after eating.	ghenta ek guli mag khate wate.	seed:health|draft-gloss
+Drink plenty of water.	peta [plenty] paani.	seed:health|draft-gloss
+You need to rest.	Tu kaas aaram karta.	seed:health|draft-gloss
+Do not go to work today.	wata kaam karta aas nai.	seed:health|draft-gloss
+The child has a high fever.	chadu uncho taap.	seed:health|draft-gloss
+She is pregnant.	Ti [pregnant].	seed:health|draft-gloss
+My grandfather cannot hear well.	moje azobapa sakta [hear] nikko nai.	seed:health|draft-gloss
+He cannot see without glasses.	To sakta palta natun [glasses] nai.	seed:health|draft-gloss
+Close your eyes.	band karta tuje [eyes].	seed:health|draft-gloss
+Open your mouth.	usauta tuje tond.	seed:health|draft-gloss
+Show me your tongue.	[show] Maka tuje jeeb.	seed:health|draft-gloss
+Raise your hand.	[raise] tuje hath.	seed:health|draft-gloss
+Breathe in slowly.	[breathe] bittar [slowly].	seed:health|draft-gloss
+My heart is beating fast.	moje dil [beating] tez.	seed:health|draft-gloss
+My back is aching.	moje peeth [aching].	seed:health|draft-gloss
+My eyes are red.	moje [eyes] lal.	seed:health|draft-gloss
+Wash your face.	dhuta tuje muha.	seed:health|draft-gloss
+Brush your teeth twice a day.	[brush] tuje [teeth] [twice] dis.	seed:health|draft-gloss
+Cut your nails.	[cut] tuje naakh.	seed:health|draft-gloss
+Comb your hair.	[comb] tuje kes.	seed:health|draft-gloss
+The baby has a rash on the skin.	chadu [rash] chaam.	seed:health|draft-gloss
+I am allergic to some foods.	Me [allergic] zarra khau.	seed:health|draft-gloss
+He has diabetes.	To sakhar bimaari.	seed:health|draft-gloss
+Where does it hurt?	khe He dukhta?	seed:health|draft-gloss
+It hurts here.	He dukhta yari.	seed:health|draft-gloss
+It does not hurt any more.	He dukhta [any] zyada nai.	seed:health|draft-gloss
+She is recovering slowly.	Ti [recovering] [slowly].	seed:health|draft-gloss
+I need to buy medicine from the shop.	Me kaas hadta guliyo cho angdi.	seed:health|draft-gloss
+Health is more important than money.	[health] zyada [important] dud.	seed:health|draft-gloss
 # ===== Feelings =====
-I am happy.		seed:feelings
-I am very sad today.		seed:feelings
-She is angry with me.		seed:feelings
-Do not be angry.		seed:feelings
-He is afraid of the dark.		seed:feelings
-I am not afraid.		seed:feelings
-I am tired.		seed:feelings
-I am worried about my mother.		seed:feelings
-Do not worry.		seed:feelings
-We are very proud of you.		seed:feelings
-I am surprised to see you here.		seed:feelings
-He was very shy.		seed:feelings
-She is lonely in the new city.		seed:feelings
-I feel sleepy.		seed:feelings
-I feel like crying.		seed:feelings
-The children are excited.		seed:feelings
-I am sorry for your loss.		seed:feelings
-He is jealous of his friend.		seed:feelings
-I love my country.		seed:feelings
-I like this place very much.		seed:feelings
-I do not like this.		seed:feelings
-I hate waiting.		seed:feelings
-She laughs a lot.		seed:feelings
-He cried when he heard the news.		seed:feelings
-Why are you smiling?		seed:feelings
-I am bored.		seed:feelings
-It made me very happy.		seed:feelings
-I feel ashamed.		seed:feelings
-He is very brave.		seed:feelings
-She is always calm.		seed:feelings
-I am sure about it.		seed:feelings
-I am not sure.		seed:feelings
-I forgot my keys.		seed:feelings
-I remember that day well.		seed:feelings
+I am happy.	Me khush.	seed:feelings|draft-gloss
+I am very sad today.	Me balli udaas aas.	seed:feelings|draft-gloss
+She is angry with me.	Ti gussa sarin Maka.	seed:feelings|draft-gloss
+Do not be angry.	gussa nai.	seed:feelings|draft-gloss
+He is afraid of the dark.	To daralo andhar.	seed:feelings|draft-gloss
+I am not afraid.	Me daralo nai.	seed:feelings|draft-gloss
+I am tired.	Me thakelo.	seed:feelings|draft-gloss
+I am worried about my mother.	Me [worried] moje mama.	seed:feelings|draft-gloss
+Do not worry.	[worry] nai.	seed:feelings|draft-gloss
+We are very proud of you.	Ami balli [proud] Tu.	seed:feelings|draft-gloss
+I am surprised to see you here.	Me [surprised] palta Tu yari.	seed:feelings|draft-gloss
+He was very shy.	To balli [shy].	seed:feelings|draft-gloss
+She is lonely in the new city.	Ti [lonely] bittar nawo sheher.	seed:feelings|draft-gloss
+I feel sleepy.	Me [feel] [sleepy].	seed:feelings|draft-gloss
+I feel like crying.	Me [feel] radte wate.	seed:feelings|draft-gloss
+The children are excited.	chadwe khush.	seed:feelings|draft-gloss
+I am sorry for your loss.	Me [sorry] tuje [loss].	seed:feelings|draft-gloss
+He is jealous of his friend.	To [jealous] teje dost.	seed:feelings|draft-gloss
+I love my country.	Me [love] moje [country].	seed:feelings|draft-gloss
+I like this place very much.	Me He [place] balli balli.	seed:feelings|draft-gloss
+I do not like this.	Me He nai.	seed:feelings|draft-gloss
+I hate waiting.	Me [hate] ube rate wate.	seed:feelings|draft-gloss
+She laughs a lot.	Ti [laughs] bhouat.	seed:feelings|draft-gloss
+He cried when he heard the news.	To [cried] ketta To ballo [news].	seed:feelings|draft-gloss
+Why are you smiling?	kheka Tu [smiling]?	seed:feelings|draft-gloss
+I am bored.	Me [bored].	seed:feelings|draft-gloss
+It made me very happy.	He [made] Maka balli khush.	seed:feelings|draft-gloss
+I feel ashamed.	Me [feel] [ashamed].	seed:feelings|draft-gloss
+He is very brave.	To balli [brave].	seed:feelings|draft-gloss
+She is always calm.	Ti hameshaa [calm].	seed:feelings|draft-gloss
+I am sure about it.	Me [sure] He.	seed:feelings|draft-gloss
+I am not sure.	Me [sure] nai.	seed:feelings|draft-gloss
+I forgot my keys.	Me visarlo moje [keys].	seed:feelings|draft-gloss
+I remember that day well.	Me [remember] Te dis nikko.	seed:feelings|draft-gloss
 # ===== Market and shopping =====
-Where is the market?		seed:market
-The market is far from here.		seed:market
-I am going to the shop.		seed:market
-What do you want to buy?		seed:market
-I want to buy some vegetables.		seed:market
-How much is one kilo of tomatoes?		seed:market
-That is too expensive.		seed:market
-Give me a discount.		seed:market
-I will take two kilos.		seed:market
-Please weigh it again.		seed:market
-Give me a bag.		seed:market
-Do you have smaller ones?		seed:market
-Show me another one.		seed:market
-Do you have this in a bigger size?		seed:market
-This shirt is too small.		seed:market
-The shoes are too tight.		seed:market
-I like this colour.		seed:market
-I do not like this cloth.		seed:market
-Can I try it on?		seed:market
-I will buy it.		seed:market
-I will not buy it.		seed:market
-What is the last price?		seed:market
-Here is your money.		seed:market
-Keep the change.		seed:market
-Please give me the bill.		seed:market
-The shop is closed today.		seed:market
-The vegetables are not fresh.		seed:market
-The fruit is rotten.		seed:market
-These apples are very good.		seed:market
-I want oil, sugar and salt.		seed:market
-Buy some rice and lentils.		seed:market
-Bring milk from the shop.		seed:market
-Go and buy bread.		seed:market
-The shopkeeper is my friend.		seed:market
-There is a lot of crowd in the market.		seed:market
-He sells clothes at the market.		seed:market
-She sells flowers near the mosque.		seed:market
-Everything is expensive these days.		seed:market
-Prices are going up.		seed:market
-I do not have enough money.		seed:market
-Can you lend me some money?		seed:market
-I will pay you tomorrow.		seed:market
-This is a good bargain.		seed:market
-He cheated me.		seed:market
-The scale is wrong.		seed:market
-The fresh vegetables come in the morning.		seed:market
-Please pack it well.		seed:market
-Send it to my house.		seed:market
-I will pay by phone.		seed:market
-Is there a bank nearby?		seed:market
+Where is the market?	khe angdi?	seed:market|draft-gloss
+The market is far from here.	angdi dur cho yari.	seed:market|draft-gloss
+I am going to the shop.	Me waste wate angdi.	seed:market|draft-gloss
+What do you want to buy?	kaa Tu kaas hadta?	seed:market|draft-gloss
+I want to buy some vegetables.	Me kaas hadta zarra bhaji.	seed:market|draft-gloss
+How much is one kilo of tomatoes?	kishi balli ek kilo [tomatoes]?	seed:market|draft-gloss
+That is too expensive.	Te balli mahag.	seed:market|draft-gloss
+Give me a discount.	deta Maka [discount].	seed:market|draft-gloss
+I will take two kilos.	Me ghenta don kilo.	seed:market|draft-gloss
+Please weigh it again.	zarra [weigh] He [again].	seed:market|draft-gloss
+Give me a bag.	deta Maka postan.	seed:market|draft-gloss
+Do you have smaller ones?	Tu [smaller] [ones]?	seed:market|draft-gloss
+Show me another one.	[show] Maka [another] ek.	seed:market|draft-gloss
+Do you have this in a bigger size?	Tu He bittar [bigger] [size]?	seed:market|draft-gloss
+This shirt is too small.	He shirt balli dhaklo.	seed:market|draft-gloss
+The shoes are too tight.	[shoes] balli [tight].	seed:market|draft-gloss
+I like this colour.	Me He rang.	seed:market|draft-gloss
+I do not like this cloth.	Me He [cloth] nai.	seed:market|draft-gloss
+Can I try it on?	sakta Me [try] He?	seed:market|draft-gloss
+I will buy it.	Me hadta He.	seed:market|draft-gloss
+I will not buy it.	Me hadta He nai.	seed:market|draft-gloss
+What is the last price?	kaa gelle keemat?	seed:market|draft-gloss
+Here is your money.	yari tuje dud.	seed:market|draft-gloss
+Keep the change.	[keep] [change].	seed:market|draft-gloss
+Please give me the bill.	zarra deta Maka [bill].	seed:market|draft-gloss
+The shop is closed today.	angdi band aas.	seed:market|draft-gloss
+The vegetables are not fresh.	bhaji taza nai.	seed:market|draft-gloss
+The fruit is rotten.	[fruit] [rotten].	seed:market|draft-gloss
+These apples are very good.	Hen [apples] balli nikko.	seed:market|draft-gloss
+I want oil, sugar and salt.	Me kaas [oil], sakhar ani mith.	seed:market|draft-gloss
+Buy some rice and lentils.	hadta zarra chawal ani [lentils].	seed:market|draft-gloss
+Bring milk from the shop.	hadta dudh cho angdi.	seed:market|draft-gloss
+Go and buy bread.	wata ani hadta roti.	seed:market|draft-gloss
+The shopkeeper is my friend.	[shopkeeper] moje dost.	seed:market|draft-gloss
+There is a lot of crowd in the market.	tari bhouat [crowd] bittar angdi.	seed:market|draft-gloss
+He sells clothes at the market.	To wikta kapde angdi.	seed:market|draft-gloss
+She sells flowers near the mosque.	Ti wikta phul bagla mizgat.	seed:market|draft-gloss
+Everything is expensive these days.	sammu mahag Hen dis.	seed:market|draft-gloss
+Prices are going up.	keemat waste wate.	seed:market|draft-gloss
+I do not have enough money.	Me [enough] dud nai.	seed:market|draft-gloss
+Can you lend me some money?	sakta Tu [lend] Maka zarra dud?	seed:market|draft-gloss
+I will pay you tomorrow.	Me [pay] Tu fausai.	seed:market|draft-gloss
+This is a good bargain.	He nikko [bargain].	seed:market|draft-gloss
+He cheated me.	To [cheated] Maka.	seed:market|draft-gloss
+The scale is wrong.	[scale] [wrong].	seed:market|draft-gloss
+The fresh vegetables come in the morning.	taza bhaji yeta bittar sakan.	seed:market|draft-gloss
+Please pack it well.	zarra [pack] He nikko.	seed:market|draft-gloss
+Send it to my house.	fetauta He moje ghar.	seed:market|draft-gloss
+I will pay by phone.	Me [pay] phone.	seed:market|draft-gloss
+Is there a bank nearby?	tari [bank] [nearby]?	seed:market|draft-gloss
 # ===== Travel and directions =====
-Where are you going?		seed:travel
-I am going to Mangalore.		seed:travel
-I want to go to the bus stand.		seed:travel
-How do I get to the station?		seed:travel
-Which way is the hospital?		seed:travel
-Go straight.		seed:travel
-Turn left at the corner.		seed:travel
-Turn right after the bridge.		seed:travel
-It is near the mosque.		seed:travel
-It is not far from here.		seed:travel
-It is about two kilometres.		seed:travel
-It takes ten minutes to walk.		seed:travel
-Stop here.		seed:travel
-Please stop the bus.		seed:travel
-When does the next bus leave?		seed:travel
-The bus is late.		seed:travel
-The bus is full.		seed:travel
-Where can I buy a ticket?		seed:travel
-One ticket to Udupi, please.		seed:travel
-How much is the fare?		seed:travel
-Take an auto-rickshaw.		seed:travel
-The road is very bad.		seed:travel
-There is a lot of traffic.		seed:travel
-Drive slowly.		seed:travel
-He drives very fast.		seed:travel
-I lost my way.		seed:travel
-Can you show me the way?		seed:travel
-Follow me.		seed:travel
-Wait here for me.		seed:travel
-The train arrives at noon.		seed:travel
-The train has already left.		seed:travel
-We are going by train.		seed:travel
-He came by bike.		seed:travel
-I walked to school.		seed:travel
-The bridge is broken.		seed:travel
-Cross the road carefully.		seed:travel
-Look both ways before crossing.		seed:travel
-The petrol pump is ahead.		seed:travel
-The car broke down on the road.		seed:travel
-We reached at night.		seed:travel
-It was a long journey.		seed:travel
-I am tired after the trip.		seed:travel
-Where is your luggage?		seed:travel
-Take your bag.		seed:travel
-He is travelling abroad next week.		seed:travel
-My flight is at ten.		seed:travel
-Give me a lift to town.		seed:travel
-Which bus goes to Kumta?		seed:travel
-Get down at the next stop.		seed:travel
-Please wake me up at the last stop.		seed:travel
+Where are you going?	khe Tu waste wate?	seed:travel|draft-gloss
+I am going to Mangalore.	Me waste wate [mangalore].	seed:travel|draft-gloss
+I want to go to the bus stand.	Me kaas wata bus [stand].	seed:travel|draft-gloss
+How do I get to the station?	kishi Me [get] [station]?	seed:travel|draft-gloss
+Which way is the hospital?	konte waat hospital?	seed:travel|draft-gloss
+Go straight.	wata [straight].	seed:travel|draft-gloss
+Turn left at the corner.	[turn] davo [corner].	seed:travel|draft-gloss
+Turn right after the bridge.	[turn] ujwo mag pul.	seed:travel|draft-gloss
+It is near the mosque.	He bagla mizgat.	seed:travel|draft-gloss
+It is not far from here.	He dur cho yari nai.	seed:travel|draft-gloss
+It is about two kilometres.	He don [kilometres].	seed:travel|draft-gloss
+It takes ten minutes to walk.	He ghenta dha minute chalta.	seed:travel|draft-gloss
+Stop here.	band karta yari.	seed:travel|draft-gloss
+Please stop the bus.	zarra band karta bus.	seed:travel|draft-gloss
+When does the next bus leave?	ketta yauche bus sodta?	seed:travel|draft-gloss
+The bus is late.	bus modi.	seed:travel|draft-gloss
+The bus is full.	bus bhardo.	seed:travel|draft-gloss
+Where can I buy a ticket?	khe sakta Me hadta ticket?	seed:travel|draft-gloss
+One ticket to Udupi, please.	ek ticket [udupi], zarra.	seed:travel|draft-gloss
+How much is the fare?	kishi balli keemat?	seed:travel|draft-gloss
+Take an auto-rickshaw.	ghenta [auto] [rickshaw].	seed:travel|draft-gloss
+The road is very bad.	waat balli kharaab.	seed:travel|draft-gloss
+There is a lot of traffic.	tari bhouat [traffic].	seed:travel|draft-gloss
+Drive slowly.	chalauta [slowly].	seed:travel|draft-gloss
+He drives very fast.	To chalauta balli tez.	seed:travel|draft-gloss
+I lost my way.	Me [lost] moje waat.	seed:travel|draft-gloss
+Can you show me the way?	sakta Tu [show] Maka waat?	seed:travel|draft-gloss
+Follow me.	[follow] Maka.	seed:travel|draft-gloss
+Wait here for me.	ube rata yari Maka.	seed:travel|draft-gloss
+The train arrives at noon.	train [arrives] [noon].	seed:travel|draft-gloss
+The train has already left.	train [already] davo.	seed:travel|draft-gloss
+We are going by train.	Ami waste wate train.	seed:travel|draft-gloss
+He came by bike.	To ailo [bike].	seed:travel|draft-gloss
+I walked to school.	Me challo shaala.	seed:travel|draft-gloss
+The bridge is broken.	pul [broken].	seed:travel|draft-gloss
+Cross the road carefully.	[cross] waat [carefully].	seed:travel|draft-gloss
+Look both ways before crossing.	[look] [both] [ways] fude [crossing].	seed:travel|draft-gloss
+The petrol pump is ahead.	petrol [pump] [ahead].	seed:travel|draft-gloss
+The car broke down on the road.	gaadi [broke] waat.	seed:travel|draft-gloss
+We reached at night.	Ami [reached] raat.	seed:travel|draft-gloss
+It was a long journey.	He deeg [journey].	seed:travel|draft-gloss
+I am tired after the trip.	Me thakelo mag safar.	seed:travel|draft-gloss
+Where is your luggage?	khe tuje [luggage]?	seed:travel|draft-gloss
+Take your bag.	ghenta tuje postan.	seed:travel|draft-gloss
+He is travelling abroad next week.	To [travelling] pardes yauche hafta.	seed:travel|draft-gloss
+My flight is at ten.	moje [flight] dha.	seed:travel|draft-gloss
+Give me a lift to town.	deta Maka [lift] gaaw.	seed:travel|draft-gloss
+Which bus goes to Kumta?	konte bus wata [kumta]?	seed:travel|draft-gloss
+Get down at the next stop.	[get] yauche band karta.	seed:travel|draft-gloss
+Please wake me up at the last stop.	zarra [wake] Maka gelle band karta.	seed:travel|draft-gloss
 # ===== Weather and seasons =====
-The weather is nice today.		seed:weather
-It is very hot today.		seed:weather
-It is cold in the morning.		seed:weather
-It is raining.		seed:weather
-It rained all night.		seed:weather
-The rain has stopped.		seed:weather
-It rains heavily in the monsoon.		seed:weather
-The sky is full of dark clouds.		seed:weather
-The wind is strong.		seed:weather
-There is a storm coming.		seed:weather
-The sea is rough today.		seed:weather
-The sun is very strong.		seed:weather
-It is humid.		seed:weather
-Take an umbrella with you.		seed:weather
-The road is full of water.		seed:weather
-The river is flooding.		seed:weather
-The rainy season starts in June.		seed:weather
-Summer is very hot here.		seed:weather
-Winter is not cold on the coast.		seed:weather
-The weather changes quickly.		seed:weather
-Lightning struck the tree.		seed:weather
-I heard thunder.		seed:weather
-The fog is thick this morning.		seed:weather
-It will rain tomorrow.		seed:weather
-It did not rain this year.		seed:weather
-The clothes are still wet.		seed:weather
-The clothes dried quickly in the sun.		seed:weather
-The moon is bright tonight.		seed:weather
-The stars are visible tonight.		seed:weather
-The evening breeze is pleasant.		seed:weather
+The weather is nice today.	[weather] [nice] aas.	seed:weather|draft-gloss
+It is very hot today.	He balli garam aas.	seed:weather|draft-gloss
+It is cold in the morning.	He thand bittar sakan.	seed:weather|draft-gloss
+It is raining.	He paus padte wate.	seed:weather|draft-gloss
+It rained all night.	He paus padlo sammu raat.	seed:weather|draft-gloss
+The rain has stopped.	paus padta band kailo.	seed:weather|draft-gloss
+It rains heavily in the monsoon.	He paus padta [heavily] bittar [monsoon].	seed:weather|draft-gloss
+The sky is full of dark clouds.	akaash bhardo andhar dhaga.	seed:weather|draft-gloss
+The wind is strong.	waaro mazbut.	seed:weather|draft-gloss
+There is a storm coming.	tari toofaan yete wate.	seed:weather|draft-gloss
+The sea is rough today.	darya [rough] aas.	seed:weather|draft-gloss
+The sun is very strong.	suraj balli mazbut.	seed:weather|draft-gloss
+It is humid.	He [humid].	seed:weather|draft-gloss
+Take an umbrella with you.	ghenta [umbrella] sarin Tu.	seed:weather|draft-gloss
+The road is full of water.	waat bhardo paani.	seed:weather|draft-gloss
+The river is flooding.	nadi [flooding].	seed:weather|draft-gloss
+The rainy season starts in June.	[rainy] [season] [starts] bittar June.	seed:weather|draft-gloss
+Summer is very hot here.	[summer] balli garam yari.	seed:weather|draft-gloss
+Winter is not cold on the coast.	[winter] thand [coast] nai.	seed:weather|draft-gloss
+The weather changes quickly.	[weather] [changes] [quickly].	seed:weather|draft-gloss
+Lightning struck the tree.	[lightning] [struck] zhaad.	seed:weather|draft-gloss
+I heard thunder.	Me ballo [thunder].	seed:weather|draft-gloss
+The fog is thick this morning.	[fog] [thick] He sakan.	seed:weather|draft-gloss
+It will rain tomorrow.	He paus padta fausai.	seed:weather|draft-gloss
+It did not rain this year.	He paus padta He warsa nai.	seed:weather|draft-gloss
+The clothes are still wet.	kapde [still] olo.	seed:weather|draft-gloss
+The clothes dried quickly in the sun.	kapde [dried] [quickly] bittar suraj.	seed:weather|draft-gloss
+The moon is bright tonight.	chand [bright] rati.	seed:weather|draft-gloss
+The stars are visible tonight.	[stars] [visible] rati.	seed:weather|draft-gloss
+The evening breeze is pleasant.	timpar [breeze] [pleasant].	seed:weather|draft-gloss
 # ===== The sea and fishing =====
-The sea is very big.		seed:sea
-The waves are high today.		seed:sea
-The fishermen go out at night.		seed:sea
-He goes fishing every morning.		seed:sea
-Our boat is old but strong.		seed:sea
-The boat has a small engine.		seed:sea
-They caught a lot of fish today.		seed:sea
-The fish are sold at the harbour.		seed:sea
-We sell fresh fish in the market.		seed:sea
-The price of fish is high.		seed:sea
-The fishing net is torn.		seed:sea
-He is mending the net.		seed:sea
-It is dangerous to go out in the storm.		seed:sea
-The boat returned safely.		seed:sea
-Wait for the boat at the beach.		seed:sea
-The children are playing on the sand.		seed:sea
-Do not swim in the deep water.		seed:sea
-The water is salty.		seed:sea
-He can swim very well.		seed:sea
-She is afraid of the sea.		seed:sea
-The tide is coming in.		seed:sea
-The tide is going out.		seed:sea
-The sun is setting over the sea.		seed:sea
-There are many boats in the harbour.		seed:sea
-The ship carries goods to other countries.		seed:sea
-My uncle was a sailor.		seed:sea
-He learned fishing from his father.		seed:sea
-We do not go to sea during the monsoon.		seed:sea
-The fishermen are back.		seed:sea
-Buy the biggest fish.		seed:sea
-We caught sardines and mackerel.		seed:sea
-I want half a kilo of prawns.		seed:sea
-The crab is still alive.		seed:sea
-Clean the fish well.		seed:sea
-Dry the fish in the sun.		seed:sea
-The port is very busy in the morning.		seed:sea
-Many people from our town work on ships.		seed:sea
-The lighthouse is on the hill.		seed:sea
-The coast is beautiful.		seed:sea
-There is a strong current here.		seed:sea
-Life jackets are kept in the boat.		seed:sea
-The engine has stopped.		seed:sea
-We need more fuel.		seed:sea
-The waves washed the boat ashore.		seed:sea
+The sea is very big.	darya balli wadlo.	seed:sea|draft-gloss
+The waves are high today.	leher uncho aas.	seed:sea|draft-gloss
+The fishermen go out at night.	[fishermen] wata raat.	seed:sea|draft-gloss
+He goes fishing every morning.	To wata [fishing] har sakan.	seed:sea|draft-gloss
+Our boat is old but strong.	amche samku purano pan mazbut.	seed:sea|draft-gloss
+The boat has a small engine.	samku dhaklo [engine].	seed:sea|draft-gloss
+They caught a lot of fish today.	Ten [caught] bhouat meen aas.	seed:sea|draft-gloss
+The fish are sold at the harbour.	meen [sold] [harbour].	seed:sea|draft-gloss
+We sell fresh fish in the market.	Ami wikta taza meen bittar angdi.	seed:sea|draft-gloss
+The price of fish is high.	keemat meen uncho.	seed:sea|draft-gloss
+The fishing net is torn.	[fishing] jaal [torn].	seed:sea|draft-gloss
+He is mending the net.	To [mending] jaal.	seed:sea|draft-gloss
+It is dangerous to go out in the storm.	He [dangerous] wata bittar toofaan.	seed:sea|draft-gloss
+The boat returned safely.	samku [returned] [safely].	seed:sea|draft-gloss
+Wait for the boat at the beach.	ube rata samku kaath.	seed:sea|draft-gloss
+The children are playing on the sand.	chadwe khelte wate [sand].	seed:sea|draft-gloss
+Do not swim in the deep water.	pauta bittar [deep] paani nai.	seed:sea|draft-gloss
+The water is salty.	paani [salty].	seed:sea|draft-gloss
+He can swim very well.	To sakta pauta balli nikko.	seed:sea|draft-gloss
+She is afraid of the sea.	Ti daralo darya.	seed:sea|draft-gloss
+The tide is coming in.	bhaar-oat yete wate bittar.	seed:sea|draft-gloss
+The tide is going out.	bhaar-oat waste wate.	seed:sea|draft-gloss
+The sun is setting over the sea.	suraj [setting] [over] darya.	seed:sea|draft-gloss
+There are many boats in the harbour.	tari bhouat samku bittar [harbour].	seed:sea|draft-gloss
+The ship carries goods to other countries.	[ship] [carries] nikko [other] [countries].	seed:sea|draft-gloss
+My uncle was a sailor.	moje malaika [sailor].	seed:sea|draft-gloss
+He learned fishing from his father.	To shiklo [fishing] cho teje bapa.	seed:sea|draft-gloss
+We do not go to sea during the monsoon.	Ami wata darya [during] [monsoon] nai.	seed:sea|draft-gloss
+The fishermen are back.	[fishermen] peeth.	seed:sea|draft-gloss
+Buy the biggest fish.	hadta [biggest] meen.	seed:sea|draft-gloss
+We caught sardines and mackerel.	Ami [caught] [sardines] ani [mackerel].	seed:sea|draft-gloss
+I want half a kilo of prawns.	Me kaas aadho kilo [prawns].	seed:sea|draft-gloss
+The crab is still alive.	[crab] [still] [alive].	seed:sea|draft-gloss
+Clean the fish well.	saaf meen nikko.	seed:sea|draft-gloss
+Dry the fish in the sun.	sukko meen bittar suraj.	seed:sea|draft-gloss
+The port is very busy in the morning.	[port] balli masroof bittar sakan.	seed:sea|draft-gloss
+Many people from our town work on ships.	bhouat manshe cho amche gaaw kaam karta [ships].	seed:sea|draft-gloss
+The lighthouse is on the hill.	[lighthouse] tekdi.	seed:sea|draft-gloss
+The coast is beautiful.	[coast] sundar.	seed:sea|draft-gloss
+There is a strong current here.	tari mazbut [current] yari.	seed:sea|draft-gloss
+Life jackets are kept in the boat.	[life] [jackets] [kept] bittar samku.	seed:sea|draft-gloss
+The engine has stopped.	[engine] band kailo.	seed:sea|draft-gloss
+We need more fuel.	Ami kaas zyada [fuel].	seed:sea|draft-gloss
+The waves washed the boat ashore.	leher dhulo samku [ashore].	seed:sea|draft-gloss
 # ===== Work and business =====
-What work do you do?		seed:work
-I work at a factory.		seed:work
-He has a small business.		seed:work
-My father owns a shop.		seed:work
-I work in the Gulf.		seed:work
-He goes to work by bus.		seed:work
-When do you finish work?		seed:work
-I finish work at six.		seed:work
-I am very busy today.		seed:work
-I have a lot of work.		seed:work
-Do not disturb me now.		seed:work
-We work six days a week.		seed:work
-He got a new job.		seed:work
-She lost her job.		seed:work
-I am looking for work.		seed:work
-The salary is low.		seed:work
-The boss is not in the office today.		seed:work
-We have a meeting at ten.		seed:work
-Please send me the letter.		seed:work
-Sign here.		seed:work
-I need a day off.		seed:work
-He is on leave.		seed:work
-The work is finished.		seed:work
-The work is not finished yet.		seed:work
-We will complete it tomorrow.		seed:work
-Help me with this work.		seed:work
-He is a hard worker.		seed:work
-She is a driver.		seed:work
-He is a carpenter.		seed:work
-My uncle is a tailor.		seed:work
-He repairs mobile phones.		seed:work
-I sell vegetables.		seed:work
-The company is hiring people.		seed:work
-Business is slow these days.		seed:work
-Business is very good this month.		seed:work
-He earns a good income.		seed:work
-We need to save some money.		seed:work
-He sent money home from abroad.		seed:work
-The contract is for two years.		seed:work
-Everyone must work together.		seed:work
+What work do you do?	kaa kaam karta Tu?	seed:work|draft-gloss
+I work at a factory.	Me kaam karta [factory].	seed:work|draft-gloss
+He has a small business.	To dhaklo dhanda.	seed:work|draft-gloss
+My father owns a shop.	moje bapa [owns] angdi.	seed:work|draft-gloss
+I work in the Gulf.	Me kaam karta bittar [gulf].	seed:work|draft-gloss
+He goes to work by bus.	To wata kaam karta bus.	seed:work|draft-gloss
+When do you finish work?	ketta Tu khatam karta kaam karta?	seed:work|draft-gloss
+I finish work at six.	Me khatam karta kaam karta cha.	seed:work|draft-gloss
+I am very busy today.	Me balli masroof aas.	seed:work|draft-gloss
+I have a lot of work.	Me bhouat kaam karta.	seed:work|draft-gloss
+Do not disturb me now.	[disturb] Maka etta nai.	seed:work|draft-gloss
+We work six days a week.	Ami kaam karta cha dis hafta.	seed:work|draft-gloss
+He got a new job.	To ghetlo nawo naukri.	seed:work|draft-gloss
+She lost her job.	Ti [lost] teji naukri.	seed:work|draft-gloss
+I am looking for work.	Me [looking] kaam karta.	seed:work|draft-gloss
+The salary is low.	pagaar khali.	seed:work|draft-gloss
+The boss is not in the office today.	[boss] bittar [office] aas nai.	seed:work|draft-gloss
+We have a meeting at ten.	Ami [meeting] dha.	seed:work|draft-gloss
+Please send me the letter.	zarra fetauta Maka chitthi.	seed:work|draft-gloss
+Sign here.	[sign] yari.	seed:work|draft-gloss
+I need a day off.	Me kaas dis [off].	seed:work|draft-gloss
+He is on leave.	To sodta.	seed:work|draft-gloss
+The work is finished.	kaam karta khatam kailo.	seed:work|draft-gloss
+The work is not finished yet.	kaam karta khatam kailo [yet] nai.	seed:work|draft-gloss
+We will complete it tomorrow.	Ami [complete] He fausai.	seed:work|draft-gloss
+Help me with this work.	madad karta Maka sarin He kaam karta.	seed:work|draft-gloss
+He is a hard worker.	To mushkil [worker].	seed:work|draft-gloss
+She is a driver.	Ti [driver].	seed:work|draft-gloss
+He is a carpenter.	To [carpenter].	seed:work|draft-gloss
+My uncle is a tailor.	moje malaika [tailor].	seed:work|draft-gloss
+He repairs mobile phones.	To [repairs] [mobile] phone.	seed:work|draft-gloss
+I sell vegetables.	Me wikta bhaji.	seed:work|draft-gloss
+The company is hiring people.	[company] [hiring] manshe.	seed:work|draft-gloss
+Business is slow these days.	dhanda hallu Hen dis.	seed:work|draft-gloss
+Business is very good this month.	dhanda balli nikko He mahina.	seed:work|draft-gloss
+He earns a good income.	To [earns] nikko [income].	seed:work|draft-gloss
+We need to save some money.	Ami kaas [save] zarra dud.	seed:work|draft-gloss
+He sent money home from abroad.	To [sent] dud ghar cho pardes.	seed:work|draft-gloss
+The contract is for two years.	[contract] don warshe.	seed:work|draft-gloss
+Everyone must work together.	sammu karyaw kaam karta sarin.	seed:work|draft-gloss
 # ===== School and learning =====
-The children go to school.		seed:school
-I go to school every day.		seed:school
-School starts at nine.		seed:school
-The teacher is teaching in the class.		seed:school
-Open your books.		seed:school
-Close your books.		seed:school
-Read this page.		seed:school
-Write your name here.		seed:school
-Listen carefully.		seed:school
-Do you understand?		seed:school
-I do not understand this word.		seed:school
-What does this word mean?		seed:school
-Please repeat the question.		seed:school
-Who knows the answer?		seed:school
-Raise your hand if you know.		seed:school
-The answer is correct.		seed:school
-The answer is wrong.		seed:school
-You have done very well.		seed:school
-He is the best student in the class.		seed:school
-She always comes first.		seed:school
-I failed the exam.		seed:school
-I passed the exam.		seed:school
-The exam is next week.		seed:school
-I must study tonight.		seed:school
-Do your homework.		seed:school
-He forgot his book at home.		seed:school
-The school is closed for holidays.		seed:school
-The teacher is angry.		seed:school
-Please be quiet in the class.		seed:school
-Sit down.		seed:school
-Stand up.		seed:school
-Come to the board.		seed:school
-Write on the board.		seed:school
-We learn Urdu and Arabic at the madrasa.		seed:school
-He studies engineering.		seed:school
-She wants to become a doctor.		seed:school
-I want to study abroad.		seed:school
-The college fees are high.		seed:school
-Education is very important.		seed:school
-Read a book every day.		seed:school
+The children go to school.	chadwe wata shaala.	seed:school|draft-gloss
+I go to school every day.	Me wata shaala har dis.	seed:school|draft-gloss
+School starts at nine.	shaala [starts] nau.	seed:school|draft-gloss
+The teacher is teaching in the class.	ustad [teaching] bittar class.	seed:school|draft-gloss
+Open your books.	usauta tuje kitab.	seed:school|draft-gloss
+Close your books.	band karta tuje kitab.	seed:school|draft-gloss
+Read this page.	padta He [page].	seed:school|draft-gloss
+Write your name here.	lehta tuje naw yari.	seed:school|draft-gloss
+Listen carefully.	[listen] [carefully].	seed:school|draft-gloss
+Do you understand?	Tu walkhata?	seed:school|draft-gloss
+I do not understand this word.	Me walkhata He [word] nai.	seed:school|draft-gloss
+What does this word mean?	kaa He [word] [mean]?	seed:school|draft-gloss
+Please repeat the question.	zarra [repeat] [question].	seed:school|draft-gloss
+Who knows the answer?	kon walkhata [answer]?	seed:school|draft-gloss
+Raise your hand if you know.	[raise] tuje hath agar Tu walkhata.	seed:school|draft-gloss
+The answer is correct.	[answer] [correct].	seed:school|draft-gloss
+The answer is wrong.	[answer] [wrong].	seed:school|draft-gloss
+You have done very well.	Tu [done] balli nikko.	seed:school|draft-gloss
+He is the best student in the class.	To [best] shagird bittar class.	seed:school|draft-gloss
+She always comes first.	Ti hameshaa yeta pailo.	seed:school|draft-gloss
+I failed the exam.	Me [failed] imtihaan.	seed:school|draft-gloss
+I passed the exam.	Me [passed] imtihaan.	seed:school|draft-gloss
+The exam is next week.	imtihaan yauche hafta.	seed:school|draft-gloss
+I must study tonight.	Me karyaw padta rati.	seed:school|draft-gloss
+Do your homework.	tuje [homework].	seed:school|draft-gloss
+He forgot his book at home.	To visarlo teje kitab ghar.	seed:school|draft-gloss
+The school is closed for holidays.	shaala band [holidays].	seed:school|draft-gloss
+The teacher is angry.	ustad gussa.	seed:school|draft-gloss
+Please be quiet in the class.	zarra [quiet] bittar class.	seed:school|draft-gloss
+Sit down.	[sit].	seed:school|draft-gloss
+Stand up.	[stand].	seed:school|draft-gloss
+Come to the board.	yeta [board].	seed:school|draft-gloss
+Write on the board.	lehta [board].	seed:school|draft-gloss
+We learn Urdu and Arabic at the madrasa.	Ami shikta [urdu] ani [arabic] [madrasa].	seed:school|draft-gloss
+He studies engineering.	To [studies] [engineering].	seed:school|draft-gloss
+She wants to become a doctor.	Ti kaas zata daktar.	seed:school|draft-gloss
+I want to study abroad.	Me kaas padta pardes.	seed:school|draft-gloss
+The college fees are high.	[college] [fees] uncho.	seed:school|draft-gloss
+Education is very important.	[education] balli [important].	seed:school|draft-gloss
+Read a book every day.	padta kitab har dis.	seed:school|draft-gloss
 # ===== Mosque, prayer and festivals =====
-It is time for prayer.		seed:faith
-Let us go to the mosque.		seed:faith
-The call to prayer is heard from the mosque.		seed:faith
-I pray five times a day.		seed:faith
-We pray together on Friday.		seed:faith
-Wash before you pray.		seed:faith
-The mosque is clean and quiet.		seed:faith
-He reads the Quran every morning.		seed:faith
-God is great.		seed:faith
-Thank God.		seed:faith
-If God wills, I will come.		seed:faith
-May God bless you.		seed:faith
-May God forgive us.		seed:faith
-Pray for me.		seed:faith
-Ramadan is the month of fasting.		seed:faith
-We fast from dawn to sunset.		seed:faith
-I am fasting today.		seed:faith
-We break the fast with dates and water.		seed:faith
-The whole family eats together at sunset.		seed:faith
-Eid is a day of joy.		seed:faith
-We wear new clothes on Eid.		seed:faith
-Children get gifts on Eid.		seed:faith
-We give charity to the poor.		seed:faith
-Visit the sick.		seed:faith
-Help the needy.		seed:faith
-Respect your elders.		seed:faith
-Speak the truth.		seed:faith
-Do not lie.		seed:faith
-Do not steal.		seed:faith
-Be kind to everyone.		seed:faith
-Feed the hungry.		seed:faith
-He went on pilgrimage this year.		seed:faith
-He is coming back from Mecca.		seed:faith
-The scholar gave a talk after prayer.		seed:faith
-The children are learning the Quran.		seed:faith
-Everyone gathered for the funeral prayer.		seed:faith
-The festival is next week.		seed:faith
-We decorated the house for the festival.		seed:faith
-Sweets were shared with the neighbours.		seed:faith
-Let us pray for peace.		seed:faith
+It is time for prayer.	He wakhat namaz.	seed:faith|draft-gloss
+Let us go to the mosque.	[let] Amka wata mizgat.	seed:faith|draft-gloss
+The call to prayer is heard from the mosque.	apauta namaz ballo cho mizgat.	seed:faith|draft-gloss
+I pray five times a day.	Me namaz padta paas wakhat dis.	seed:faith|draft-gloss
+We pray together on Friday.	Ami namaz padta sarin Jumma.	seed:faith|draft-gloss
+Wash before you pray.	dhuta fude Tu namaz padta.	seed:faith|draft-gloss
+The mosque is clean and quiet.	mizgat saaf ani [quiet].	seed:faith|draft-gloss
+He reads the Quran every morning.	To padta Quran har sakan.	seed:faith|draft-gloss
+God is great.	Allah [great].	seed:faith|draft-gloss
+Thank God.	[thank] Allah.	seed:faith|draft-gloss
+If God wills, I will come.	agar Allah [wills], Me yeta.	seed:faith|draft-gloss
+May God bless you.	Allah [bless] Tu.	seed:faith|draft-gloss
+May God forgive us.	Allah [forgive] Amka.	seed:faith|draft-gloss
+Pray for me.	namaz padta Maka.	seed:faith|draft-gloss
+Ramadan is the month of fasting.	Ramzan mahina [fasting].	seed:faith|draft-gloss
+We fast from dawn to sunset.	Ami tez cho [dawn] maghrib.	seed:faith|draft-gloss
+I am fasting today.	Me [fasting] aas.	seed:faith|draft-gloss
+We break the fast with dates and water.	Ami [break] tez sarin khajur ani paani.	seed:faith|draft-gloss
+The whole family eats together at sunset.	[whole] khandan khata sarin maghrib.	seed:faith|draft-gloss
+Eid is a day of joy.	[eid] dis [joy].	seed:faith|draft-gloss
+We wear new clothes on Eid.	Ami [wear] nawo kapde [eid].	seed:faith|draft-gloss
+Children get gifts on Eid.	chadwe [get] tofa [eid].	seed:faith|draft-gloss
+We give charity to the poor.	Ami deta khairaat [poor].	seed:faith|draft-gloss
+Visit the sick.	[visit] bimaar.	seed:faith|draft-gloss
+Help the needy.	madad karta [needy].	seed:faith|draft-gloss
+Respect your elders.	[respect] tuje [elders].	seed:faith|draft-gloss
+Speak the truth.	zapta sachcha.	seed:faith|draft-gloss
+Do not lie.	[lie] nai.	seed:faith|draft-gloss
+Do not steal.	[steal] nai.	seed:faith|draft-gloss
+Be kind to everyone.	[kind] sammu.	seed:faith|draft-gloss
+Feed the hungry.	[feed] bhukelo.	seed:faith|draft-gloss
+He went on pilgrimage this year.	To gelo [pilgrimage] He warsa.	seed:faith|draft-gloss
+He is coming back from Mecca.	To yete wate peeth cho [mecca].	seed:faith|draft-gloss
+The scholar gave a talk after prayer.	[scholar] dele [talk] mag namaz.	seed:faith|draft-gloss
+The children are learning the Quran.	chadwe shikte wate Quran.	seed:faith|draft-gloss
+Everyone gathered for the funeral prayer.	sammu [gathered] [funeral] namaz.	seed:faith|draft-gloss
+The festival is next week.	Eid yauche hafta.	seed:faith|draft-gloss
+We decorated the house for the festival.	Ami [decorated] ghar Eid.	seed:faith|draft-gloss
+Sweets were shared with the neighbours.	gaddo [shared] sarin shejer.	seed:faith|draft-gloss
+Let us pray for peace.	[let] Amka namaz padta [peace].	seed:faith|draft-gloss
 # ===== Weddings and celebrations =====
-There is a wedding in our family.		seed:celebrations
-The wedding is next Sunday.		seed:celebrations
-The bride is wearing a red dress.		seed:celebrations
-The groom is coming with his friends.		seed:celebrations
-Many guests have come.		seed:celebrations
-The food was very good at the wedding.		seed:celebrations
-They are cooking for five hundred people.		seed:celebrations
-We are invited to the wedding.		seed:celebrations
-Congratulations to the new couple.		seed:celebrations
-May you be happy together.		seed:celebrations
-The whole street is decorated with lights.		seed:celebrations
-Women are singing songs.		seed:celebrations
-The children are dancing.		seed:celebrations
-She applied henna on her hands.		seed:celebrations
-He gave a gift to the bride.		seed:celebrations
-The wedding hall is very big.		seed:celebrations
-The couple is going on a trip.		seed:celebrations
-His marriage is fixed for next month.		seed:celebrations
-Her marriage was arranged by the family.		seed:celebrations
-We celebrated his birthday at home.		seed:celebrations
-Happy birthday to you!		seed:celebrations
-The cake was very sweet.		seed:celebrations
-We took many photos.		seed:celebrations
-It was a very happy day.		seed:celebrations
-The party will start at seven.		seed:celebrations
+There is a wedding in our family.	tari parna bittar amche khandan.	seed:celebrations|draft-gloss
+The wedding is next Sunday.	parna yauche Itwaar.	seed:celebrations|draft-gloss
+The bride is wearing a red dress.	dulhan [wearing] lal [dress].	seed:celebrations|draft-gloss
+The groom is coming with his friends.	dulha yete wate sarin teje dost.	seed:celebrations|draft-gloss
+Many guests have come.	bhouat mehman yeta.	seed:celebrations|draft-gloss
+The food was very good at the wedding.	khau balli nikko parna.	seed:celebrations|draft-gloss
+They are cooking for five hundred people.	Ten khau karte wate paas sou manshe.	seed:celebrations|draft-gloss
+We are invited to the wedding.	Ami [invited] parna.	seed:celebrations|draft-gloss
+Congratulations to the new couple.	[congratulations] nawo [couple].	seed:celebrations|draft-gloss
+May you be happy together.	Tu khush sarin.	seed:celebrations|draft-gloss
+The whole street is decorated with lights.	[whole] [street] [decorated] sarin light.	seed:celebrations|draft-gloss
+Women are singing songs.	[women] [singing] gaana.	seed:celebrations|draft-gloss
+The children are dancing.	chadwe [dancing].	seed:celebrations|draft-gloss
+She applied henna on her hands.	Ti [applied] [henna] teji hath.	seed:celebrations|draft-gloss
+He gave a gift to the bride.	To dele tofa dulhan.	seed:celebrations|draft-gloss
+The wedding hall is very big.	parna [hall] balli wadlo.	seed:celebrations|draft-gloss
+The couple is going on a trip.	[couple] waste wate safar.	seed:celebrations|draft-gloss
+His marriage is fixed for next month.	teje parna [fixed] yauche mahina.	seed:celebrations|draft-gloss
+Her marriage was arranged by the family.	teji parna [arranged] khandan.	seed:celebrations|draft-gloss
+We celebrated his birthday at home.	Ami [celebrated] teje birthday ghar.	seed:celebrations|draft-gloss
+Happy birthday to you!	khush birthday Tu!	seed:celebrations|draft-gloss
+The cake was very sweet.	cake balli gaddo.	seed:celebrations|draft-gloss
+We took many photos.	Ami ghetlo bhouat photo.	seed:celebrations|draft-gloss
+It was a very happy day.	He balli khush dis.	seed:celebrations|draft-gloss
+The party will start at seven.	party [start] saat.	seed:celebrations|draft-gloss
 # ===== Village, nature and animals =====
-Our town is by the sea.		seed:nature
-The village is quiet.		seed:nature
-There are many coconut trees.		seed:nature
-The tree has many mangoes.		seed:nature
-The garden is full of flowers.		seed:nature
-The flower smells sweet.		seed:nature
-The river is very clean.		seed:nature
-The hill is covered with green trees.		seed:nature
-The forest is thick.		seed:nature
-The fields are green in the rainy season.		seed:nature
-The farmer is ploughing the field.		seed:nature
-He grows rice and vegetables.		seed:nature
-The cow gives milk.		seed:nature
-The goat is eating grass.		seed:nature
-The hen has laid an egg.		seed:nature
-The dog is running behind the boy.		seed:nature
-The cat caught a mouse.		seed:nature
-A bird is sitting on the tree.		seed:nature
-The crow is making noise.		seed:nature
-The snake went into the bush.		seed:nature
-The elephant is very big.		seed:nature
-The monkey took the banana.		seed:nature
-Do not disturb the animals.		seed:nature
-There are many insects at night.		seed:nature
-Mosquitoes are biting me.		seed:nature
-The buffalo is in the water.		seed:nature
-The horse runs very fast.		seed:nature
-Look at the sky.		seed:nature
-There is a full moon tonight.		seed:nature
-The road goes through the forest.		seed:nature
-The rain made everything green.		seed:nature
-We planted a tree.		seed:nature
-Water the plants every day.		seed:nature
-The leaves are falling.		seed:nature
-The grass is wet.		seed:nature
+Our town is by the sea.	amche gaaw darya.	seed:nature|draft-gloss
+The village is quiet.	gaaw [quiet].	seed:nature|draft-gloss
+There are many coconut trees.	tari bhouat [coconut] zhaad.	seed:nature|draft-gloss
+The tree has many mangoes.	zhaad bhouat [mangoes].	seed:nature|draft-gloss
+The garden is full of flowers.	baag bhardo phul.	seed:nature|draft-gloss
+The flower smells sweet.	phul [smells] gaddo.	seed:nature|draft-gloss
+The river is very clean.	nadi balli saaf.	seed:nature|draft-gloss
+The hill is covered with green trees.	tekdi [covered] sarin hiro zhaad.	seed:nature|draft-gloss
+The forest is thick.	[forest] [thick].	seed:nature|draft-gloss
+The fields are green in the rainy season.	shet hiro bittar [rainy] [season].	seed:nature|draft-gloss
+The farmer is ploughing the field.	[farmer] [ploughing] shet.	seed:nature|draft-gloss
+He grows rice and vegetables.	To [grows] chawal ani bhaji.	seed:nature|draft-gloss
+The cow gives milk.	gai deta dudh.	seed:nature|draft-gloss
+The goat is eating grass.	bakri khate wate [grass].	seed:nature|draft-gloss
+The hen has laid an egg.	kombri [laid] undo.	seed:nature|draft-gloss
+The dog is running behind the boy.	kutro [running] [behind] [boy].	seed:nature|draft-gloss
+The cat caught a mouse.	manjar [caught] [mouse].	seed:nature|draft-gloss
+A bird is sitting on the tree.	chidiya [sitting] zhaad.	seed:nature|draft-gloss
+The crow is making noise.	[crow] [making] [noise].	seed:nature|draft-gloss
+The snake went into the bush.	saap gelo [bush].	seed:nature|draft-gloss
+The elephant is very big.	hatti balli wadlo.	seed:nature|draft-gloss
+The monkey took the banana.	wandar ghetlo [banana].	seed:nature|draft-gloss
+Do not disturb the animals.	[disturb] [animals] nai.	seed:nature|draft-gloss
+There are many insects at night.	tari bhouat [insects] raat.	seed:nature|draft-gloss
+Mosquitoes are biting me.	[mosquitoes] [biting] Maka.	seed:nature|draft-gloss
+The buffalo is in the water.	[buffalo] bittar paani.	seed:nature|draft-gloss
+The horse runs very fast.	[horse] [runs] balli tez.	seed:nature|draft-gloss
+Look at the sky.	[look] akaash.	seed:nature|draft-gloss
+There is a full moon tonight.	tari bhardo chand rati.	seed:nature|draft-gloss
+The road goes through the forest.	waat wata [through] [forest].	seed:nature|draft-gloss
+The rain made everything green.	paus padta [made] sammu hiro.	seed:nature|draft-gloss
+We planted a tree.	Ami [planted] zhaad.	seed:nature|draft-gloss
+Water the plants every day.	paani [plants] har dis.	seed:nature|draft-gloss
+The leaves are falling.	sodta [falling].	seed:nature|draft-gloss
+The grass is wet.	[grass] olo.	seed:nature|draft-gloss
 # ===== Phone and technology =====
-Where is my phone?		seed:phone
-My phone is not working.		seed:phone
-The battery is dead.		seed:phone
-Charge your phone.		seed:phone
-Call me tomorrow.		seed:phone
-I will call you later.		seed:phone
-Send me a message.		seed:phone
-I got your message.		seed:phone
-Please answer the phone.		seed:phone
-The phone is ringing.		seed:phone
-He is talking on the phone.		seed:phone
-There is no network here.		seed:phone
-The internet is very slow.		seed:phone
-Do you have WiFi?		seed:phone
-I saw it on the internet.		seed:phone
-He watches videos all day.		seed:phone
-Send me the photo.		seed:phone
-Take a picture of us.		seed:phone
-Turn up the volume.		seed:phone
-Turn down the sound.		seed:phone
-I am sending you the location.		seed:phone
-Video call me tonight.		seed:phone
-He calls his mother every day from abroad.		seed:phone
-My phone fell in the water.		seed:phone
-The screen is broken.		seed:phone
-I forgot my password.		seed:phone
-Do not share your number with everyone.		seed:phone
-He plays games on his phone.		seed:phone
-Turn on the television.		seed:phone
-What is on the news today?		seed:phone
+Where is my phone?	khe moje phone?	seed:phone|draft-gloss
+My phone is not working.	moje phone kaam karte wate nai.	seed:phone|draft-gloss
+The battery is dead.	[battery] [dead].	seed:phone|draft-gloss
+Charge your phone.	[charge] tuje phone.	seed:phone|draft-gloss
+Call me tomorrow.	apauta Maka fausai.	seed:phone|draft-gloss
+I will call you later.	Me apauta Tu maggir.	seed:phone|draft-gloss
+Send me a message.	fetauta Maka message.	seed:phone|draft-gloss
+I got your message.	Me ghetlo tuje message.	seed:phone|draft-gloss
+Please answer the phone.	zarra [answer] phone.	seed:phone|draft-gloss
+The phone is ringing.	phone [ringing].	seed:phone|draft-gloss
+He is talking on the phone.	To [talking] phone.	seed:phone|draft-gloss
+There is no network here.	tari nai [network] yari.	seed:phone|draft-gloss
+The internet is very slow.	internet balli hallu.	seed:phone|draft-gloss
+Do you have WiFi?	Tu [wifi]?	seed:phone|draft-gloss
+I saw it on the internet.	Me pallo He internet.	seed:phone|draft-gloss
+He watches videos all day.	To [watches] video sammu dis.	seed:phone|draft-gloss
+Send me the photo.	fetauta Maka photo.	seed:phone|draft-gloss
+Take a picture of us.	ghenta [picture] Amka.	seed:phone|draft-gloss
+Turn up the volume.	[turn] [volume].	seed:phone|draft-gloss
+Turn down the sound.	[turn] [sound].	seed:phone|draft-gloss
+I am sending you the location.	Me fetaute wate Tu [location].	seed:phone|draft-gloss
+Video call me tonight.	video apauta Maka rati.	seed:phone|draft-gloss
+He calls his mother every day from abroad.	To apauta teje mama har dis cho pardes.	seed:phone|draft-gloss
+My phone fell in the water.	moje phone [fell] bittar paani.	seed:phone|draft-gloss
+The screen is broken.	[screen] [broken].	seed:phone|draft-gloss
+I forgot my password.	Me visarlo moje [password].	seed:phone|draft-gloss
+Do not share your number with everyone.	[share] tuje [number] sarin sammu nai.	seed:phone|draft-gloss
+He plays games on his phone.	To khelta [games] teje phone.	seed:phone|draft-gloss
+Turn on the television.	[turn] TV.	seed:phone|draft-gloss
+What is on the news today?	kaa [news] aas?	seed:phone|draft-gloss
 # ===== Describing things and giving opinions =====
-This is good.		seed:describing
-That is bad.		seed:describing
-It is very big.		seed:describing
-It is very small.		seed:describing
-This house is bigger than that one.		seed:describing
-He is taller than me.		seed:describing
-She is younger than her brother.		seed:describing
-This is the best shop in town.		seed:describing
-This road is longer.		seed:describing
-The river is deep.		seed:describing
-The water is shallow.		seed:describing
-The stone is heavy.		seed:describing
-The bag is light.		seed:describing
-The tea is sweet.		seed:describing
-The lemon is sour.		seed:describing
-The medicine is bitter.		seed:describing
-The bread is soft.		seed:describing
-The rock is hard.		seed:describing
-The knife is sharp.		seed:describing
-The road is wide.		seed:describing
-The lane is narrow.		seed:describing
-The colour is red.		seed:describing
-The sky is blue.		seed:describing
-The leaves are green.		seed:describing
-The flower is yellow.		seed:describing
-The dress is white.		seed:describing
-The night is black.		seed:describing
-The car is new.		seed:describing
-The house is old.		seed:describing
-The boy is fat.		seed:describing
-The girl is thin.		seed:describing
-The old man is weak.		seed:describing
-The young man is strong.		seed:describing
-This is easy.		seed:describing
-That is difficult.		seed:describing
-It is true.		seed:describing
-It is false.		seed:describing
-It is very far.		seed:describing
-It is very near.		seed:describing
-I think he is right.		seed:describing
-I do not agree with you.		seed:describing
-In my opinion, this is better.		seed:describing
-Both are the same.		seed:describing
-They are different.		seed:describing
+This is good.	He nikko.	seed:describing|draft-gloss
+That is bad.	Te kharaab.	seed:describing|draft-gloss
+It is very big.	He balli wadlo.	seed:describing|draft-gloss
+It is very small.	He balli dhaklo.	seed:describing|draft-gloss
+This house is bigger than that one.	He ghar [bigger] Te ek.	seed:describing|draft-gloss
+He is taller than me.	To [taller] Maka.	seed:describing|draft-gloss
+She is younger than her brother.	Ti [younger] teji bhaus.	seed:describing|draft-gloss
+This is the best shop in town.	He [best] angdi bittar gaaw.	seed:describing|draft-gloss
+This road is longer.	He waat [longer].	seed:describing|draft-gloss
+The river is deep.	nadi [deep].	seed:describing|draft-gloss
+The water is shallow.	paani [shallow].	seed:describing|draft-gloss
+The stone is heavy.	[stone] jad.	seed:describing|draft-gloss
+The bag is light.	postan light.	seed:describing|draft-gloss
+The tea is sweet.	chaha gaddo.	seed:describing|draft-gloss
+The lemon is sour.	[lemon] khato.	seed:describing|draft-gloss
+The medicine is bitter.	guliyo kadwo.	seed:describing|draft-gloss
+The bread is soft.	roti [soft].	seed:describing|draft-gloss
+The rock is hard.	[rock] mushkil.	seed:describing|draft-gloss
+The knife is sharp.	[knife] [sharp].	seed:describing|draft-gloss
+The road is wide.	waat [wide].	seed:describing|draft-gloss
+The lane is narrow.	[lane] [narrow].	seed:describing|draft-gloss
+The colour is red.	rang lal.	seed:describing|draft-gloss
+The sky is blue.	akaash nila.	seed:describing|draft-gloss
+The leaves are green.	sodta hiro.	seed:describing|draft-gloss
+The flower is yellow.	phul pilo.	seed:describing|draft-gloss
+The dress is white.	[dress] safed.	seed:describing|draft-gloss
+The night is black.	raat kalo.	seed:describing|draft-gloss
+The car is new.	gaadi nawo.	seed:describing|draft-gloss
+The house is old.	ghar purano.	seed:describing|draft-gloss
+The boy is fat.	[boy] [fat].	seed:describing|draft-gloss
+The girl is thin.	[girl] [thin].	seed:describing|draft-gloss
+The old man is weak.	purano bando kamzor.	seed:describing|draft-gloss
+The young man is strong.	[young] bando mazbut.	seed:describing|draft-gloss
+This is easy.	He aasan.	seed:describing|draft-gloss
+That is difficult.	Te mushkil.	seed:describing|draft-gloss
+It is true.	He saccha.	seed:describing|draft-gloss
+It is false.	He khota.	seed:describing|draft-gloss
+It is very far.	He balli dur.	seed:describing|draft-gloss
+It is very near.	He balli bagla.	seed:describing|draft-gloss
+I think he is right.	Me [think] To ujwo.	seed:describing|draft-gloss
+I do not agree with you.	Me [agree] sarin Tu nai.	seed:describing|draft-gloss
+In my opinion, this is better.	bittar moje [opinion], He [better].	seed:describing|draft-gloss
+Both are the same.	[both] ek parin.	seed:describing|draft-gloss
+They are different.	Ten wegle.	seed:describing|draft-gloss
 # ===== A day in the life =====
-I wake up early in the morning.		seed:routine
-I wash my face and brush my teeth.		seed:routine
-I pray and have breakfast.		seed:routine
-Then I go to work.		seed:routine
-I come back home in the evening.		seed:routine
-We eat dinner at eight.		seed:routine
-After dinner we watch television.		seed:routine
-The children go to bed early.		seed:routine
-I sleep at ten.		seed:routine
-She gets up before everyone.		seed:routine
-He takes a bath every morning.		seed:routine
-I drink tea in the evening.		seed:routine
-We walk on the beach after sunset.		seed:routine
-On Fridays we go to the mosque.		seed:routine
-On Sundays I rest at home.		seed:routine
-Every morning I read the newspaper.		seed:routine
-He shaves every day.		seed:routine
-She combs her hair.		seed:routine
-The children get ready for school.		seed:routine
-My mother wakes me up.		seed:routine
-I put on my shoes.		seed:routine
-I take my bag and leave.		seed:routine
-I lock the door.		seed:routine
-I reach the shop at nine.		seed:routine
-I open the shop.		seed:routine
-We close at night.		seed:routine
-I count the money at the end of the day.		seed:routine
-I come home tired.		seed:routine
-I take a short nap after lunch.		seed:routine
-We talk together in the evening.		seed:routine
-He tells stories to the children at night.		seed:routine
-The lights go out at eleven.		seed:routine
-I turn off the light and sleep.		seed:routine
-It is a busy day.		seed:routine
-Tomorrow is another day.		seed:routine
+I wake up early in the morning.	Me [wake] wehla bittar sakan.	seed:routine|draft-gloss
+I wash my face and brush my teeth.	Me dhuta moje muha ani [brush] moje [teeth].	seed:routine|draft-gloss
+I pray and have breakfast.	Me namaz padta ani [breakfast].	seed:routine|draft-gloss
+Then I go to work.	[then] Me wata kaam karta.	seed:routine|draft-gloss
+I come back home in the evening.	Me yeta peeth ghar bittar timpar.	seed:routine|draft-gloss
+We eat dinner at eight.	Ami khata khau aath.	seed:routine|draft-gloss
+After dinner we watch television.	mag khau Ami [watch] TV.	seed:routine|draft-gloss
+The children go to bed early.	chadwe wata khaat wehla.	seed:routine|draft-gloss
+I sleep at ten.	Me wadgalta dha.	seed:routine|draft-gloss
+She gets up before everyone.	Ti [gets] fude sammu.	seed:routine|draft-gloss
+He takes a bath every morning.	To ghenta [bath] har sakan.	seed:routine|draft-gloss
+I drink tea in the evening.	Me peta chaha bittar timpar.	seed:routine|draft-gloss
+We walk on the beach after sunset.	Ami chalta kaath mag maghrib.	seed:routine|draft-gloss
+On Fridays we go to the mosque.	Jumma Ami wata mizgat.	seed:routine|draft-gloss
+On Sundays I rest at home.	Itwaar Me aaram karta ghar.	seed:routine|draft-gloss
+Every morning I read the newspaper.	har sakan Me padta [newspaper].	seed:routine|draft-gloss
+He shaves every day.	To [shaves] har dis.	seed:routine|draft-gloss
+She combs her hair.	Ti [combs] teji kes.	seed:routine|draft-gloss
+The children get ready for school.	chadwe [get] tayyar shaala.	seed:routine|draft-gloss
+My mother wakes me up.	moje mama [wakes] Maka.	seed:routine|draft-gloss
+I put on my shoes.	Me [put] moje [shoes].	seed:routine|draft-gloss
+I take my bag and leave.	Me ghenta moje postan ani sodta.	seed:routine|draft-gloss
+I lock the door.	Me [lock] dar.	seed:routine|draft-gloss
+I reach the shop at nine.	Me [reach] angdi nau.	seed:routine|draft-gloss
+I open the shop.	Me usauta angdi.	seed:routine|draft-gloss
+We close at night.	Ami band karta raat.	seed:routine|draft-gloss
+I count the money at the end of the day.	Me [count] dud [end] dis.	seed:routine|draft-gloss
+I come home tired.	Me yeta ghar thakelo.	seed:routine|draft-gloss
+I take a short nap after lunch.	Me ghenta aakhdo [nap] mag [lunch].	seed:routine|draft-gloss
+We talk together in the evening.	Ami [talk] sarin bittar timpar.	seed:routine|draft-gloss
+He tells stories to the children at night.	To [tells] [stories] chadwe raat.	seed:routine|draft-gloss
+The lights go out at eleven.	light wata agyara.	seed:routine|draft-gloss
+I turn off the light and sleep.	Me [turn] [off] light ani wadgalta.	seed:routine|draft-gloss
+It is a busy day.	He masroof dis.	seed:routine|draft-gloss
+Tomorrow is another day.	fausai [another] dis.	seed:routine|draft-gloss
 # ===== Things that happened =====
-Yesterday I went to the market.		seed:stories
-I bought fish and vegetables.		seed:stories
-On the way I met my old friend.		seed:stories
-We talked for a long time.		seed:stories
-Then I came home.		seed:stories
-My mother had already cooked.		seed:stories
-We ate together.		seed:stories
-Last week my uncle came from Dubai.		seed:stories
-He brought gifts for everyone.		seed:stories
-The children were very happy.		seed:stories
-When I was small, I lived in the village.		seed:stories
-We used to play near the sea.		seed:stories
-My grandfather told us many stories.		seed:stories
-One day it rained very heavily.		seed:stories
-The water came into our house.		seed:stories
-We moved everything to the upper floor.		seed:stories
-The next morning the water went down.		seed:stories
-Nobody was hurt.		seed:stories
-A long time ago, there was a king.		seed:stories
-He had a beautiful garden.		seed:stories
-One day a bird came to the garden.		seed:stories
-The bird sang a beautiful song.		seed:stories
-The king was very happy.		seed:stories
-He gave the bird some grain.		seed:stories
-The bird flew away and never came back.		seed:stories
-He waited for it every day.		seed:stories
-I saw him at the mosque yesterday.		seed:stories
-She did not come to the party.		seed:stories
-They left early in the morning.		seed:stories
-We finished the work at night.		seed:stories
+Yesterday I went to the market.	kaal Me gelo angdi.	seed:stories|draft-gloss
+I bought fish and vegetables.	Me hadlo meen ani bhaji.	seed:stories|draft-gloss
+On the way I met my old friend.	waat Me [met] moje purano dost.	seed:stories|draft-gloss
+We talked for a long time.	Ami [talked] deeg wakhat.	seed:stories|draft-gloss
+Then I came home.	[then] Me ailo ghar.	seed:stories|draft-gloss
+My mother had already cooked.	moje mama [already] khau kailo.	seed:stories|draft-gloss
+We ate together.	Ami khalo sarin.	seed:stories|draft-gloss
+Last week my uncle came from Dubai.	gelle hafta moje malaika ailo cho [dubai].	seed:stories|draft-gloss
+He brought gifts for everyone.	To [brought] tofa sammu.	seed:stories|draft-gloss
+The children were very happy.	chadwe balli khush.	seed:stories|draft-gloss
+When I was small, I lived in the village.	ketta Me dhaklo, Me [lived] bittar gaaw.	seed:stories|draft-gloss
+We used to play near the sea.	Ami [used] khelta bagla darya.	seed:stories|draft-gloss
+My grandfather told us many stories.	moje azobapa ballo Amka bhouat [stories].	seed:stories|draft-gloss
+One day it rained very heavily.	ek dis He paus padlo balli [heavily].	seed:stories|draft-gloss
+The water came into our house.	paani ailo amche ghar.	seed:stories|draft-gloss
+We moved everything to the upper floor.	Ami [moved] sammu [upper] farsh.	seed:stories|draft-gloss
+The next morning the water went down.	yauche sakan paani gelo.	seed:stories|draft-gloss
+Nobody was hurt.	[nobody] dukhta.	seed:stories|draft-gloss
+A long time ago, there was a king.	deeg wakhat [ago], tari raja.	seed:stories|draft-gloss
+He had a beautiful garden.	To sundar baag.	seed:stories|draft-gloss
+One day a bird came to the garden.	ek dis chidiya ailo baag.	seed:stories|draft-gloss
+The bird sang a beautiful song.	chidiya [sang] sundar gaana.	seed:stories|draft-gloss
+The king was very happy.	raja balli khush.	seed:stories|draft-gloss
+He gave the bird some grain.	To dele chidiya zarra [grain].	seed:stories|draft-gloss
+The bird flew away and never came back.	chidiya [flew] [away] ani kadi nai ailo peeth.	seed:stories|draft-gloss
+He waited for it every day.	To ube ralo He har dis.	seed:stories|draft-gloss
+I saw him at the mosque yesterday.	Me pallo Teka mizgat kaal.	seed:stories|draft-gloss
+She did not come to the party.	Ti yeta party nai.	seed:stories|draft-gloss
+They left early in the morning.	Ten davo wehla bittar sakan.	seed:stories|draft-gloss
+We finished the work at night.	Ami khatam kailo kaam karta raat.	seed:stories|draft-gloss
 # ===== Longer sentences =====
-I could not come yesterday because my mother was sick.		seed:longer
-When the rain stopped, the children ran outside to play.		seed:longer
-He wanted to buy a new boat, but he did not have enough money.		seed:longer
-My brother works in Dubai and sends money home every month.		seed:longer
-If you are hungry, there is some rice and fish in the kitchen.		seed:longer
-She went to the market to buy vegetables, and then she came home to cook.		seed:longer
-The teacher told the students to read the lesson and write the answers in their books.		seed:longer
-I will wait for you here until you finish your work.		seed:longer
-Although it was raining heavily, the fishermen went out to sea.		seed:longer
-My grandfather says that the sea was much cleaner when he was young.		seed:longer
-We were sitting on the beach when the sun started to set.		seed:longer
-He did not know that his friend was waiting for him at the station.		seed:longer
-Please tell your mother that I will come to see her tomorrow morning.		seed:longer
-The shop near the mosque sells everything you need for the house.		seed:longer
-I have not seen him since he went to work abroad.		seed:longer
-The children who study hard will do well in the exam.		seed:longer
-She asked me where I was going and why I was in a hurry.		seed:longer
-It is better to leave early because the road is very bad after the rain.		seed:longer
-He said that he would call us as soon as he reached home.		seed:longer
-We bought a small house near the sea so that the children can play on the beach.		seed:longer
-Wash your hands with soap before you eat and after you eat.		seed:longer
-The old man sat under the tree and told stories to the children until it was dark.		seed:longer
-My father worked very hard all his life so that we could go to school.		seed:longer
-Everyone in the village came to help when the boat was in trouble.		seed:longer
-I like to walk on the beach in the evening because the air is cool and fresh.		seed:longer
-The bus was so full that we could not find a place to sit.		seed:longer
-He is not only my neighbour but also my best friend.		seed:longer
-You can take my phone if yours is not working.		seed:longer
-Nobody knows how the fire started in the market last night.		seed:longer
-Every morning my mother wakes up early, prays and makes tea for the whole family.		seed:longer
-She was so happy that she could not say anything.		seed:longer
-The doctor said that I must rest for one week and take the medicine every day.		seed:longer
-I don't think he will come today because he is not feeling well.		seed:longer
-Would you like to come with us to the wedding on Sunday?		seed:longer
-Please wait here while I go and ask the shopkeeper about the price.		seed:longer
-They have lived in this town for many years, but they still miss their village.		seed:longer
-He told me a story about a fisherman who found a big fish in his net.		seed:longer
-If the weather is good tomorrow, we will go to the beach with our friends.		seed:longer
-There was no electricity for two days, so we could not charge our phones.		seed:longer
-I forgot to bring my money, so I could not buy anything at the market.		seed:longer
+I could not come yesterday because my mother was sick.	Me sakta yeta kaal [because] moje mama bimaar nai.	seed:longer|draft-gloss
+When the rain stopped, the children ran outside to play.	ketta paus padta band kailo, chadwe [ran] bhair khelta.	seed:longer|draft-gloss
+He wanted to buy a new boat, but he did not have enough money.	To kaas hoto hadta nawo samku, pan To [enough] dud nai.	seed:longer|draft-gloss
+My brother works in Dubai and sends money home every month.	moje bhaus kaam karta bittar [dubai] ani fetauta dud ghar har mahina.	seed:longer|draft-gloss
+If you are hungry, there is some rice and fish in the kitchen.	agar Tu bhukelo, tari zarra chawal ani meen bittar bawarchikhana.	seed:longer|draft-gloss
+She went to the market to buy vegetables, and then she came home to cook.	Ti gelo angdi hadta bhaji, ani [then] Ti ailo ghar khau karta.	seed:longer|draft-gloss
+The teacher told the students to read the lesson and write the answers in their books.	ustad ballo shagird padta [lesson] ani lehta [answers] bittar tenche kitab.	seed:longer|draft-gloss
+I will wait for you here until you finish your work.	Me ube rata Tu yari [until] Tu khatam karta tuje kaam karta.	seed:longer|draft-gloss
+Although it was raining heavily, the fishermen went out to sea.	[although] He paus padte wate [heavily], [fishermen] gelo darya.	seed:longer|draft-gloss
+My grandfather says that the sea was much cleaner when he was young.	moje azobapa balta Te darya balli [cleaner] ketta To [young].	seed:longer|draft-gloss
+We were sitting on the beach when the sun started to set.	Ami [sitting] kaath ketta suraj [started] [set].	seed:longer|draft-gloss
+He did not know that his friend was waiting for him at the station.	To walkhata Te teje dost ube rate wate Teka [station] nai.	seed:longer|draft-gloss
+Please tell your mother that I will come to see her tomorrow morning.	zarra [tell] tuje mama Te Me yeta palta teji fausai sakan.	seed:longer|draft-gloss
+The shop near the mosque sells everything you need for the house.	angdi bagla mizgat wikta sammu Tu kaas ghar.	seed:longer|draft-gloss
+I have not seen him since he went to work abroad.	Me [seen] Teka [since] To gelo kaam karta pardes nai.	seed:longer|draft-gloss
+The children who study hard will do well in the exam.	chadwe kon padta mushkil nikko bittar imtihaan.	seed:longer|draft-gloss
+She asked me where I was going and why I was in a hurry.	Ti [asked] Maka khe Me waste wate ani kheka Me bittar [hurry].	seed:longer|draft-gloss
+It is better to leave early because the road is very bad after the rain.	He [better] sodta wehla [because] waat balli kharaab mag paus padta.	seed:longer|draft-gloss
+He said that he would call us as soon as he reached home.	To ballo Te To apauta Amka [soon] To [reached] ghar.	seed:longer|draft-gloss
+We bought a small house near the sea so that the children can play on the beach.	Ami hadlo dhaklo ghar bagla darya Te chadwe sakta khelta kaath.	seed:longer|draft-gloss
+Wash your hands with soap before you eat and after you eat.	dhuta tuje hath sarin [soap] fude Tu khata ani mag Tu khata.	seed:longer|draft-gloss
+The old man sat under the tree and told stories to the children until it was dark.	purano bando [sat] khali zhaad ani ballo [stories] chadwe [until] He andhar.	seed:longer|draft-gloss
+My father worked very hard all his life so that we could go to school.	moje bapa kaam kailo balli mushkil sammu teje [life] Te Ami sakta wata shaala.	seed:longer|draft-gloss
+Everyone in the village came to help when the boat was in trouble.	sammu bittar gaaw ailo madad karta ketta samku bittar [trouble].	seed:longer|draft-gloss
+I like to walk on the beach in the evening because the air is cool and fresh.	Me chalta kaath bittar timpar [because] [air] [cool] ani taza.	seed:longer|draft-gloss
+The bus was so full that we could not find a place to sit.	bus bhardo Te Ami sakta [find] [place] [sit] nai.	seed:longer|draft-gloss
+He is not only my neighbour but also my best friend.	To [only] moje shejer pan [also] moje [best] dost nai.	seed:longer|draft-gloss
+You can take my phone if yours is not working.	Tu sakta ghenta moje phone agar tuje kaam karte wate nai.	seed:longer|draft-gloss
+Nobody knows how the fire started in the market last night.	[nobody] walkhata kishi uzo [started] bittar angdi gelle raat.	seed:longer|draft-gloss
+Every morning my mother wakes up early, prays and makes tea for the whole family.	har sakan moje mama [wakes] wehla, namaz padta ani [makes] chaha [whole] khandan.	seed:longer|draft-gloss
+She was so happy that she could not say anything.	Ti khush Te Ti sakta balta [anything] nai.	seed:longer|draft-gloss
+The doctor said that I must rest for one week and take the medicine every day.	daktar ballo Te Me karyaw aaram karta ek hafta ani ghenta guliyo har dis.	seed:longer|draft-gloss
+I don't think he will come today because he is not feeling well.	Me [think] To yeta aas [because] To [feeling] nikko nai.	seed:longer|draft-gloss
+Would you like to come with us to the wedding on Sunday?	Tu yeta sarin Amka parna Itwaar?	seed:longer|draft-gloss
+Please wait here while I go and ask the shopkeeper about the price.	zarra ube rata yari [while] Me wata ani [ask] [shopkeeper] keemat.	seed:longer|draft-gloss
+They have lived in this town for many years, but they still miss their village.	Ten [lived] bittar He gaaw bhouat warshe, pan Ten [still] [miss] tenche gaaw.	seed:longer|draft-gloss
+He told me a story about a fisherman who found a big fish in his net.	To ballo Maka kainiyo [fisherman] kon [found] wadlo meen bittar teje jaal.	seed:longer|draft-gloss
+If the weather is good tomorrow, we will go to the beach with our friends.	agar [weather] nikko fausai, Ami wata kaath sarin amche dost.	seed:longer|draft-gloss
+There was no electricity for two days, so we could not charge our phones.	tari nai [electricity] don dis, Ami sakta [charge] amche phone nai.	seed:longer|draft-gloss
+I forgot to bring my money, so I could not buy anything at the market.	Me visarlo hadta moje dud, Me sakta hadta [anything] angdi nai.	seed:longer|draft-gloss
 # ===== Plans, hopes and conditions =====
 I will go tomorrow.	Me fausai watalo.	seed:future
 He will come next week.	To yauche hafta yetalo.	seed:future
