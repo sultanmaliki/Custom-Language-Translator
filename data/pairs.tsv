@@ -9,204 +9,204 @@
 # Run `python data_preprocessing.py` at any time to check your work and see how many are done.
 english	nawayathi	source
 # ===== Greetings and politeness =====
-Hello.		seed:greetings
-Good morning.		seed:greetings
-Good afternoon.		seed:greetings
-Good evening.		seed:greetings
-Good night.		seed:greetings
-How are you?		seed:greetings
-I am fine, thank you.		seed:greetings
-And how are you?		seed:greetings
-I am not well today.		seed:greetings
-What is your name?		seed:greetings
-My name is Ahmed.		seed:greetings
-Nice to meet you.		seed:greetings
-Welcome to our house.		seed:greetings
-Please come in.		seed:greetings
-Please sit down.		seed:greetings
-Thank you very much.		seed:greetings
-You are welcome.		seed:greetings
-Sorry, I made a mistake.		seed:greetings
-Excuse me, can I ask something?		seed:greetings
-Please forgive me.		seed:greetings
-Congratulations!		seed:greetings
-Good luck.		seed:greetings
-Take care.		seed:greetings
-See you tomorrow.		seed:greetings
-See you later.		seed:greetings
-Goodbye.		seed:greetings
-Peace be upon you.		seed:greetings
-And peace be upon you too.		seed:greetings
-God willing, we will meet again.		seed:greetings
-How is your family?		seed:greetings
-Everyone at home is well.		seed:greetings
-Thank you for your help.		seed:greetings
-Please say it again.		seed:greetings
-I did not understand.		seed:greetings
-Please speak slowly.		seed:greetings
-Do you speak English?		seed:greetings
+Hello.	Awa	seed:greetings
+Good morning.	Sakan Bakhair.	seed:greetings
+Good afternoon.	Dompar Bakhair.	seed:greetings
+Good evening.	Timpar Bakhair.	seed:greetings
+Good night.	Raat Bakhair	seed:greetings
+How are you?	Tu kishi wate?	seed:greetings
+I am fine, thank you.	Me nikko wate, Shukriya.	seed:greetings
+And how are you?	Ani tu kishi wate?	seed:greetings
+I am not well today.	Aas tabyat zarra nikki nai.	seed:greetings
+What is your name?	Tuje naw ka?	seed:greetings
+My name is Ahmed.	Moje naw Ahmed.	seed:greetings
+Nice to meet you.	Tuje sarin milun nikke dakhadle.	seed:greetings
+Welcome to our house.	Amche ghare khush aamdeed.	seed:greetings
+Please come in.	Bittar yenai.	seed:greetings
+Please sit down.	Baishe nai.	seed:greetings
+Thank you very much.	Tumcho bhalli shukriya.	seed:greetings
+You are welcome.	Saa khair.	seed:greetings
+Sorry, I made a mistake.	Maaf kar, galti zali.	seed:greetings
+Excuse me, can I ask something?	Aik, me kai pusu?	seed:greetings
+Please forgive me.	Zarra maaf kar.	seed:greetings
+Congratulations!	Mabrook!	seed:greetings
+Good luck.	Khush kismat.	seed:greetings
+Take care.	Khayal dharaw.	seed:greetings
+See you tomorrow.	Tuka fausai milta.	seed:greetings
+See you later.	Tuka maggir milta.	seed:greetings
+Goodbye.	Chalo.	seed:greetings
+Peace be upon you.	As-salamu alaikum.	seed:greetings
+And peace be upon you too.	Wa-alaikum as-salam.	seed:greetings
+God willing, we will meet again.	Insha-allah, ami dobara miltale.	seed:greetings
+How is your family?	Tujo khandan kishi ahe?	seed:greetings
+Everyone at home is well.	Ghare sammu nikke wate.	seed:greetings
+Thank you for your help.	Tuji madad sabab shukriya.	seed:greetings
+Please say it again.	Biji ek dai bal nai.	seed:greetings
+I did not understand.	Me walkhal nai.	seed:greetings
+Please speak slowly.	Zarra hallu zap.	seed:greetings
+Do you speak English?	Tu english zapta?	seed:greetings
 # ===== About yourself =====
-I am from Bhatkal.		seed:about-me
-Where are you from?		seed:about-me
-I live near the sea.		seed:about-me
-How old are you?		seed:about-me
-I am twenty years old.		seed:about-me
-My father is fifty years old.		seed:about-me
-What do you do?		seed:about-me
-I am a student.		seed:about-me
-I work in a shop.		seed:about-me
-He is a teacher.		seed:about-me
-She is a doctor.		seed:about-me
-My brother works in Dubai.		seed:about-me
-My sister studies at college.		seed:about-me
-I have two brothers and one sister.		seed:about-me
-Do you have any children?		seed:about-me
-We have three children.		seed:about-me
-This is my friend.		seed:about-me
-He is my neighbour.		seed:about-me
-She is my cousin.		seed:about-me
-Where do you live?		seed:about-me
-I live in a small house.		seed:about-me
-Our house is near the mosque.		seed:about-me
-What is your phone number?		seed:about-me
-I was born in this town.		seed:about-me
-I have lived here for ten years.		seed:about-me
-I speak our language at home.		seed:about-me
-I can also speak Kannada.		seed:about-me
-I am learning English.		seed:about-me
-He is a good man.		seed:about-me
-She is very kind.		seed:about-me
-Are you married?		seed:about-me
-He is not married yet.		seed:about-me
-My name is Fatima and I am a nurse.		seed:about-me
-I am the youngest in my family.		seed:about-me
-He is the eldest son.		seed:about-me
+I am from Bhatkal.	Me Bhatkal cho.	seed:about-me
+Where are you from?	Tu kyari cho?	seed:about-me
+I live near the sea.	Me darya bagla rata.	seed:about-me
+How old are you?	Tuka ketle warshe?	seed:about-me
+I am twenty years old.	Maka ekwis warshe.	seed:about-me
+My father is fifty years old.	Moje bapa pannas warshe.	seed:about-me
+What do you do?	Tu ka karta?	seed:about-me
+I am a student.	Me ek shagird.	seed:about-me
+I work in a shop.	Me ek angdi kaam karta.	seed:about-me
+He is a teacher.		Ho ek ustad.	seed:about-me
+She is a doctor.	Ti ek daktarni.	seed:about-me
+My brother works in Dubai.	Mojo bhaus Dubai bittar kaam karta.	seed:about-me
+My sister studies at college.	Moji Bhain College bittar padta.	seed:about-me
+I have two brothers and one sister.	Maka don bhaus ani ek bhain wate.	seed:about-me
+Do you have any children?	Tumka ekko chadwe wate? 	seed:about-me
+We have three children.	Amka teen chadwe wate.	seed:about-me
+This is my friend.	Ho mojo dost.	seed:about-me
+He is my neighbour.	Ho amcho shejer cho.	seed:about-me
+She is my cousin.	Ti moji bhain.	seed:about-me
+Where do you live?	Tu khe raha?	seed:about-me
+I live in a small house.	Me ek dhakle ghare rata.	seed:about-me
+Our house is near the mosque.	Amche ghar mizgati bagla ahe.	seed:about-me
+What is your phone number?	Tujo phone number kaa?	seed:about-me
+I was born in this town.	Me he gawat paida zallo.	seed:about-me
+I have lived here for ten years.	Me yari dha warshe rala te.	seed:about-me
+I speak our language at home.	Me amche ghare amchi zuban zapta.	seed:about-me
+I can also speak Kannada.	Me kannada ko zapta.	seed:about-me
+I am learning English.	Me english shikte wate.	seed:about-me
+He is a good man.	Ho ek nikko bando.	seed:about-me
+She is very kind.	Ti balli meherban wate.	seed:about-me
+Are you married?	Tuje parne zale?	seed:about-me
+He is not married yet.	Teje parne azzun zallai.	seed:about-me
+My name is Fatima and I am a nurse.	Moje naw Fathima ani me ek nurse.	seed:about-me
+I am the youngest in my family.	Me amche khandan bittar samman dhaklo	seed:about-me
+He is the eldest son.	To samman wadlo poot.	seed:about-me
 # ===== Family =====
-This is my mother.		seed:family
-This is my father.		seed:family
-My grandfather is very old.		seed:family
-My grandmother tells us stories.		seed:family
-My uncle lives in the city.		seed:family
-My aunt is cooking in the kitchen.		seed:family
-My wife is at home.		seed:family
-My husband is at work.		seed:family
-Our son is in school.		seed:family
-Our daughter is sleeping.		seed:family
-The baby is crying.		seed:family
-My elder brother is tall.		seed:family
-My younger sister is very clever.		seed:family
-Where is your father?		seed:family
-Your mother is calling you.		seed:family
-His parents live in the village.		seed:family
-She loves her children.		seed:family
-The children are playing outside.		seed:family
-We all eat together.		seed:family
-My family is big.		seed:family
-Ali is my brother's son.		seed:family
-Zainab is my sister's daughter.		seed:family
-My father-in-law is a kind man.		seed:family
-The whole family came for the wedding.		seed:family
-My grandmother is sick.		seed:family
-He takes care of his parents.		seed:family
-I miss my mother.		seed:family
-Our neighbours are like family.		seed:family
-My brother and I go to the market together.		seed:family
-Their daughter got married last year.		seed:family
-Whose child is this?		seed:family
-She is my mother's sister.		seed:family
-He is my father's brother.		seed:family
-The twins look the same.		seed:family
-The boy is holding his mother's hand.		seed:family
-My father gave me some money.		seed:family
-Our grandmother lives with us.		seed:family
-Ask your father.		seed:family
-Call your brother.		seed:family
-Come and see the baby.		seed:family
+This is my mother.	Hi moji mama.	seed:family
+This is my father.	Hen moje bapa	seed:family
+My grandfather is very old.	Moje azobapa balli suzan wate.	seed:family
+My grandmother tells us stories.	Moji ajjimama amka kainiyo sangta.	seed:family
+My uncle lives in the city.	Moje malaika sheher bittar rata.	seed:family
+My aunt is cooking in the kitchen.	Moji maushi bawarchikhana bittar khau karta.	seed:family
+My wife is at home.	Moji meli ghare wate.	seed:family
+My husband is at work.	Moje ghaw kaam karu gela ha.	seed:family
+Our son is in school.	Amcho poot School'a gela te.	seed:family
+Our daughter is sleeping.	Amchi dhoo wadgali te.	seed:family
+The baby is crying.	Chadu radte wate.	seed:family
+My elder brother is tall.	Mojo wadlo bhaus deeg wate.	seed:family
+My younger sister is very clever.	Moji dhakli bhain balli hushyar wate.	seed:family
+Where is your father?	Tuje bapa khe wate?	seed:family
+Your mother is calling you.	Tuji mama tuka apaute wate.	seed:family
+His parents live in the village.	Teje maabaap gaaw bittar rata.	seed:family
+She loves her children.	Ti apli chadwa sarin mohabbat karta.	seed:family
+The children are playing outside.	Chadwe bhair khelte wate.	seed:family
+We all eat together.	Ami sammu sarin khata.	seed:family
+My family is big.	Mojo khandan wadlo ahe.	seed:family
+Ali is my brother's son.	Ali mojo Bhachcho.	seed:family
+Zainab is my sister's daughter.	Zainab moji bhachchi.	seed:family
+My father-in-law is a kind man.	Moje mamule ek meherban manche.	seed:family
+The whole family came for the wedding.	Saglo khandan parna ailaha.	seed:family
+My grandmother is sick.	Moji ajjimama bimaar wate.	seed:family
+He takes care of his parents.	To aple maabaap cho khayal darauta.	seed:family
+I miss my mother.	Maka moji mama cho ato padta. 	seed:family
+Our neighbours are like family.	Amche shejerche manche khandan'a parin.	seed:family
+My brother and I go to the market together.	Me ani mojo bhaus sarin angdi wata.	seed:family
+Their daughter got married last year.	Tenchi dhoo che gelle warsa parne zale.	seed:family
+Whose child is this?	Ho konacho chadu?	seed:family
+She is my mother's sister.	Ti moji maushi.	seed:family
+He is my father's brother.	To mojo chacha	seed:family
+The twins look the same.	Zawale ek parin dakhtat.	seed:family
+The boy is holding his mother's hand.	Chadu apli mama cho hath dharla te.	seed:family
+My father gave me some money.	Moje bapa maka zarra dud dele.	seed:family
+Our grandmother lives with us.	Amchi ajjimama amche sarin rata.	seed:family
+Ask your father.	Tuje bapa pus.	seed:family
+Call your brother.	Tuje bhaushi apaw	seed:family
+Come and see the baby.	Ye ani chadwa pale.	seed:family
 # ===== Questions =====
-What is this?		seed:questions
-What is that?		seed:questions
-Who is he?		seed:questions
-Who are you?		seed:questions
-Who came?		seed:questions
-Whose bag is this?		seed:questions
-Where is he?		seed:questions
-Where did you go?		seed:questions
-When did you come?		seed:questions
-When will he come?		seed:questions
-Why are you late?		seed:questions
-Why did you not come?		seed:questions
-Why is he crying?		seed:questions
-How did it happen?		seed:questions
-How far is it?		seed:questions
-How long will it take?		seed:questions
-How many people are there?		seed:questions
-How much does it cost?		seed:questions
-Which one do you want?		seed:questions
-Which is your house?		seed:questions
-Is he at home?		seed:questions
-Is she coming?		seed:questions
-Are they here?		seed:questions
-Do you know him?		seed:questions
-Do you like it?		seed:questions
-Did you eat?		seed:questions
-Did he call?		seed:questions
-Have you seen my bag?		seed:questions
-Have you finished?		seed:questions
-Can you swim?		seed:questions
-Can you come tomorrow?		seed:questions
-Will you come with me?		seed:questions
-Will it rain today?		seed:questions
-Should I wait?		seed:questions
-Is there any water?		seed:questions
-Is this yours?		seed:questions
-Are you sure?		seed:questions
-Is it true?		seed:questions
-What happened?		seed:questions
-What are you doing?		seed:questions
-What do you want?		seed:questions
-What did he say?		seed:questions
-What are you looking for?		seed:questions
-What should we do now?		seed:questions
+What is this?	He kaa?	seed:questions
+What is that?	Te kaa?	seed:questions
+Who is he?	To kon?	seed:questions
+Who are you?	Tu kon?	seed:questions
+Who came?	Kon aile?	seed:questions
+Whose bag is this?	Hi konachi postan?	seed:questions
+Where is he?	To khe wate?	seed:questions
+Where did you go?	Tu khe gelo?	seed:questions
+When did you come?	Tu ketta ailo?	seed:questions
+When will he come?	To ketta yetalo?	seed:questions
+Why are you late?	Tu kheka late wate?	seed:questions
+Why did you not come?	Tu kheka ayal nai?	seed:questions
+Why is he crying?	To kheka radte wate?	seed:questions
+How did it happen?	He kishi zale?	seed:questions
+How far is it?	He ketle dur ahe?	seed:questions
+How long will it take?	Heka kedo wakhat lagtalo?	seed:questions
+How many people are there?	Ketle manshe wate?	seed:questions
+How much does it cost?	Heji keemat kaa?	seed:questions
+Which one do you want?	Tuka konte kaas?	seed:questions
+Which is your house?	Tuje ghar konte?	seed:questions
+Is he at home?	To ghare wate?	seed:questions
+Is she coming?	Ti yetali?	seed:questions
+Are they here?	Ten aile?	seed:questions
+Do you know him?	Tu heka walkhata?	seed:questions
+Do you like it?	Tuka he pasand ahe?	seed:questions
+Did you eat?	Tu Khalo?	seed:questions
+Did he call?	To apaulo?	seed:questions
+Have you seen my bag?	Tu mojo postan pallo?	seed:questions
+Have you finished?	Tu khatam kailo?	seed:questions
+Can you swim?	Tu pau sakta?	seed:questions
+Can you come tomorrow?	Tu pausai yau sakta?	seed:questions
+Will you come with me?	Tu moje sarin yeta?	seed:questions
+Will it rain today?	Aas paus padtale?	seed:questions
+Should I wait?	Me waat dakhu?	seed:questions
+Is there any water?	Zarra paani ahe?	seed:questions
+Is this yours?	He tuje?	seed:questions
+Are you sure?	Tu pakka wate?	seed:questions
+Is it true?	He saccha?	seed:questions
+What happened?	kaa zale?	seed:questions
+What are you doing?	Tu kaa karta wate?	seed:questions
+What do you want?	Tuka kaa kaas?	seed:questions
+What did he say?	To kaa ballo?	seed:questions
+What are you looking for?	Tu kaa sodte wate?	seed:questions
+What should we do now?	Ami etta kaa karyaw?	seed:questions
 # ===== Requests, commands and permission =====
-Come here.		seed:requests
-Go there.		seed:requests
-Sit here.		seed:requests
-Wait a minute.		seed:requests
-Please help me.		seed:requests
-Can you help me?		seed:requests
-Can I come in?		seed:requests
-May I ask you something?		seed:requests
-Can I go now?		seed:requests
-You can go.		seed:requests
-Bring me some water.		seed:requests
-Give me that book.		seed:requests
-Take this.		seed:requests
-Show me your hand.		seed:requests
-Do it now.		seed:requests
-Do it slowly.		seed:requests
-Do not do that.		seed:requests
-Do not touch it.		seed:requests
-Do not go there.		seed:requests
-Do not be late.		seed:requests
-Do not make noise.		seed:requests
-Do not tell anyone.		seed:requests
-Let me see.		seed:requests
-Let me think.		seed:requests
-Let us go.		seed:requests
-Let him come.		seed:requests
-Let me help you.		seed:requests
-Tell me the truth.		seed:requests
-Tell him to come.		seed:requests
-Ask her to wait.		seed:requests
-Send him here.		seed:requests
-Call the doctor.		seed:requests
-Stop it.		seed:requests
-Listen to me.		seed:requests
-Look at this.		seed:requests
-Hold this for me.		seed:requests
-Keep quiet.		seed:requests
-Leave me alone.		seed:requests
-Try again.		seed:requests
+Come here.	Yari ye.	seed:requests
+Go there.	Tari was.	seed:requests
+Sit here.	Yari bais.	seed:requests
+Wait a minute.	zarra sabar kar.	seed:requests
+Please help me.	Zarra madad kar.	seed:requests
+Can you help me?	Tu moji madad karu sakta?	seed:requests
+Can I come in?	Me bittar yau?	seed:requests
+May I ask you something?	Me tuka kai pusu?	seed:requests
+Can I go now?	Me etta wasu sakta?	seed:requests
+You can go.	Tu wasu sakta.	seed:requests
+Bring me some water.	Maka zarra paani hade nai.	seed:requests
+Give me that book.	Maka kitab de nai.	seed:requests
+Take this.	He ghen.	seed:requests
+Show me your hand.	Maka tujo hath dakhad.	seed:requests
+Do it now.	He etta kar.	seed:requests
+Do it slowly.	He hallu kar.	seed:requests
+Do not do that.	Te karu nakha.	seed:requests
+Do not touch it.	Teka hath lau nakha.	seed:requests
+Do not go there.	Tari wasu nakha.	seed:requests
+Do not be late.	Wakhat karu nakha.	seed:requests
+Do not make noise.	Awaz karu nakha.	seed:requests
+Do not tell anyone.	Konya sangu nakha.	seed:requests
+Let me see.	Maka palau de.	seed:requests
+Let me think.	Maka azmau de.	seed:requests
+Let us go.	Ami wachchau.	seed:requests
+Let him come.	Teka yau de.	seed:requests
+Let me help you.	Maka tujji madad karu de.	seed:requests
+Tell me the truth.	Maka sachcha sang.	seed:requests
+Tell him to come.	Teka yau sang.	seed:requests
+Ask her to wait.	Tika ube ra bal.	seed:requests
+Send him here.	Teka yari fetau.	seed:requests
+Call the doctor.	Doctor'a apaw.	seed:requests
+Stop it.	Band kar.	seed:requests
+Listen to me.	Maka aik.	seed:requests
+Look at this.	He pale.	seed:requests
+Hold this for me.	He moje sabab dhar.	seed:requests
+Keep quiet.	Chup ra.	seed:requests
+Leave me alone.	Maka eklo sod.	seed:requests
+Try again.	Biji ek time koshish kar	seed:requests
 # ===== Numbers and money =====
 One, two, three, four, five.		seed:numbers
 Six, seven, eight, nine, ten.		seed:numbers
@@ -1334,54 +1334,54 @@ If the weather is good tomorrow, we will go to the beach with our friends.		seed
 There was no electricity for two days, so we could not charge our phones.		seed:longer
 I forgot to bring my money, so I could not buy anything at the market.		seed:longer
 # ===== Plans, hopes and conditions =====
-I will go tomorrow.		seed:future
-He will come next week.		seed:future
-We will meet at five.		seed:future
-I will call you tonight.		seed:future
-It will be ready by evening.		seed:future
-I am going to buy a new phone.		seed:future
-She is going to study medicine.		seed:future
-We are planning a trip.		seed:future
-If it rains, we will stay at home.		seed:future
-If you come, I will be happy.		seed:future
-If I have time, I will help you.		seed:future
-If you do not study, you will fail.		seed:future
-When he comes, tell him to wait.		seed:future
-I will go if you come with me.		seed:future
-I will not go without you.		seed:future
-Maybe he will come.		seed:future
-Maybe not.		seed:future
-I hope it does not rain.		seed:future
-I hope you get well soon.		seed:future
-I want to build a house here.		seed:future
-One day I will visit Mecca.		seed:future
-I will save money for the wedding.		seed:future
-Next year we will buy a boat.		seed:future
-I want to open my own shop.		seed:future
-Whatever happens, I will not leave.		seed:future
-Wait until I come back.		seed:future
-Do not go before I come.		seed:future
-As soon as I reach, I will call.		seed:future
-Before you go, eat something.		seed:future
-After you finish, come to me.		seed:future
+I will go tomorrow.	Me fausai watalo.	seed:future
+He will come next week.	To yauche hafta yetalo.	seed:future
+We will meet at five.	Ami paas ganta milyau.	seed:future
+I will call you tonight.	Me tuka rati call karta.	seed:future
+It will be ready by evening.	He timpara tak tayyar ratale.	seed:future
+I am going to buy a new phone.	Me nawo phone hadu wata wate.	seed:future
+She is going to study medicine.	Ti guliyo shiku wata wate.	seed:future
+We are planning a trip.	Ami safar cho irada karte wate.	seed:future
+If it rains, we will stay at home.	Agar paus padlan, ami ghare ratale.	seed:future
+If you come, I will be happy.	Agar tu ailan, me khush ratalo.	seed:future
+If I have time, I will help you.	Agar moje kade wakhat ralan, me tuji madad kartalo.	seed:future
+If you do not study, you will fail.	Tu pade natlan, tu na-kamyab zatalo.	seed:future
+When he comes, tell him to wait.	Jetta to yetalo, teka ube rau sang.	seed:future
+I will go if you come with me.	Me tu moje sarin ailan watalo.	seed:future
+I will not go without you.	Me tu natun wasuche nai.	seed:future
+Maybe he will come.	Shayad to yetalo.	seed:future
+Maybe not.	Shayad nai.	seed:future
+I hope it does not rain.	Me chahta he paus zauche nakha.	seed:future
+I hope you get well soon.	Me chahta tu dakkan nikko zaho.	seed:future
+I want to build a house here.	Maka yari ghar bandu kaas.	seed:future
+One day I will visit Mecca.	Ek dis me Mecca watalo.	seed:future
+I will save money for the wedding.	Me parna sabab dud warautalo.	seed:future
+Next year we will buy a boat.	Yauche warsa ami samku hadtale.	seed:future
+I want to open my own shop.	Maka moji khud chi angad usaw kaas.	seed:future
+Whatever happens, I will not leave.	Ka zalan ko, Me wasu che nai.	seed:future
+Wait until I come back.	Me yeta sar waat dakh.	seed:future
+Do not go before I come.	Me yaw fude wasu nakha.	seed:future
+As soon as I reach, I will call.	Me pauta sar fauran, call karta.	seed:future
+Before you go, eat something.	Tu wasu fude, kai kha.	seed:future
+After you finish, come to me.	Tuje zala mag, Moje kade ye.	seed:future
 # ===== Emergencies and safety =====
-Help!		seed:emergency
-Call the police.		seed:emergency
-Call an ambulance.		seed:emergency
-There is a fire!		seed:emergency
-Run!		seed:emergency
-Be careful!		seed:emergency
-It is dangerous.		seed:emergency
-Do not go near the water.		seed:emergency
-Someone is drowning.		seed:emergency
-He is hurt.		seed:emergency
-He is not breathing.		seed:emergency
-Stay here, I will get help.		seed:emergency
-I am lost.		seed:emergency
-My child is missing.		seed:emergency
-The road is blocked.		seed:emergency
-Someone stole my bag.		seed:emergency
-Where is the nearest hospital?		seed:emergency
-I need a doctor now.		seed:emergency
-Keep away from the fire.		seed:emergency
-It is safe now.		seed:emergency
+Help!	Madad!	seed:emergency
+Call the police.	Polic'a apaw.	seed:emergency
+Call an ambulance.	Ambulanc'a apaw.	seed:emergency
+There is a fire!	Tari uzo ahe!	seed:emergency
+Run!	Dhau.	seed:emergency
+Be careful!	Sambhalun ra.	seed:emergency
+It is dangerous.	Te kaza ashe.	seed:emergency
+Do not go near the water.	Panya bagla wasu nakha.	seed:emergency
+Someone is drowning.	Koni ka budte wate.	seed:emergency
+He is hurt.	Heka Dukhte ahe.	seed:emergency
+He is not breathing.	Ho saas gente nai	seed:emergency
+Stay here, I will get help.	Yari rha, me madad hadta.	seed:emergency
+I am lost.	Me nai zalate.	seed:emergency
+My child is missing.	Mojo chadu nai zala te.	seed:emergency
+The road is blocked.	Ti waat band ashe.	seed:emergency
+Someone stole my bag.	Koni ka moje postan chorla ha.	seed:emergency
+Where is the nearest hospital?	Samman bagla hospital khe ashe.	seed:emergency
+I need a doctor now.	Maka etta daktar kaas.	seed:emergency
+Keep away from the fire.	Uza pusun dur daraw.	seed:emergency
+It is safe now.	Ka etta he sahi salamat ahe?	seed:emergency
