@@ -660,8 +660,8 @@ The bottle is empty.	botal khali.	seed:food|draft-gloss
 Do not drink water from the tap.	peta paani cho [tap] nai.	seed:food|draft-gloss
 He drinks a glass of juice every day.	To peta gilas [juice] har dis.	seed:food|draft-gloss
 She is grinding spices for the curry.	Ti [grinding] [spices] [curry].	seed:food|draft-gloss
-We break our fast at sunset.	Ami [break] amche tez maghrib.	seed:food|draft-gloss
-Dates are eaten to break the fast.	khajur [eaten] [break] tez.	seed:food|draft-gloss
+We break our fast at sunset.	Ami [break] amche [fast] maghrib.	seed:food|draft-gloss
+Dates are eaten to break the fast.	khajur [eaten] [break] [fast].	seed:food|draft-gloss
 Our cook makes biryani on special days.	amche khau karta [makes] [biryani] [special] dis.	seed:food|draft-gloss
 # ===== Home and household =====
 Our house has three rooms.	amche ghar teen kamra.	seed:home|draft-gloss
@@ -744,7 +744,7 @@ Open your mouth.	usauta tuje tond.	seed:health|draft-gloss
 Show me your tongue.	[show] Maka tuje jeeb.	seed:health|draft-gloss
 Raise your hand.	[raise] tuje hath.	seed:health|draft-gloss
 Breathe in slowly.	[breathe] bittar [slowly].	seed:health|draft-gloss
-My heart is beating fast.	moje dil [beating] tez.	seed:health|draft-gloss
+My heart is beating fast.	moje dil [beating] [fast].	seed:health|draft-gloss
 My back is aching.	moje peeth [aching].	seed:health|draft-gloss
 My eyes are red.	moje [eyes] lal.	seed:health|draft-gloss
 Wash your face.	dhuta tuje muha.	seed:health|draft-gloss
@@ -871,7 +871,7 @@ Take an auto-rickshaw.	ghenta [auto] [rickshaw].	seed:travel|draft-gloss
 The road is very bad.	waat balli kharaab.	seed:travel|draft-gloss
 There is a lot of traffic.	tari bhouat [traffic].	seed:travel|draft-gloss
 Drive slowly.	chalauta [slowly].	seed:travel|draft-gloss
-He drives very fast.	To chalauta balli tez.	seed:travel|draft-gloss
+He drives very fast.	To chalauta balli [fast].	seed:travel|draft-gloss
 I lost my way.	Me [lost] moje waat.	seed:travel|draft-gloss
 Can you show me the way?	sakta Tu [show] Maka waat?	seed:travel|draft-gloss
 Follow me.	[follow] Maka.	seed:travel|draft-gloss
@@ -1071,9 +1071,9 @@ May God bless you.	Allah [bless] Tu.	seed:faith|draft-gloss
 May God forgive us.	Allah [forgive] Amka.	seed:faith|draft-gloss
 Pray for me.	namaz padta Maka.	seed:faith|draft-gloss
 Ramadan is the month of fasting.	Ramzan mahina [fasting].	seed:faith|draft-gloss
-We fast from dawn to sunset.	Ami tez cho [dawn] maghrib.	seed:faith|draft-gloss
+We fast from dawn to sunset.	Ami [fast] cho [dawn] maghrib.	seed:faith|draft-gloss
 I am fasting today.	Me [fasting] aas.	seed:faith|draft-gloss
-We break the fast with dates and water.	Ami [break] tez sarin khajur ani paani.	seed:faith|draft-gloss
+We break the fast with dates and water.	Ami [break] [fast] sarin khajur ani paani.	seed:faith|draft-gloss
 The whole family eats together at sunset.	[whole] khandan khata sarin maghrib.	seed:faith|draft-gloss
 Eid is a day of joy.	[eid] dis [joy].	seed:faith|draft-gloss
 We wear new clothes on Eid.	Ami [wear] nawo kapde [eid].	seed:faith|draft-gloss
@@ -1149,7 +1149,7 @@ Do not disturb the animals.	[disturb] [animals] nai.	seed:nature|draft-gloss
 There are many insects at night.	tari bhouat [insects] raat.	seed:nature|draft-gloss
 Mosquitoes are biting me.	[mosquitoes] [biting] Maka.	seed:nature|draft-gloss
 The buffalo is in the water.	[buffalo] bittar paani.	seed:nature|draft-gloss
-The horse runs very fast.	[horse] [runs] balli tez.	seed:nature|draft-gloss
+The horse runs very fast.	[horse] [runs] balli [fast].	seed:nature|draft-gloss
 Look at the sky.	[look] akaash.	seed:nature|draft-gloss
 There is a full moon tonight.	tari bhardo chand rati.	seed:nature|draft-gloss
 The road goes through the forest.	waat wata [through] [forest].	seed:nature|draft-gloss
@@ -1265,7 +1265,7 @@ I count the money at the end of the day.	Me [count] dud [end] dis.	seed:routine|
 I come home tired.	Me yeta ghar thakelo.	seed:routine|draft-gloss
 I take a short nap after lunch.	Me ghenta aakhdo [nap] mag [lunch].	seed:routine|draft-gloss
 We talk together in the evening.	Ami [talk] sarin bittar timpar.	seed:routine|draft-gloss
-He tells stories to the children at night.	To [tells] [stories] chadwe raat.	seed:routine|draft-gloss
+He tells stories to the children at night.	To sangta [stories] chadwe raat.	seed:routine|draft-gloss
 The lights go out at eleven.	light wata agyara.	seed:routine|draft-gloss
 I turn off the light and sleep.	Me [turn] [off] light ani wadgalta.	seed:routine|draft-gloss
 It is a busy day.	He masroof dis.	seed:routine|draft-gloss
@@ -1314,7 +1314,7 @@ Although it was raining heavily, the fishermen went out to sea.	[although] He pa
 My grandfather says that the sea was much cleaner when he was young.	moje azobapa balta Te darya balli [cleaner] ketta To [young].	seed:longer|draft-gloss
 We were sitting on the beach when the sun started to set.	Ami [sitting] kaath ketta suraj [started] [set].	seed:longer|draft-gloss
 He did not know that his friend was waiting for him at the station.	To walkhata Te teje dost ube rate wate Teka [station] nai.	seed:longer|draft-gloss
-Please tell your mother that I will come to see her tomorrow morning.	zarra [tell] tuje mama Te Me yeta palta teji fausai sakan.	seed:longer|draft-gloss
+Please tell your mother that I will come to see her tomorrow morning.	zarra sangta tuje mama Te Me yeta palta teji fausai sakan.	seed:longer|draft-gloss
 The shop near the mosque sells everything you need for the house.	angdi bagla mizgat wikta sammu Tu kaas ghar.	seed:longer|draft-gloss
 I have not seen him since he went to work abroad.	Me [seen] Teka [since] To gelo kaam karta pardes nai.	seed:longer|draft-gloss
 The children who study hard will do well in the exam.	chadwe kon padta mushkil nikko bittar imtihaan.	seed:longer|draft-gloss
